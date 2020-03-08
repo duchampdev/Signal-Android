@@ -53,12 +53,7 @@ import org.whispersystems.libsignal.util.guava.Optional;
 
 import java.io.Closeable;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class ThreadDatabase extends Database {
 
@@ -633,6 +628,16 @@ public class ThreadDatabase extends Database {
     databaseHelper.getWritableDatabase().update(TABLE_NAME, contentValues,ID_WHERE,
                                                 new String[] {String.valueOf(threadId)});
 
+    notifyConversationListListeners();
+  }
+
+  public void markUnread(long threadId) {
+    Recipient recipient = getRecipientForThreadId(threadId);
+    Cursor conversationCursor = getFilteredConversationList(Collections.singletonList(recipient.getId()));
+    int unreadCount = readerFor(conversationCursor).getNext().getUnreadCount();
+    if (unreadCount == 0) {
+      incrementUnread(threadId, 1);
+    }
     notifyConversationListListeners();
   }
 

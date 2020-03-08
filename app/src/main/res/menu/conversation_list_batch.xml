@@ -12,4 +12,11 @@
           android:icon="?menu_selectall_icon"
           app:showAsAction="always"/>
 
+    <item android:title="mark unread"
+          android:id="@+id/menu_mark_unread"
+          android:icon="?menu_info_icon"
+          app:showAsAction="always"/>
+
+    <!-- @string/conversation_list_batch__menu_mark_unread -->
+
 </menu>
