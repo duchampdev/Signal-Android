@@ -32,6 +32,9 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
+import android.media.AudioAttributes;
+import android.media.AudioFocusRequest;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -382,6 +385,10 @@ public class ConversationActivity extends PassphraseRequiredActivity
   private final DynamicTheme       dynamicTheme    = new DynamicDarkToolbarTheme();
   private final DynamicLanguage    dynamicLanguage = new DynamicLanguage();
 
+  private AudioManager.OnAudioFocusChangeListener audioFocusChangeListener;
+  private AudioFocusRequest                       audioFocusRequest;
+  private AudioManager                            audioManager;
+
   public static @NonNull Intent buildIntent(@NonNull Context context,
                                             @NonNull RecipientId recipientId,
                                             long threadId,
@@ -473,7 +480,23 @@ public class ConversationActivity extends PassphraseRequiredActivity
         });
       }
     });
+    initializeAudioFocusDependencies();
     initializeInsightObserver();
+  }
+
+  private void initializeAudioFocusDependencies() {
+    audioManager             = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
+    audioFocusChangeListener = (focusChange) -> {
+      // do nothing if we lose audio focus
+    };
+    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      audioFocusRequest = new AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_EXCLUSIVE)
+              .setAudioAttributes(new AudioAttributes.Builder().setContentType(AudioAttributes.CONTENT_TYPE_SPEECH).build())
+              .setOnAudioFocusChangeListener(audioFocusChangeListener)
+              .build();
+    } else {
+      audioFocusRequest = null;
+    }
   }
 
   @Override
@@ -2755,7 +2778,17 @@ public class ConversationActivity extends PassphraseRequiredActivity
 
     getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-    audioRecorder.startRecording();
+    int audioFocusResult;
+    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      audioFocusResult = audioManager.requestAudioFocus(audioFocusRequest);
+    } else {
+      audioFocusResult = audioManager.requestAudioFocus(audioFocusChangeListener, AudioManager.STREAM_VOICE_CALL, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_EXCLUSIVE);
+    }
+    if(audioFocusResult == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+      audioRecorder.startRecording();
+    } else {
+      Log.w(TAG, "could not get audio focus");
+    }
   }
 
   @Override
@@ -2772,6 +2805,11 @@ public class ConversationActivity extends PassphraseRequiredActivity
     getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
     ListenableFuture<Pair<Uri, Long>> future = audioRecorder.stopRecording();
+    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      audioManager.abandonAudioFocusRequest(audioFocusRequest);
+    } else {
+      audioManager.abandonAudioFocus(audioFocusChangeListener);
+    }
     future.addListener(new ListenableFuture.Listener<Pair<Uri, Long>>() {
       @Override
       public void onSuccess(final @NonNull Pair<Uri, Long> result) {
@@ -2826,6 +2864,11 @@ public class ConversationActivity extends PassphraseRequiredActivity
     getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
     ListenableFuture<Pair<Uri, Long>> future = audioRecorder.stopRecording();
+    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      audioManager.abandonAudioFocusRequest(audioFocusRequest);
+    } else {
+      audioManager.abandonAudioFocus(audioFocusChangeListener);
+    }
     future.addListener(new ListenableFuture.Listener<Pair<Uri, Long>>() {
       @Override
       public void onSuccess(final Pair<Uri, Long> result) {
