@@ -5,6 +5,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.AudioFocusRequest;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Build;
@@ -62,6 +63,9 @@ public class AudioSlidePlayer implements SensorEventListener {
   private @Nullable SimpleExoPlayer         mediaPlayer;
   private           long                    startTime;
 
+  private final @NonNull  AudioManager.OnAudioFocusChangeListener audioFocusChangeListener;
+  private final @Nullable AudioFocusRequest                       audioFocusRequest;
+
   public synchronized static AudioSlidePlayer createFor(@NonNull Context context,
                                                         @NonNull AudioSlide slide,
                                                         @NonNull Listener listener)
@@ -91,6 +95,24 @@ public class AudioSlidePlayer implements SensorEventListener {
     } else {
       this.wakeLock = null;
     }
+
+    audioFocusChangeListener = focusChange -> {
+      if(focusChange == AudioManager.AUDIOFOCUS_LOSS ||
+              focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ||
+              focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
+        stop();
+      }
+    };
+    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      audioFocusRequest = new AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN_TRANSIENT)
+              .setAudioAttributes(new android.media.AudioAttributes.Builder().setContentType(android.media.AudioAttributes.CONTENT_TYPE_SPEECH).build())
+              .setWillPauseWhenDucked(true)
+              .setOnAudioFocusChangeListener(audioFocusChangeListener)
+              .build();
+    } else {
+      audioFocusRequest = null;
+    }
+
   }
 
   public void play(final double progress) throws IOException {
@@ -111,6 +133,17 @@ public class AudioSlidePlayer implements SensorEventListener {
     this.startTime             = System.currentTimeMillis();
 
     mediaPlayer.prepare(createMediaSource(slide.getUri()));
+
+    int audioFocusResult;
+    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      audioFocusResult = audioManager.requestAudioFocus(audioFocusRequest);
+    } else {
+      audioFocusResult = audioManager.requestAudioFocus(audioFocusChangeListener, AudioManager.STREAM_VOICE_CALL, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+    }
+    if (! (audioFocusResult == AudioManager.AUDIOFOCUS_REQUEST_GRANTED)) {
+      Log.w(TAG, "could not get audio focus");
+      return;
+    }
     mediaPlayer.setPlayWhenReady(true);
     mediaPlayer.setAudioAttributes(new AudioAttributes.Builder()
                                                       .setContentType(earpiece ? C.CONTENT_TYPE_SPEECH : C.CONTENT_TYPE_MUSIC)
@@ -153,6 +186,11 @@ public class AudioSlidePlayer implements SensorEventListener {
             Log.i(TAG, "onComplete");
             synchronized (AudioSlidePlayer.this) {
               mediaPlayer = null;
+              if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                audioManager.abandonAudioFocusRequest(audioFocusRequest);
+              } else {
+                audioManager.abandonAudioFocus(audioFocusChangeListener);
+              }
 
               sensorManager.unregisterListener(AudioSlidePlayer.this);
 
@@ -210,6 +248,11 @@ public class AudioSlidePlayer implements SensorEventListener {
     if (this.mediaPlayer != null) {
       this.mediaPlayer.stop();
       this.mediaPlayer.release();
+      if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        audioManager.abandonAudioFocusRequest(audioFocusRequest);
+      } else {
+        audioManager.abandonAudioFocus(audioFocusChangeListener);
+      }
     }
 
     sensorManager.unregisterListener(AudioSlidePlayer.this);
