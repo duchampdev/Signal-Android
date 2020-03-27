@@ -16,6 +16,7 @@ import android.os.PowerManager.WakeLock;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.util.Pair;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.google.android.exoplayer2.C;
@@ -57,7 +58,7 @@ public class AudioSlidePlayer implements SensorEventListener {
   private final @NonNull  AudioManager      audioManager;
   private final @NonNull  SensorManager     sensorManager;
   private final @NonNull  Sensor            proximitySensor;
-  private final @Nullable WakeLock          wakeLock;
+  private @Nullable WakeLock          wakeLock;
 
   private @NonNull  WeakReference<Listener> listener;
   private @Nullable SimpleExoPlayer         mediaPlayer;
@@ -91,7 +92,7 @@ public class AudioSlidePlayer implements SensorEventListener {
     this.proximitySensor      = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
 
     if (Build.VERSION.SDK_INT >= 21) {
-      this.wakeLock = ServiceUtil.getPowerManager(context).newWakeLock(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, TAG);
+      this.wakeLock = ServiceUtil.getPowerManager(context).newWakeLock(PowerManager.FULL_WAKE_LOCK, TAG);
     } else {
       this.wakeLock = null;
     }
@@ -144,6 +145,7 @@ public class AudioSlidePlayer implements SensorEventListener {
       Log.w(TAG, "could not get audio focus");
       return;
     }
+    wakeLock.acquire();
     mediaPlayer.setPlayWhenReady(true);
     mediaPlayer.setAudioAttributes(new AudioAttributes.Builder()
                                                       .setContentType(earpiece ? C.CONTENT_TYPE_SPEECH : C.CONTENT_TYPE_MUSIC)
@@ -258,6 +260,8 @@ public class AudioSlidePlayer implements SensorEventListener {
     sensorManager.unregisterListener(AudioSlidePlayer.this);
 
     this.mediaPlayer = null;
+
+    if(this.wakeLock != null && this.wakeLock.isHeld()) this.wakeLock.release();
   }
 
   public synchronized static void stopAll() {
@@ -380,7 +384,15 @@ public class AudioSlidePlayer implements SensorEventListener {
       double duration = mediaPlayer.getDuration();
       double progress = position / duration;
 
-      if (wakeLock != null) wakeLock.acquire();
+      if (wakeLock != null) {
+          wakeLock.release();
+          if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+              wakeLock = ServiceUtil.getPowerManager(context).newWakeLock(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, TAG);
+              wakeLock.acquire();
+          } else {
+              wakeLock = null;
+          }
+      }
       stop();
       try {
         play(progress, true);
