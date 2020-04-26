@@ -1,7 +1,11 @@
 package org.thoughtcrime.securesms.lock.v2;
 
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.PluralsRes;
+import androidx.autofill.HintConstants;
+import androidx.core.view.ViewCompat;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
@@ -21,18 +25,14 @@ public class CreateKbsPinFragment extends BaseKbsPinFragment<CreateKbsPinViewMod
 
     getLabel().setText(getPinLengthRestrictionText(R.plurals.CreateKbsPinFragment__pin_must_be_at_least_digits));
     getConfirm().setEnabled(false);
+    ViewCompat.setAutofillHints(getInput(), HintConstants.AUTOFILL_HINT_NEW_PASSWORD);
   }
 
   private void initializeViewStatesForPinChange(boolean isForgotPin) {
     getTitle().setText(R.string.CreateKbsPinFragment__create_a_new_pin);
 
-    if (isForgotPin) {
-      getDescription().setText(R.string.CreateKbsPinFragment__you_can_choose_a_new_pin_as_long_as_this_device_is_registered);
-      getDescription().setLearnMoreVisible(false);
-    } else {
-      getDescription().setText(R.string.CreateKbsPinFragment__pins_keep_information_stored_with_signal_encrypted);
-      getDescription().setLearnMoreVisible(true);
-    }
+    getDescription().setText(R.string.CreateKbsPinFragment__you_can_choose_a_new_pin_as_long_as_this_device_is_registered);
+    getDescription().setLearnMoreVisible(true);
   }
 
   private void initializeViewStatesForPinCreate() {
