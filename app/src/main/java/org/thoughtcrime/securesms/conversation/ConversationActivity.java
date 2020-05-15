@@ -1809,11 +1809,11 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
     stickerViewModel = ViewModelProviders.of(this, new ConversationStickerViewModel.Factory(getApplication(), repository))
                                          .get(ConversationStickerViewModel.class);
 
-    stickerViewModel.getStickerResults().observe(this, stickers -> {
+    /*stickerViewModel.getStickerResults().observe(this, stickers -> {
       if (stickers == null) return;
 
       inputPanel.setStickerSuggestions(stickers);
-    });
+    });*/
 
     stickerViewModel.getStickersAvailability().observe(this, stickersAvailable -> {
       if (stickersAvailable == null) return;
