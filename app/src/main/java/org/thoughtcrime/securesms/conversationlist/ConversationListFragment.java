@@ -90,6 +90,7 @@ import org.thoughtcrime.securesms.components.reminder.ServiceOutageReminder;
 import org.thoughtcrime.securesms.components.reminder.ShareReminder;
 import org.thoughtcrime.securesms.components.reminder.SystemSmsImportReminder;
 import org.thoughtcrime.securesms.components.reminder.UnauthorizedReminder;
+import org.thoughtcrime.securesms.conversation.ConversationFragment;
 import org.thoughtcrime.securesms.conversationlist.ConversationListAdapter.ItemClickListener;
 import org.thoughtcrime.securesms.conversationlist.model.MessageResult;
 import org.thoughtcrime.securesms.conversationlist.model.SearchResult;
@@ -118,6 +119,7 @@ import org.thoughtcrime.securesms.recipients.Recipient;
 import org.thoughtcrime.securesms.service.KeyCachingService;
 import org.thoughtcrime.securesms.sms.MessageSender;
 import org.thoughtcrime.securesms.util.AvatarUtil;
+import org.thoughtcrime.securesms.util.CachedInflater;
 import org.thoughtcrime.securesms.util.ServiceUtil;
 import org.thoughtcrime.securesms.util.StickyHeaderDecoration;
 import org.thoughtcrime.securesms.util.TextSecurePreferences;
@@ -261,6 +263,12 @@ public class ConversationListFragment extends MainFragment implements LoaderMana
   }
 
   @Override
+  public void onStart() {
+    super.onStart();
+    ConversationFragment.prepare(requireContext());
+  }
+
+  @Override
   public void onPause() {
     super.onPause();
 
@@ -343,7 +351,6 @@ public class ConversationListFragment extends MainFragment implements LoaderMana
     getNavigator().goToConversation(threadRecord.getRecipient().getId(),
                                     threadRecord.getThreadId(),
                                     threadRecord.getDistributionType(),
-                                    threadRecord.getLastSeen(),
                                     -1);
   }
 
@@ -356,7 +363,6 @@ public class ConversationListFragment extends MainFragment implements LoaderMana
       getNavigator().goToConversation(contact.getId(),
                                       threadId,
                                       ThreadDatabase.DistributionTypes.DEFAULT,
-                                      -1,
                                       -1);
     });
   }
@@ -371,7 +377,6 @@ public class ConversationListFragment extends MainFragment implements LoaderMana
       getNavigator().goToConversation(message.conversationRecipient.getId(),
                                       message.threadId,
                                       ThreadDatabase.DistributionTypes.DEFAULT,
-                                      -1,
                                       startingPosition);
     });
   }
@@ -720,8 +725,8 @@ public class ConversationListFragment extends MainFragment implements LoaderMana
     actionMode.setTitle(String.valueOf(defaultAdapter.getBatchSelections().size()));
   }
 
-  private void handleCreateConversation(long threadId, Recipient recipient, int distributionType, long lastSeen) {
-    getNavigator().goToConversation(recipient.getId(), threadId, distributionType, lastSeen, -1);
+  private void handleCreateConversation(long threadId, Recipient recipient, int distributionType) {
+    getNavigator().goToConversation(recipient.getId(), threadId, distributionType, -1);
   }
 
   @Override
@@ -755,8 +760,7 @@ public class ConversationListFragment extends MainFragment implements LoaderMana
   @Override
   public void onItemClick(ConversationListItem item) {
     if (actionMode == null) {
-      handleCreateConversation(item.getThreadId(), item.getRecipient(),
-                               item.getDistributionType(), item.getLastSeen());
+      handleCreateConversation(item.getThreadId(), item.getRecipient(), item.getDistributionType());
     } else {
       ConversationListAdapter adapter = (ConversationListAdapter)list.getAdapter();
       adapter.toggleThreadInBatchSet(item.getThreadId());

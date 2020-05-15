@@ -24,6 +24,11 @@ public class WebRtcViewModel {
     RECIPIENT_UNAVAILABLE,
     NO_SUCH_USER,
     UNTRUSTED_IDENTITY,
+
+    // Multiring Hangup States
+    CALL_ACCEPTED_ELSEWHERE,
+    CALL_DECLINED_ELSEWHERE,
+    CALL_ONGOING_ELSEWHERE
   }
 
 
@@ -35,6 +40,7 @@ public class WebRtcViewModel {
 
   private final boolean isBluetoothAvailable;
   private final boolean isMicrophoneEnabled;
+  private final boolean isRemoteVideoOffer;
 
   private final CameraState         localCameraState;
   private final SurfaceViewRenderer localRenderer;
@@ -47,7 +53,8 @@ public class WebRtcViewModel {
                          @NonNull SurfaceViewRenderer remoteRenderer,
                                   boolean             remoteVideoEnabled,
                                   boolean             isBluetoothAvailable,
-                                  boolean             isMicrophoneEnabled)
+                                  boolean             isMicrophoneEnabled,
+                                  boolean             isRemoteVideoOffer)
   {
     this(state,
          recipient,
@@ -57,7 +64,8 @@ public class WebRtcViewModel {
          remoteRenderer,
          remoteVideoEnabled,
          isBluetoothAvailable,
-         isMicrophoneEnabled);
+         isMicrophoneEnabled,
+         isRemoteVideoOffer);
   }
 
   public WebRtcViewModel(@NonNull  State               state,
@@ -68,7 +76,8 @@ public class WebRtcViewModel {
                          @NonNull  SurfaceViewRenderer remoteRenderer,
                                    boolean             remoteVideoEnabled,
                                    boolean             isBluetoothAvailable,
-                                   boolean             isMicrophoneEnabled)
+                                   boolean             isMicrophoneEnabled,
+                                   boolean             isRemoteVideoOffer)
   {
     this.state                = state;
     this.recipient            = recipient;
@@ -79,6 +88,7 @@ public class WebRtcViewModel {
     this.remoteVideoEnabled   = remoteVideoEnabled;
     this.isBluetoothAvailable = isBluetoothAvailable;
     this.isMicrophoneEnabled  = isMicrophoneEnabled;
+    this.isRemoteVideoOffer   = isRemoteVideoOffer;
   }
 
   public @NonNull State getState() {
@@ -109,6 +119,10 @@ public class WebRtcViewModel {
     return isMicrophoneEnabled;
   }
 
+  public boolean isRemoteVideoOffer() {
+    return isRemoteVideoOffer;
+  }
+
   public SurfaceViewRenderer getLocalRenderer() {
     return localRenderer;
   }
@@ -118,6 +132,6 @@ public class WebRtcViewModel {
   }
 
   public @NonNull String toString() {
-    return "[State: " + state + ", recipient: " + recipient.getId().serialize() + ", identity: " + identityKey + ", remoteVideo: " + remoteVideoEnabled + ", localVideo: " + localCameraState.isEnabled() + "]";
+    return "[State: " + state + ", recipient: " + recipient.getId().serialize() + ", identity: " + identityKey + ", remoteVideo: " + remoteVideoEnabled + ", localVideo: " + localCameraState.isEnabled() + ", isRemoteVideoOffer: " + isRemoteVideoOffer + "]";
   }
 }

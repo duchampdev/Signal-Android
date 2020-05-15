@@ -169,7 +169,6 @@ public final class KeyBackupService {
         Log.i(TAG, "Restore " + status.getStatus());
         switch (status.getStatus()) {
           case OK:
-            Log.i(TAG, String.format(Locale.US,"Restore OK! data: %s tries: %d", Hex.toStringCondensed(status.getData().toByteArray()), status.getTries()));
             KbsData kbsData = hashedPin.decryptKbsDataIVCipherText(status.getData().toByteArray());
             MasterKey masterKey = kbsData.getMasterKey();
             return new KbsPinData(masterKey, nextToken);
@@ -181,8 +180,6 @@ public final class KeyBackupService {
             // if the number of tries has not fallen, the pin is correct we're just using an out of date token
             boolean canRetry = remainingTries == status.getTries();
             Log.i(TAG, String.format(Locale.US, "Token MISMATCH %d %d", remainingTries, status.getTries()));
-            Log.i(TAG, String.format("Last token %s", Hex.toStringCondensed(token.getToken())));
-            Log.i(TAG, String.format("Next token %s", Hex.toStringCondensed(nextToken.getToken())));
             throw new TokenException(nextToken, canRetry);
           case MISSING:
             Log.i(TAG, "Restore OK! No data though");

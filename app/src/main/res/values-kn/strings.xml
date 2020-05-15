@@ -27,7 +27,7 @@
   <string name="ApplicationPreferencesActivity_disable_passphrase">ಪಾಸ್‌ಫ್ರೇಸ್‌ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ</string>
   <string name="ApplicationPreferencesActivity_this_will_permanently_unlock_signal_and_message_notifications">ಇದು Signal ಮತ್ತು ಸಂದೇಶ ಅಧಿಸೂಚನೆಗಳನ್ನು ಶಾಶ್ವತವಾಗಿ ಅನ್ಲಾಕ್ ಮಾಡುತ್ತದೆ.</string>
   <string name="ApplicationPreferencesActivity_disable">ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ</string>
-  <string name="ApplicationPreferencesActivity_unregistering">ನೋಂದಣಿಯನ್ನು ರದ್ದುಗೊಳಿಸಲಾಗುತ್ತಿದೆ…</string>
+  <string name="ApplicationPreferencesActivity_unregistering">ನೋಂದಣಿಯನ್ನು ರದ್ದುಗೊಳಿಸಲಾಗುತ್ತಿದೆ...</string>
   <string name="ApplicationPreferencesActivity_unregistering_from_signal_messages_and_calls">Signal ಸಂದೇಶಗಳು ಹಾಗೂ ಕರೆಗಳ ನೋಂದಣಿಯನ್ನು ರದ್ದುಗೊಳಿಸಲಾಗುತ್ತಿದೆ..</string>
   <string name="ApplicationPreferencesActivity_disable_signal_messages_and_calls">Signal ಸಂದೇಶಗಳು ಹಾಗೂ ಕರೆಗಳನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸುವುದೇ?</string>
   <string name="ApplicationPreferencesActivity_disable_signal_messages_and_calls_by_unregistering">ಸರ್ವರ್‌ ನಿಂದ ನೋಂದಣಿ ರದ್ದುಗೊಳಿಸುವ ಮೂಲಕ Signal ಸಂದೇಶಗಳನ್ನು ಮತ್ತು ಕರೆಗಳನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ. ಭವಿಷ್ಯದಲ್ಲಿ ನೀವು ಮತ್ತೆ ಬಳಸಲು ನಿಮ್ಮ ಫೋನ್ ಸಂಖ್ಯೆಯನ್ನು ಮರು ನೋಂದಾಯಿಸಬೇಕಾಗುತ್ತದೆ.</string>
@@ -70,8 +70,8 @@
   <string name="AttachmentManager_signal_requires_location_information_in_order_to_attach_a_location">ಸ್ಥಳ ಮಾಹಿತಿಯನ್ನು ಲಗತ್ತಿಸಲು Signal ಗೆ ಸ್ಥಳ ಅನುಮತಿಯ ಅಗತ್ಯವಿರುತ್ತದೆ, ಆದರೆ ಅದನ್ನು ಶಾಶ್ವತವಾಗಿ ನಿರಾಕರಿಸಲಾಗಿದೆ. ದಯವಿಟ್ಟು ಆ್ಯಪ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳ ಮೆನುಗೆ ಮುಂದುವರಿಯಿರಿ, \"ಅನುಮತಿಗಳು\" ಆಯ್ಕೆಮಾಡಿ ಮತ್ತು \"ಸ್ಥಳ\" ಸಕ್ರಿಯಗೊಳಿಸಿ.</string>
   <string name="AttachmentManager_signal_requires_the_camera_permission_in_order_to_take_photos_but_it_has_been_permanently_denied">ಫೋಟೋಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳಲು Signal ಗೆ ಕ್ಯಾಮೆರಾ ಅನುಮತಿಯ ಅಗತ್ಯವಿರುತ್ತದೆ, ಆದರೆ ಅದನ್ನು ಶಾಶ್ವತವಾಗಿ ನಿರಾಕರಿಸಲಾಗಿದೆ. ದಯವಿಟ್ಟು ಆ್ಯಪ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳ ಮೆನುಗೆ ಮುಂದುವರಿಯಿರಿ, \"ಅನುಮತಿಗಳು\" ಆಯ್ಕೆಮಾಡಿ ಮತ್ತು \"ಕ್ಯಾಮೆರಾ\" ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ.</string>
   <!--AttachmentUploadJob-->
-  <string name="AttachmentUploadJob_uploading_media">ಮೀಡಿಯಾವನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ…</string>
-  <string name="AttachmentUploadJob_compressing_video_start">ವಿಡಿಯೋವನ್ನು ಸಂಕುಚಿತಗೊಳಿಸಲಾಗುತ್ತಿದೆ…</string>
+  <string name="AttachmentUploadJob_uploading_media">ಮೀಡಿಯಾವನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ...</string>
+  <string name="AttachmentUploadJob_compressing_video_start">ವಿಡಿಯೋವನ್ನು ಸಂಕುಚಿತಗೊಳಿಸಲಾಗುತ್ತಿದೆ...</string>
   <!--AudioSlidePlayer-->
   <string name="AudioSlidePlayer_error_playing_audio">ಆಡಿಯೋ ಪ್ಲೇ ಮಾಡುವುದರಲ್ಲಿ ದೋಷ!</string>
   <!--BlockedContactsActivity-->
@@ -84,6 +84,7 @@
   <string name="BlockUnblockDialog_unblock_s">%1$sನಿರ್ಬಂಧ ತೆಗೆಯುವುದೇ?</string>
   <string name="BlockUnblockDialog_unblock">ನಿರ್ಬಂಧ ತೆಗೆಯಿರಿ</string>
   <string name="BlockUnblockDialog_block">ನಿರ್ಬಂಧಿಸಿ</string>
+  <string name="BlockUnblockDialog_block_and_delete">ನಿರ್ಬಂಧಿಸಿ ಮತ್ತು ಅಳಿಸಿ</string>
   <!--BucketedThreadMedia-->
   <string name="BucketedThreadMedia_Today">ಇಂದು</string>
   <string name="BucketedThreadMedia_Yesterday">ನಿನ್ನೆ</string>
@@ -162,6 +163,7 @@
   <string name="ConversationItem_read_more"> ಮತ್ತಷ್ಟು ಓದಿ</string>
   <string name="ConversationItem_download_more"> ಇನ್ನಷ್ಟು ಇಳಿಕೆ ಮಾಡಿ</string>
   <string name="ConversationItem_pending"> ಬಾಕಿ ಉಳಿದಿದೆ</string>
+  <string name="ConversationItem_this_message_was_deleted">ಈ ಸಂದೇಶವನ್ನು ಅಳಿಸಲಾಗಿದೆ.</string>
   <!--ConversationActivity-->
   <string name="ConversationActivity_reset_secure_session_question">ಸುರಕ್ಷಿತ ಸೆಷನ್ ಮರು ಪ್ರಾರಂಭಿಸಿ?</string>
   <string name="ConversationActivity_this_may_help_if_youre_having_encryption_problems">ನೀವು ಈ ಸಂಭಾಷಣೆಯಲ್ಲಿ ಎನ್‌ಕ್ರಿಪ್ಷನ್ ಸಮಸ್ಯೆಗಳನ್ನು ಹೊಂದಿದ್ದಲ್ಲಿ ಇದು ಸಹಾಯ ಮಾಡಬಹುದು. ನಿಮ್ಮ ಸಂದೇಶಗಳನ್ನು ಉಳಿಸಿಕೊಳ್ಳಲಾಗುವುದು.</string>
@@ -251,7 +253,7 @@
   </plurals>
   <plurals name="ConversationFragment_saving_n_attachments_to_sd_card">
     <item quantity="one">ಉಳಿಸಲಾಗುತ್ತಿದೆ ಲಗತ್ತು ಗೆ ಸಂಗ್ರಹಣೆ…</item>
-    <item quantity="other">ಸ್ಟೊರೇಜ್ %1$d ಲಗತ್ತನ್ನು ಉಳಿಸಲಾಗುತ್ತಿದೆ…</item>
+    <item quantity="other">ಸ್ಟೊರೇಜ್ %1$d ಲಗತ್ತನ್ನು ಉಳಿಸಲಾಗುತ್ತಿದೆ...</item>
   </plurals>
   <string name="ConversationFragment_pending">ಬಾಕಿ ಇದೆ…</string>
   <string name="ConversationFragment_push">ದತ್ತಾಂಶ (Signal)</string>
@@ -282,7 +284,7 @@
 ಇದು ಆಯ್ಕೆ ಮಾಡಲಾದ ಎಲ್ಲಾ %1$d ಸಂಭಾಷಣೆಗಳನ್ನು ಶಾಶ್ವತವಾಗಿ ಅಳಿಸುತ್ತದೆ.</item>
   </plurals>
   <string name="ConversationListFragment_deleting">ಅಳಿಸಲಾಗುತ್ತಿದೆ</string>
-  <string name="ConversationListFragment_deleting_selected_conversations">ಆಯ್ದ ಸಂಭಾಷಣೆಗಳನ್ನು ಅಳಿಸಲಾಗುತ್ತಿದೆ …</string>
+  <string name="ConversationListFragment_deleting_selected_conversations">ಆಯ್ದ ಸಂಭಾಷಣೆಗಳನ್ನು ಅಳಿಸಲಾಗುತ್ತಿದೆ ...</string>
   <plurals name="ConversationListFragment_conversations_archived">
     <item quantity="one">ಸಂಭಾಷಣೆಗಳನ್ನು ಸಂಗ್ರಹಕ್ಕೆ ಸೇರಿಸಲಾಗಿದೆ</item>
     <item quantity="other">%dಸಂಭಾಷಣೆಗಳನ್ನು ಆರ್ಕೈವ್ ಮಾಡಲಾಗಿದೆ</item>
@@ -379,6 +381,9 @@
   <string name="GroupMembersDialog_you">ನೀವು</string>
   <!--GV2 access levels-->
   <!--PendingMembersActivity-->
+  <string name="PendingMembersActivity_people_you_invited">ನೀವು ಆಹ್ವಾನಿಸಿದ ಜನರು</string>
+  <string name="PendingMembersActivity_invites_by_other_group_members">ಗುಂಪಿನ ಇತರ ಸದಸ್ಯರು ಆಹ್ವಾನಿಸಿದ ಜನರು</string>
+  <string name="PendingMembersActivity_missing_detail_explanation">ಗುಂಪಿನ ಇತರ ಸದಸ್ಯರು ಆಹ್ವಾನಿಸಿದ ಜನರ ವಿವರಗಳನ್ನು ತೋರಿಸಲಾಗುವುದಿಲ್ಲ. ಆಹ್ವಾನಿತರು ಸೇರಲು ಆರಿಸಿದರೆ, ಅವರ ಮಾಹಿತಿಯನ್ನು ಆ ಸಮಯದಲ್ಲಿ ಗುಂಪಿನೊಂದಿಗೆ ಹಂಚಿಕೊಳ್ಳಲಾಗುತ್ತದೆ. ಅವರು ಸೇರುವವರೆಗೂ ಅವರು ಗುಂಪಿನಲ್ಲಿ ಯಾವುದೇ ಸಂದೇಶಗಳನ್ನು ನೋಡಲಾಗುವುದಿಲ್ಲ.</string>
   <!--GV2 Invite cancellation confirmation-->
   <!--CropImageActivity-->
   <string name="CropImageActivity_group_avatar">ಗುಂಪಿನ ಅವತಾರ್</string>
@@ -407,7 +412,7 @@
   <string name="InviteActivity_no_app_to_share_to">ಹಂಚಿಕೊಳ್ಳಲು ತಾವು ಯಾವುದೇ ಅಪ್ಲಿಕೇಶನ್ ಗಳನ್ನು ಹೊಂದಿಲ್ಲ ಎಂದು ಕಂಡುಬರುತ್ತಿದೆ.</string>
   <string name="InviteActivity_friends_dont_let_friends_text_unencrypted">ಸ್ನೇಹಿತರು ಸ್ನೇಹಿತರನ್ನು ಎನ್‌ಕ್ರಿಪ್ಟ್‌ ಮಾಡದೇ ಚಾಟ್ ಮಾಡಲು ಬಿಡುವುದಿಲ್ಲ.</string>
   <!--Job-->
-  <string name="Job_working_in_the_background">ಹಿನ್ನೆಲೆಯಲ್ಲಿ ಕೆಲಸವನ್ನು ಮಾಡುತ್ತಿದ್ದೇವೆ…</string>
+  <string name="Job_working_in_the_background">ಹಿನ್ನೆಲೆಯಲ್ಲಿ ಕೆಲಸವನ್ನು ಮಾಡುತ್ತಿದ್ದೇವೆ...</string>
   <!--LearnMoreTextView-->
   <string name="LearnMoreTextView_learn_more">ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ</string>
   <!--MessageDetailsRecipient-->
@@ -522,6 +527,7 @@
   <string name="MessageRecord_s_set_disappearing_message_time_to_s">%1$sಕಾಣದಂತಾಗುತ್ತಿರುವ ಸಂದೇಶದ ಟೈಮರ್ ಅನ್ನು %2$s ಗೆ ಹೊಂದಿಸಿ.</string>
   <!--GV2 specific-->
   <!--GV2 member additions-->
+  <string name="MessageRecord_you_joined_the_group">ನೀವು ಗುಂಪಿಗೆ ಸೇರಿದ್ದೀರಿ.</string>
   <string name="MessageRecord_s_joined_the_group">%1$s ಗುಂಪನ್ನು ಸೇರಿದ್ದಾರೆ </string>
   <!--GV2 member removals-->
   <!--GV2 role change-->
@@ -602,6 +608,9 @@
   <string name="PlayServicesProblemFragment_the_version_of_google_play_services_you_have_installed_is_not_functioning">ನೀವು ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿದ Google ಪ್ಲೇ ಸರ್ವೀಸಸ್‌ ನ ಆವೃತ್ತಿಯು ಸರಿಯಾಗಿ ಕೆಲಸ ಮಾಡುತ್ತಿಲ್ಲ. ದಯವಿಟ್ಟು Google ಪ್ಲೇ ಸರ್ವೀಸಸ್ ಅನ್ನು ಪುನಃ ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿ ಹಾಗು ಪುನಃ ಪ್ರಯತ್ನಿಸಿ.  </string>
   <!--PinRestoreEntryFragment-->
   <string name="PinRestoreEntryFragment_incorrect_pin">ತಪ್ಪಾದ ಪಿನ್</string>
+  <string name="PinRestoreEntryFragment_if_you_cant_remember_your_pin">ನಿಮ್ಮ ಪಿನ್ ನಿಮಗೆ ನೆನಪಿಲ್ಲದಿದ್ದರೆ, ನೀವು ಹೊಸದನ್ನು ರಚಿಸಬಹುದು.  ನಿಮ್ಮ ಖಾತೆಯನ್ನು ನೀವು ನೋಂದಾಯಿಸಬಹುದು ಮತ್ತು ಬಳಸಬಹುದು, ಆದರೆ ನಿಮ್ಮ ಪ್ರೊಫೈಲ್ ಮಾಹಿತಿಯಂತಹ ಕೆಲವು ಉಳಿಸಿದ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ನೀವು ಕಳೆದುಕೊಳ್ಳುತ್ತೀರಿ.</string>
+  <string name="PinRestoreEntryFragment_create_new_pin">ಹೊಸ ಪಿನ್ ರಚಿಸಿ</string>
+  <string name="PinRestoreEntryFragment_contact_support">ಸಂಪರ್ಕ ಬೆಂಬಲ</string>
   <string name="PinRestoreEntryFragment_cancel">ರದ್ದುಗೊಳಿಸಿ</string>
   <string name="PinRestoreEntryFragment_skip">ಬಿಟ್ಟು ಮುಂದುವರಿಯಿರಿ</string>
   <string name="PinRestoreEntryFragment_enter_alphanumeric_pin">ಆಲ್ಫಾನ್ಯೂಮರಿಕ್ ಪಿನ್ ನಮೂದಿಸಿ</string>
@@ -681,6 +690,7 @@
   <string name="RegistrationActivity_country_code_description">ದೇಶದ ಕೋಡ್</string>
   <string name="RegistrationActivity_call">ಕರೆ</string>
   <!--RegistrationLockV2Dialog-->
+  <string name="RegistrationLockV2Dialog_if_you_forget_your_signal_pin_when_registering_again">Signal ‌ನೊಂದಿಗೆ ಮತ್ತೆ ನೋಂದಾಯಿಸುವಾಗ ನಿಮ್ಮ Signal ಪಿನ್ ಅನ್ನು ನೀವು ಮರೆತರೆ, ನಿಮ್ಮನ್ನು 7 ದಿನಗಳವರೆಗೆ ನಿಮ್ಮ ಖಾತೆಯಿಂದ ಲಾಕ್ ಮಾಡಲಾಗುತ್ತದೆ.</string>
   <!--RevealableMessageView-->
   <string name="RevealableMessageView_view_photo">ಫೋಟೋ ವೀಕ್ಷಿಸಿ</string>
   <string name="RevealableMessageView_view_video">ವೀಡಿಯೊ ವೀಕ್ಷಿಸಿ</string>
@@ -765,6 +775,7 @@
   <string name="ThreadRecord_view_once_photo">ವ್ಯೂ-ಒನ್ಸ್ ಫೋಟೋ</string>
   <string name="ThreadRecord_view_once_video">ವ್ಯೂ-ಒನ್ಸ್ ವೀಡಿಯೊ</string>
   <string name="ThreadRecord_view_once_media">ವ್ಯೂ-ಒನ್ಸ್ ಮೀಡಿಯಾ</string>
+  <string name="ThreadRecord_this_message_was_deleted">ಈ ಸಂದೇಶವನ್ನು ಅಳಿಸಲಾಗಿದೆ.</string>
   <string name="ThreadRecord_s_is_on_signal">%sರವರು Signal ಸೇರಿದ್ದಾರೆ!</string>
   <string name="ThreadRecord_disappearing_messages_disabled">ಕಣ್ಮರೆಯಾಗುವ ಸಂದೇಶಗಳು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ</string>
   <string name="ThreadRecord_disappearing_message_time_updated_to_s">ಕಣ್ಮರೆಯಾಗುತ್ತಿರುವ ಸಂದೇಶ ಸಮಯ %s ಕ್ಕೆ ಹೊಂದಿಸಲಾಗಿದೆ</string>
@@ -874,6 +885,7 @@
   <string name="MessageNotifier_reacted_s_to_your_view_once_photo">%1$s ನಿಮ್ಮ ವ್ಯೂ-ಒನ್ಸ್ ಫೋಟೊಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಿದ್ದಾರೆ</string>
   <string name="MessageNotifier_reacted_s_to_your_view_once_video">%1$sನಿಮ್ಮ ವ್ಯೂ-ಒನ್ಸ್ ವೀಡಿಯೋಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಿದ್ದಾರೆ</string>
   <string name="MessageNotifier_reacted_s_to_your_sticker">%1$s ನಿಮ್ಮ ಸ್ಟಿಕ್ಕರ್‌ಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಿದ್ದಾರೆ</string>
+  <string name="MessageNotifier_this_message_was_deleted">ಈ ಸಂದೇಶವನ್ನು ಅಳಿಸಲಾಗಿದೆ.</string>
   <!--Notification Channels-->
   <string name="NotificationChannel_messages">ಡೀಫಾಲ್ಟ್</string>
   <string name="NotificationChannel_calls">ಕರೆಗಳು</string>
@@ -963,7 +975,7 @@
   <string name="contact_filter_toolbar__show_dial_pad_description">ಡಯಲ್‌ಪ್ಯಾಡ್ ತೋರಿಸಿ</string>
   <!--contact_selection_group_activity-->
   <string name="contact_selection_group_activity__no_contacts">ಸಂಪರ್ಕಗಳಿಲ್ಲ.</string>
-  <string name="contact_selection_group_activity__finding_contacts">ಸಂಪರ್ಕಗಳನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ …</string>
+  <string name="contact_selection_group_activity__finding_contacts">ಸಂಪರ್ಕಗಳನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ ...</string>
   <!--single_contact_selection_activity-->
   <string name="SingleContactSelectionActivity_contact_photo">ಸಂಪರ್ಕದ ಛಾಯಾಚಿತ್ರ</string>
   <!--ContactSelectionListFragment-->
@@ -1112,7 +1124,7 @@
   <!--message_recipients_list_item-->
   <string name="message_recipients_list_item__view">ನೋಡಿ</string>
   <string name="message_recipients_list_item__resend">ಪುನಃ ಕಳುಹಿಸಿ</string>
-  <string name="message_recipients_list_item__resending">ಪುನಃ ಕಳುಹಿಸಲಾಗುತ್ತಿದೆ…</string>
+  <string name="message_recipients_list_item__resending">ಪುನಃ ಕಳುಹಿಸಲಾಗುತ್ತಿದೆ...</string>
   <!--GroupUtil-->
   <plurals name="GroupUtil_joined_the_group">
     <item quantity="one">%1$s ಗುಂಪನ್ನು ಸೇರಿದ್ದಾರೆ </item>
@@ -1504,16 +1516,20 @@
     <item quantity="other">ಪಿನ್ ಕನಿಷ್ಠ %1$dಅಂಕಿಗಳನ್ನು ಹೊಂದಿರಬೇಕು</item>
   </plurals>
   <string name="CreateKbsPinFragment__create_a_new_pin">ಹೊಸ ಪಿನ್ ರಚಿಸಿ</string>
+  <string name="CreateKbsPinFragment__you_can_choose_a_new_pin_as_long_as_this_device_is_registered">ಈ ಸಾಧನವನ್ನು ನೋಂದಾಯಿಸಿರುವವರೆಗೆ ನಿಮ್ಮ ಪಿನ್ ಅನ್ನು ನೀವು ಬದಲಾಯಿಸಬಹುದು.</string>
   <string name="CreateKbsPinFragment__create_your_pin">ನಿಮ್ಮ ಪಿನ್ ರಚಿಸಿ </string>
+  <string name="CreateKbsPinFragment__pins_keep_information_stored_with_signal_encrypted">ಪಿನ್‌ಗಳು Signal ಎನ್‌ಕ್ರಿಪ್ಟ್ ಮಾಡಿದ ಮಾಹಿತಿಯನ್ನು ಸಂಗ್ರಹಿಸಿಡುತ್ತವೆ ಆದ್ದರಿಂದ ನೀವು ಮಾತ್ರ ಅದನ್ನು ಪ್ರವೇಶಿಸಬಹುದು. ನೀವು Signal ಅನ್ನು ಪುನಃ ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿದಾಗ ನಿಮ್ಮ ಪ್ರೊಫೈಲ್, ಸೆಟ್ಟಿಂಗ್‌‌ಗಳು ಮತ್ತು ಸಂಪರ್ಕಗಳು ಪುನಃಸ್ಥಾಪನೆಯಾಗುತ್ತವೆ.</string>
+  <string name="CreateKbsPinFragment__choose_a_stronger_pin">ಬಲವಾದ ಪಿನ್ ಆಯ್ಕೆಮಾಡಿ</string>
   <!--ConfirmKbsPinFragment-->
   <string name="ConfirmKbsPinFragment__pins_dont_match">ಪಿನ್‌ಗಳು ಹೊಂದಿಕೆಯಾಗುತಿಲ್ಲ. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.</string>
   <string name="ConfirmKbsPinFragment__confirm_your_pin">ನಿಮ್ಮ ಪಿನ್ ಅನ್ನು ದೃಡಪಡಿಸು.</string>
   <string name="ConfirmKbsPinFragment__pin_creation_failed">ಪಿನ್ ರಚನೆ ವಿಫಲವಾಗಿದೆ</string>
   <string name="ConfirmKbsPinFragment__your_pin_was_not_saved">ನಿಮ್ಮ ಪಿನ್ ಉಳಿಸಲಾಗಿಲ್ಲ. ನಂತರ ಪಿನ್ ರಚಿಸಲು ನಾವು ನಿಮ್ಮನ್ನು ಕೇಳುತ್ತೇವೆ.</string>
   <string name="ConfirmKbsPinFragment__pin_created">ಪಿನ್ ರಚಿಸಲಾಗಿದೆ.</string>
-  <string name="ConfirmKbsPinFragment__creating_pin">ಪಿನ್ ರಚಿಸುತ್ತಿದೆ…</string>
+  <string name="ConfirmKbsPinFragment__creating_pin">ಪಿನ್ ರಚಿಸುತ್ತಿದೆ...</string>
   <!--KbsSplashFragment-->
   <string name="KbsSplashFragment__introducing_pins">ಪಿನ್‌ಗಳನ್ನು ಪರಿಚಯಿಸಲಾಗುತ್ತಿದೆ</string>
+  <string name="KbsSplashFragment__pins_keep_information_stored_with_signal_encrypted">ಪಿನ್‌ಗಳು Signal ಎನ್‌ಕ್ರಿಪ್ಟ್ ಮಾಡಿದ ಮಾಹಿತಿಯನ್ನು ಸಂಗ್ರಹಿಸಿಡುತ್ತವೆ ಆದ್ದರಿಂದ ನೀವು ಮಾತ್ರ ಅದನ್ನು ಪ್ರವೇಶಿಸಬಹುದು. ನೀವು Signal ಅನ್ನು ಪುನಃ ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿದಾಗ ನಿಮ್ಮ ಪ್ರೊಫೈಲ್, ಸೆಟ್ಟಿಂಗ್‌‌ಗಳು ಮತ್ತು ಸಂಪರ್ಕಗಳು ಪುನಃಸ್ಥಾಪನೆಯಾಗುತ್ತವೆ.</string>
   <string name="KbsSplashFragment__learn_more">ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ</string>
   <string name="KbsSplashFragment__registration_lock_equals_pin">ನೋಂದಣಿ ಲಾಕ್ = ಪಿನ್</string>
   <string name="KbsSplashFragment__your_registration_lock_is_now_called_a_pin">ನಿಮ್ಮ ನೋಂದಣಿ ಲಾಕ್ ಅನ್ನು ಈಗ ಪಿನ್ ಎಂದು ಕರೆಯಲಾಗುತ್ತದೆ, ಮತ್ತು ಅದು ಹೆಚ್ಚಿನದನ್ನು ಮಾಡುತ್ತದೆ. ಇದೀಗ ಅದನ್ನು ನವೀಕರಿಸಿ. </string>
@@ -1640,6 +1656,8 @@
   <string name="preferences_app_protection__screen_lock_inactivity_timeout">ಸ್ಕ್ರೀನ್ ಲಾಕ್ ನಿಷ್ಕ್ರಿಯತೆಯ ಟೈಮ್‌ ಔಟ್</string>
   <string name="preferences_app_protection__signal_pin">Signal ಪಿನ್</string>
   <string name="preferences_app_protection__create_a_pin">ಒಂದು ಪಿನ್ ರಚಿಸಿ</string>
+  <string name="preferences_app_protection__change_your_pin">ನಿಮ್ಮ ಪಿನ್ ಬದಲಾಯಿಸಿ</string>
+  <string name="preferences_app_protection__pins_keep_information_stored_with_signal_encrypted">ಪಿನ್‌ಗಳು Signal ಎನ್‌ಕ್ರಿಪ್ಟ್ ಮಾಡಿದ ಮಾಹಿತಿಯನ್ನು ಸಂಗ್ರಹಿಸಿಡುತ್ತವೆ ಆದ್ದರಿಂದ ನೀವು ಮಾತ್ರ ಅದನ್ನು ಪ್ರವೇಶಿಸಬಹುದು. ನೀವು Signal ಅನ್ನು ಪುನಃ ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿದಾಗ ನಿಮ್ಮ ಪ್ರೊಫೈಲ್, ಸೆಟ್ಟಿಂಗ್‌‌ಗಳು ಮತ್ತು ಸಂಪರ್ಕಗಳು ಪುನಃಸ್ಥಾಪನೆಯಾಗುತ್ತವೆ.</string>
   <string name="AppProtectionPreferenceFragment_none">ಯಾವುದೂ ಇಲ್ಲ</string>
   <string name="registration_activity__the_registration_lock_pin_is_not_the_same_as_the_sms_verification_code_you_just_received_please_enter_the_pin_you_previously_configured_in_the_application">ನೋಂದಣಿ ಲಾಕ್ ಪಿನ್ ನೀವು ಇದೀಗ ಸ್ವೀಕರಿಸಿದ ಎಸ್‌ಎಂಎಸ್ ದೃಢೀಕರಣ ಕೋಡ್‌ನಂತೆಯೇ ಇರುವುದಿಲ್ಲ. ದಯವಿಟ್ಟು ನೀವು ಈ ಹಿಂದೆ ಅಪ್ಲಿಕೇಶನ್‌ನಲ್ಲಿ ಕಾನ್ಫಿಗರ್ ಮಾಡಿದ ಪಿನ್ ಅನ್ನು ನಮೂದಿಸಿ.</string>
   <string name="registration_activity__registration_lock_pin">ನೋಂದಣಿ ಲಾಕ್ ಪಿನ್</string>
