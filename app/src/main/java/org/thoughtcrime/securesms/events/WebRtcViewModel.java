@@ -3,6 +3,7 @@ package org.thoughtcrime.securesms.events;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import org.thoughtcrime.securesms.components.webrtc.TextureViewRenderer;
 import org.thoughtcrime.securesms.recipients.Recipient;
 import org.thoughtcrime.securesms.ringrtc.CameraState;
 import org.webrtc.SurfaceViewRenderer;
@@ -43,18 +44,21 @@ public class WebRtcViewModel {
   private final boolean isRemoteVideoOffer;
 
   private final CameraState         localCameraState;
-  private final SurfaceViewRenderer localRenderer;
-  private final SurfaceViewRenderer remoteRenderer;
+  private final TextureViewRenderer localRenderer;
+  private final TextureViewRenderer remoteRenderer;
+
+  private final long callConnectedTime;
 
   public WebRtcViewModel(@NonNull State               state,
                          @NonNull Recipient           recipient,
                          @NonNull CameraState         localCameraState,
-                         @NonNull SurfaceViewRenderer localRenderer,
-                         @NonNull SurfaceViewRenderer remoteRenderer,
+                         @NonNull TextureViewRenderer localRenderer,
+                         @NonNull TextureViewRenderer remoteRenderer,
                                   boolean             remoteVideoEnabled,
                                   boolean             isBluetoothAvailable,
                                   boolean             isMicrophoneEnabled,
-                                  boolean             isRemoteVideoOffer)
+                                  boolean             isRemoteVideoOffer,
+                                  long                callConnectedTime)
   {
     this(state,
          recipient,
@@ -65,19 +69,21 @@ public class WebRtcViewModel {
          remoteVideoEnabled,
          isBluetoothAvailable,
          isMicrophoneEnabled,
-         isRemoteVideoOffer);
+         isRemoteVideoOffer,
+         callConnectedTime);
   }
 
   public WebRtcViewModel(@NonNull  State               state,
                          @NonNull  Recipient           recipient,
                          @Nullable IdentityKey         identityKey,
                          @NonNull  CameraState         localCameraState,
-                         @NonNull  SurfaceViewRenderer localRenderer,
-                         @NonNull  SurfaceViewRenderer remoteRenderer,
+                         @NonNull  TextureViewRenderer localRenderer,
+                         @NonNull  TextureViewRenderer remoteRenderer,
                                    boolean             remoteVideoEnabled,
                                    boolean             isBluetoothAvailable,
                                    boolean             isMicrophoneEnabled,
-                                   boolean             isRemoteVideoOffer)
+                                   boolean             isRemoteVideoOffer,
+                                   long                callConnectedTime)
   {
     this.state                = state;
     this.recipient            = recipient;
@@ -89,6 +95,7 @@ public class WebRtcViewModel {
     this.isBluetoothAvailable = isBluetoothAvailable;
     this.isMicrophoneEnabled  = isMicrophoneEnabled;
     this.isRemoteVideoOffer   = isRemoteVideoOffer;
+    this.callConnectedTime    = callConnectedTime;
   }
 
   public @NonNull State getState() {
@@ -123,15 +130,26 @@ public class WebRtcViewModel {
     return isRemoteVideoOffer;
   }
 
-  public SurfaceViewRenderer getLocalRenderer() {
+  public TextureViewRenderer getLocalRenderer() {
     return localRenderer;
   }
 
-  public SurfaceViewRenderer getRemoteRenderer() {
+  public TextureViewRenderer getRemoteRenderer() {
     return remoteRenderer;
   }
 
+  public long getCallConnectedTime() {
+    return callConnectedTime;
+  }
+
   public @NonNull String toString() {
-    return "[State: " + state + ", recipient: " + recipient.getId().serialize() + ", identity: " + identityKey + ", remoteVideo: " + remoteVideoEnabled + ", localVideo: " + localCameraState.isEnabled() + ", isRemoteVideoOffer: " + isRemoteVideoOffer + "]";
+    return "[State: "               + state +
+           ", recipient: "          + recipient.getId().serialize() +
+           ", identity: "           + identityKey +
+           ", remoteVideo: "        + remoteVideoEnabled +
+           ", localVideo: "         + localCameraState.isEnabled() +
+           ", isRemoteVideoOffer: " + isRemoteVideoOffer +
+           ", callConnectedTime: "  + callConnectedTime +
+           "]";
   }
 }

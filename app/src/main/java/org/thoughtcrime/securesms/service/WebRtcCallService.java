@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Build;
@@ -25,6 +26,7 @@ import org.signal.ringrtc.CallManager.CallEvent;
 import org.signal.ringrtc.Remote;
 import org.thoughtcrime.securesms.ApplicationContext;
 import org.thoughtcrime.securesms.WebRtcCallActivity;
+import org.thoughtcrime.securesms.components.webrtc.TextureViewRenderer;
 import org.thoughtcrime.securesms.crypto.UnidentifiedAccessUtil;
 import org.thoughtcrime.securesms.database.DatabaseFactory;
 import org.thoughtcrime.securesms.database.RecipientDatabase.VibrateState;
@@ -56,6 +58,7 @@ import org.thoughtcrime.securesms.webrtc.audio.OutgoingRinger;
 import org.thoughtcrime.securesms.webrtc.audio.SignalAudioManager;
 import org.thoughtcrime.securesms.webrtc.locks.LockManager;
 import org.webrtc.EglBase;
+import org.webrtc.EglRenderer;
 import org.webrtc.IceCandidate;
 import org.webrtc.PeerConnection;
 import org.webrtc.SurfaceViewRenderer;
@@ -167,6 +170,8 @@ public class WebRtcCallService extends Service implements CallManager.Observer,
   private boolean     isRemoteVideoOffer  = false;
   private boolean     acceptWithVideo     = false;
 
+  private long callConnectedTime = -1;
+
   private SignalServiceMessageSender      messageSender;
   private SignalServiceAccountManager     accountManager;
   private SignalAudioManager              audioManager;
@@ -179,8 +184,8 @@ public class WebRtcCallService extends Service implements CallManager.Observer,
 
   @Nullable private CallManager         callManager;
   @Nullable private RemotePeer          activePeer;
-  @Nullable private SurfaceViewRenderer localRenderer;
-  @Nullable private SurfaceViewRenderer remoteRenderer;
+  @Nullable private TextureViewRenderer localRenderer;
+  @Nullable private TextureViewRenderer remoteRenderer;
   @Nullable private EglBase             eglBase;
   @Nullable private Camera              camera;
 
@@ -925,6 +930,8 @@ public class WebRtcCallService extends Service implements CallManager.Observer,
       lockManager.updatePhoneState(getInCallPhoneState());
     }
 
+    callConnectedTime = System.currentTimeMillis();
+
     sendMessage(WebRtcViewModel.State.CALL_CONNECTED, activePeer, localCameraState, remoteVideoEnabled, bluetoothAvailable, microphoneEnabled, isRemoteVideoOffer);
 
     unregisterPowerButtonReceiver();
@@ -972,6 +979,15 @@ public class WebRtcCallService extends Service implements CallManager.Observer,
 
     if (activePeer.getState() != CallState.CONNECTED) {
       enableVideoOnCreate = enable;
+
+      if (enableVideoOnCreate              &&
+          !audioManager.isSpeakerphoneOn() &&
+          !audioManager.isBluetoothScoOn() &&
+          !audioManager.isWiredHeadsetOn())
+      {
+        audioManager.setSpeakerphoneOn(true);
+      }
+
       return;
     }
 
@@ -1194,8 +1210,8 @@ public class WebRtcCallService extends Service implements CallManager.Observer,
     Util.runOnMainSync(() -> {
 
       eglBase        = EglBase.create();
-      localRenderer  = new SurfaceViewRenderer(WebRtcCallService.this);
-      remoteRenderer = new SurfaceViewRenderer(WebRtcCallService.this);
+      localRenderer  = new TextureViewRenderer(WebRtcCallService.this);
+      remoteRenderer = new TextureViewRenderer(WebRtcCallService.this);
 
       localRenderer.init(eglBase.getEglBaseContext(), null);
       remoteRenderer.init(eglBase.getEglBaseContext(), null);
@@ -1268,7 +1284,8 @@ public class WebRtcCallService extends Service implements CallManager.Observer,
                                                          remoteVideoEnabled,
                                                          bluetoothAvailable,
                                                          microphoneEnabled,
-                                                         isRemoteVideoOffer));
+                                                         isRemoteVideoOffer,
+                                                         callConnectedTime));
   }
 
   private void sendMessage(@NonNull WebRtcViewModel.State state,
@@ -1289,7 +1306,8 @@ public class WebRtcCallService extends Service implements CallManager.Observer,
                                                          remoteVideoEnabled,
                                                          bluetoothAvailable,
                                                          microphoneEnabled,
-                                                         isRemoteVideoOffer));
+                                                         isRemoteVideoOffer,
+                                                         callConnectedTime));
   }
 
   private ListenableFutureTask<Boolean> sendMessage(@NonNull final RemotePeer remotePeer,
