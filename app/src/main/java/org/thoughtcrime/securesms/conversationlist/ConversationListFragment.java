@@ -130,7 +130,11 @@ import org.thoughtcrime.securesms.util.concurrent.SimpleTask;
 import org.thoughtcrime.securesms.util.task.SnackbarAsyncTask;
 import org.whispersystems.libsignal.util.guava.Optional;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -591,39 +595,6 @@ public class ConversationListFragment extends MainFragment implements LoaderMana
     });
   }
 
-  @SuppressWarnings("StaticFieldLeak")
-  private void handleMarkUnread() {
-    Context context = requireContext();
-
-    new AsyncTask<Void, Void, Void>() {
-
-      @Override
-      protected void onPreExecute() {
-
-      }
-
-      @Override
-      protected Void doInBackground(Void... params) {
-        ThreadDatabase threadDb = DatabaseFactory.getThreadDatabase(context);
-        Set<Long> threadIds = defaultAdapter.getBatchSelections();
-        threadIds.forEach(threadId -> {
-          try {
-            threadDb.markUnread(threadId);
-          } catch (NullPointerException ignored) {}
-        });
-        return null;
-      }
-
-      @Override
-      protected void onPostExecute(Void result) {
-        if (actionMode != null) {
-          actionMode.finish();
-          actionMode = null;
-        }
-      }
-    }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-  }
-
   private void handleInvite() {
     getNavigator().goToInvite();
   }
@@ -818,7 +789,6 @@ public class ConversationListFragment extends MainFragment implements LoaderMana
   @Override
   public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
     switch (item.getItemId()) {
-    case R.id.menu_mark_unread:      handleMarkUnread();         return true;
     case R.id.menu_select_all:       handleSelectAllThreads();   return true;
     case R.id.menu_delete_selected:  handleDeleteAllSelected();  return true;
     case R.id.menu_archive_selected: handleArchiveAllSelected(); return true;

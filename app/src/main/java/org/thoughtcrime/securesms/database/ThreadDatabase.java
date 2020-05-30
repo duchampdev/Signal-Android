@@ -691,16 +691,6 @@ public class ThreadDatabase extends Database {
     notifyConversationListListeners();
   }
 
-  public void markUnread(long threadId) {
-    Recipient recipient = getRecipientForThreadId(threadId);
-    Cursor conversationCursor = getFilteredConversationList(Collections.singletonList(recipient.getId()));
-    int unreadCount = readerFor(conversationCursor).getNext().getUnreadCount();
-    if (unreadCount == 0) {
-      incrementUnread(threadId, 1);
-    }
-    notifyConversationListListeners();
-  }
-
   public boolean update(long threadId, boolean unarchive) {
     MmsSmsDatabase mmsSmsDatabase = DatabaseFactory.getMmsSmsDatabase(context);
     long count                    = mmsSmsDatabase.getConversationCount(threadId);

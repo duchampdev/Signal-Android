@@ -361,8 +361,7 @@ public class ConversationListItem extends RelativeLayout
   }
 
   private void setUnreadIndicator(ThreadRecord thread) {
-    System.out.println("updating unread indicator for unreadCount " + thread.getUnreadCount());
-    if (thread.getUnreadCount() == 0) {
+    if (thread.isOutgoing() || thread.getUnreadCount() == 0) {
       unreadIndicator.setVisibility(View.GONE);
       return;
     }
