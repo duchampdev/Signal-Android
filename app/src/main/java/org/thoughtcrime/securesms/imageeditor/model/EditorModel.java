@@ -20,6 +20,7 @@ import org.thoughtcrime.securesms.imageeditor.Renderer;
 import org.thoughtcrime.securesms.imageeditor.RendererContext;
 import org.thoughtcrime.securesms.imageeditor.UndoRedoStackListener;
 import org.thoughtcrime.securesms.imageeditor.renderers.MultiLineTextRenderer;
+import org.thoughtcrime.securesms.imageeditor.renderers.FaceBlurRenderer;
 
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -35,6 +36,7 @@ import java.util.UUID;
  */
 public final class EditorModel implements Parcelable, RendererContext.Ready {
 
+  public static final int Z_MASK     = -1;
   public static final int Z_DRAWING  = 0;
   public static final int Z_STICKERS = 0;
   public static final int Z_TEXT     = 1;
@@ -661,7 +663,10 @@ public final class EditorModel implements Parcelable, RendererContext.Ready {
    */
   public void addElement(@NonNull EditorElement element) {
     pushUndoPoint();
+    addElementWithoutPushUndo(element);
+  }
 
+  public void addElementWithoutPushUndo(@NonNull EditorElement element) {
     EditorElement mainImage = editorElementHierarchy.getMainImage();
     EditorElement parent    = mainImage != null ? mainImage : editorElementHierarchy.getImageRoot();
 
@@ -672,6 +677,36 @@ public final class EditorModel implements Parcelable, RendererContext.Ready {
     }
 
     updateUndoRedoAvailableState(undoRedoStacks);
+  }
+
+  public void clearFaceRenderers() {
+    EditorElement mainImage = editorElementHierarchy.getMainImage();
+    if (mainImage != null) {
+      boolean hasPushedUndo = false;
+      for (int i = mainImage.getChildCount() - 1; i >= 0; i--) {
+        if (mainImage.getChild(i).getRenderer() instanceof FaceBlurRenderer) {
+          if (!hasPushedUndo) {
+            pushUndoPoint();
+            hasPushedUndo = true;
+          }
+          
+          mainImage.deleteChild(mainImage.getChild(i), invalidate);
+        }
+      }
+    }
+  }
+
+  public boolean hasFaceRenderer() {
+    EditorElement mainImage = editorElementHierarchy.getMainImage();
+    if (mainImage != null) {
+      for (int i = mainImage.getChildCount() - 1; i >= 0; i--) {
+        if (mainImage.getChild(i).getRenderer() instanceof FaceBlurRenderer) {
+          return true;
+        }
+      }
+    }
+
+    return false;
   }
 
   public boolean isChanged() {
@@ -738,6 +773,10 @@ public final class EditorModel implements Parcelable, RendererContext.Ready {
 
   public EditorElement getRoot() {
     return editorElementHierarchy.getRoot();
+  }
+
+  public EditorElement getMainImage() {
+    return editorElementHierarchy.getMainImage();
   }
 
   public void delete(@NonNull EditorElement editorElement) {

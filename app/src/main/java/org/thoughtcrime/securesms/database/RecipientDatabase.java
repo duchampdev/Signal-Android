@@ -648,13 +648,18 @@ public class RecipientDatabase extends Database {
   public void applyStorageSyncUpdates(@NonNull StorageId storageId, SignalAccountRecord update) {
     SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
-    ContentValues       values      = new ContentValues();
-    ProfileName         profileName = ProfileName.fromParts(update.getGivenName().orNull(), update.getFamilyName().orNull());
+    ContentValues values      = new ContentValues();
+    ProfileName   profileName = ProfileName.fromParts(update.getGivenName().orNull(), update.getFamilyName().orNull());
+    String        profileKey  = update.getProfileKey().or(Optional.fromNullable(Recipient.self().getProfileKey())).transform(Base64::encodeBytes).orNull();
+
+    if (!update.getProfileKey().isPresent()) {
+      Log.w(TAG, "Got an empty profile key while applying an account record update!");
+    }
 
     values.put(PROFILE_GIVEN_NAME, profileName.getGivenName());
     values.put(PROFILE_FAMILY_NAME, profileName.getFamilyName());
     values.put(PROFILE_JOINED_NAME, profileName.toString());
-    values.put(PROFILE_KEY, update.getProfileKey().transform(Base64::encodeBytes).orNull());
+    values.put(PROFILE_KEY, profileKey);
     values.put(STORAGE_SERVICE_ID, Base64.encodeBytes(update.getId().getRaw()));
     values.put(DIRTY, DirtyState.CLEAN.getId());
 
@@ -755,8 +760,7 @@ public class RecipientDatabase extends Database {
     List<RecipientSettings> out   = new ArrayList<>();
 
     String[] columns = ArrayUtils.concat(RECIPIENT_FULL_PROJECTION,
-      new String[]{ GroupDatabase.TABLE_NAME + "." + GroupDatabase.GROUP_ID,
-                    GroupDatabase.TABLE_NAME + "." + GroupDatabase.V2_MASTER_KEY });
+      new String[]{GroupDatabase.TABLE_NAME + "." + GroupDatabase.V2_MASTER_KEY });
 
     try (Cursor cursor = db.query(table, columns, query, args, null, null, null)) {
       while (cursor != null && cursor.moveToNext()) {
