@@ -3,6 +3,7 @@ package org.thoughtcrime.securesms.scribbles;
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.RectF;
@@ -19,14 +20,15 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import org.thoughtcrime.securesms.R;
-import org.thoughtcrime.securesms.components.TooltipPopup;
+import org.thoughtcrime.securesms.dependencies.ApplicationDependencies;
+import org.thoughtcrime.securesms.imageeditor.Bounds;
 import org.thoughtcrime.securesms.imageeditor.ColorableRenderer;
 import org.thoughtcrime.securesms.imageeditor.ImageEditorView;
 import org.thoughtcrime.securesms.imageeditor.Renderer;
 import org.thoughtcrime.securesms.imageeditor.model.EditorElement;
 import org.thoughtcrime.securesms.imageeditor.model.EditorModel;
-import org.thoughtcrime.securesms.imageeditor.renderers.MultiLineTextRenderer;
 import org.thoughtcrime.securesms.imageeditor.renderers.FaceBlurRenderer;
+import org.thoughtcrime.securesms.imageeditor.renderers.MultiLineTextRenderer;
 import org.thoughtcrime.securesms.keyvalue.SignalStore;
 import org.thoughtcrime.securesms.logging.Log;
 import org.thoughtcrime.securesms.mediasend.MediaSendPageFragment;
@@ -305,12 +307,8 @@ public final class ImageEditorFragment extends Fragment implements ImageEditorHu
       }
 
       case BLUR: {
-        imageEditorView.startDrawing(0.055f, Paint.Cap.ROUND, true);
+        imageEditorView.startDrawing(0.052f, Paint.Cap.ROUND, true);
         imageEditorHud.setBlurFacesToggleEnabled(imageEditorView.getModel().hasFaceRenderer());
-        if (!SignalStore.tooltips().hasSeenAutoBlurFacesTooltip()) {
-          imageEditorHud.showAutoBlurFacesTooltip();
-          SignalStore.tooltips().markAutoBlurFacesTooltipSeen();
-        }
         break;
       }
 
@@ -344,32 +342,57 @@ public final class ImageEditorFragment extends Fragment implements ImageEditorHu
 
   @Override
   public void onBlurFacesToggled(boolean enabled) {
-    if (!enabled) {
-      imageEditorView.getModel().clearFaceRenderers();
+    EditorModel   model     = imageEditorView.getModel();
+    EditorElement mainImage = model.getMainImage();
+    if (mainImage == null) {
+      imageEditorHud.hideBlurToast();
       return;
     }
 
-    if (cachedFaceDetection != null && cachedFaceDetection.first().equals(getUri())) {
-      renderFaceBlurs(cachedFaceDetection.second());
+    if (!enabled) {
+      model.clearFaceRenderers();
+      imageEditorHud.hideBlurToast();
       return;
-    } else if (cachedFaceDetection != null && !cachedFaceDetection.first().equals(getUri())) {
-      cachedFaceDetection = null;
+    }
+
+    Matrix inverseCropPosition = model.getInverseCropPosition();
+
+    if (cachedFaceDetection != null) {
+      if (cachedFaceDetection.first().equals(getUri()) && cachedFaceDetection.second().position.equals(inverseCropPosition)) {
+        renderFaceBlurs(cachedFaceDetection.second());
+        imageEditorHud.showBlurToast();
+        return;
+      } else {
+        cachedFaceDetection = null;
+      }
     }
 
     AlertDialog progress = SimpleProgressDialog.show(requireContext());
+    mainImage.getFlags().setChildrenVisible(false);
 
-    SimpleTask.run(() -> {
-      Bitmap bitmap = ((UriGlideRenderer) imageEditorView.getModel().getMainImage().getRenderer()).getBitmap();
+    SimpleTask.run(getLifecycle(), () -> {
+      if (mainImage.getRenderer() != null) {
+        Bitmap bitmap = ((UriGlideRenderer) mainImage.getRenderer()).getBitmap();
+        if (bitmap != null) {
+          FaceDetector detector = new FirebaseFaceDetector();
 
-      if (bitmap != null) {
-        FaceDetector detector = new FirebaseFaceDetector();
-        return new FaceDetectionResult(detector.detect(bitmap), new Point(bitmap.getWidth(), bitmap.getHeight()));
-      } else {
-        return new FaceDetectionResult(Collections.emptyList(), new Point(0, 0));
+          Point size = model.getOutputSizeMaxWidth(1000);
+          Bitmap render = model.render(ApplicationDependencies.getApplication(), size);
+          try {
+            return new FaceDetectionResult(detector.detect(render), new Point(render.getWidth(), render.getHeight()), inverseCropPosition);
+          } finally {
+            render.recycle();
+            mainImage.getFlags().reset();
+          }
+        }
       }
+
+      return new FaceDetectionResult(Collections.emptyList(), new Point(0, 0), new Matrix());
     }, result -> {
+      mainImage.getFlags().reset();
       renderFaceBlurs(result);
       progress.dismiss();
+      imageEditorHud.showBlurToast();
     });
   }
 
@@ -456,20 +479,31 @@ public final class ImageEditorFragment extends Fragment implements ImageEditorHu
 
   private void renderFaceBlurs(@NonNull FaceDetectionResult result) {
     List<RectF> faces = result.rects;
-    Point       size  = result.imageSize;
 
     if (faces.isEmpty()) {
-      Toast.makeText(requireContext(), R.string.ImageEditorFragment_no_faces_detected, Toast.LENGTH_SHORT).show();
-      imageEditorHud.setBlurFacesToggleEnabled(false);
       cachedFaceDetection = null;
       return;
     }
 
     imageEditorView.getModel().pushUndoPoint();
 
+    Matrix faceMatrix = new Matrix();
+
     for (RectF face : faces) {
-      FaceBlurRenderer faceBlurRenderer = new FaceBlurRenderer(face, size);
-      imageEditorView.getModel().addElementWithoutPushUndo(new EditorElement(faceBlurRenderer, EditorModel.Z_MASK));
+      FaceBlurRenderer faceBlurRenderer = new FaceBlurRenderer();
+      EditorElement    element          = new EditorElement(faceBlurRenderer, EditorModel.Z_MASK);
+      Matrix           localMatrix      = element.getLocalMatrix();
+
+      faceMatrix.setRectToRect(Bounds.FULL_BOUNDS, face, Matrix.ScaleToFit.FILL);
+
+      localMatrix.set(result.position);
+      localMatrix.preConcat(faceMatrix);
+
+      element.getFlags().setEditable(false)
+                        .setSelectable(false)
+                        .persist();
+
+      imageEditorView.getModel().addElementWithoutPushUndo(element);
     }
 
     imageEditorView.invalidate();
@@ -533,11 +567,15 @@ public final class ImageEditorFragment extends Fragment implements ImageEditorHu
 
   private static class FaceDetectionResult {
     private final List<RectF> rects;
-    private final Point       imageSize;
+    private final Matrix      position;
 
-    private FaceDetectionResult(@NonNull List<RectF> rects, @NonNull Point imageSize) {
-      this.rects     = rects;
-      this.imageSize = imageSize;
+    private FaceDetectionResult(@NonNull List<RectF> rects, @NonNull Point imageSize, @NonNull Matrix position) {
+      this.rects    = rects;
+      this.position = new Matrix(position);
+
+      Matrix imageProjectionMatrix = new Matrix();
+      imageProjectionMatrix.setRectToRect(new RectF(0, 0, imageSize.x, imageSize.y), Bounds.FULL_BOUNDS, Matrix.ScaleToFit.FILL);
+      this.position.preConcat(imageProjectionMatrix);
     }
   }
 }
