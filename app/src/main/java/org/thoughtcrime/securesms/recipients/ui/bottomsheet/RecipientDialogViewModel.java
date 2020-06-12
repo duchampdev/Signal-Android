@@ -23,6 +23,7 @@ import org.thoughtcrime.securesms.groups.GroupId;
 import org.thoughtcrime.securesms.groups.LiveGroup;
 import org.thoughtcrime.securesms.groups.ui.GroupChangeFailureReason;
 import org.thoughtcrime.securesms.groups.ui.GroupErrors;
+import org.thoughtcrime.securesms.groups.ui.addtogroup.AddToGroupsActivity;
 import org.thoughtcrime.securesms.recipients.Recipient;
 import org.thoughtcrime.securesms.recipients.RecipientId;
 import org.thoughtcrime.securesms.recipients.RecipientUtil;
@@ -164,6 +165,14 @@ final class RecipientDialogViewModel extends ViewModel {
                                         })
                      .setNegativeButton(android.R.string.cancel, (dialog, which) -> {})
                      .show());
+  }
+
+  void onAddedToContacts() {
+    recipientDialogRepository.refreshRecipient();
+  }
+
+  void onAddToGroupButton(@NonNull Activity activity) {
+    recipientDialogRepository.getGroupMembership(existingGroups -> activity.startActivity(AddToGroupsActivity.newIntent(activity, recipientDialogRepository.getRecipientId(), existingGroups)));
   }
 
   @WorkerThread

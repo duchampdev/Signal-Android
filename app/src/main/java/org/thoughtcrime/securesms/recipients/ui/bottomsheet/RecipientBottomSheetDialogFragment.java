@@ -1,5 +1,7 @@
 package org.thoughtcrime.securesms.recipients.ui.bottomsheet;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -20,6 +22,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import org.thoughtcrime.securesms.R;
 import org.thoughtcrime.securesms.components.AvatarImageView;
 import org.thoughtcrime.securesms.groups.GroupId;
+import org.thoughtcrime.securesms.recipients.RecipientExporter;
 import org.thoughtcrime.securesms.recipients.RecipientId;
 import org.thoughtcrime.securesms.util.ServiceUtil;
 import org.thoughtcrime.securesms.util.ThemeUtil;
@@ -27,7 +30,13 @@ import org.thoughtcrime.securesms.util.Util;
 
 import java.util.Objects;
 
+/**
+ * A bottom sheet that shows some simple recipient details, as well as some actions (like calling,
+ * adding to contacts, etc).
+ */
 public final class RecipientBottomSheetDialogFragment extends BottomSheetDialogFragment {
+
+  public static final int REQUEST_CODE_ADD_CONTACT = 1111;
 
   private static final String ARGS_RECIPIENT_ID = "RECIPIENT_ID";
   private static final String ARGS_GROUP_ID     = "GROUP_ID";
@@ -40,6 +49,8 @@ public final class RecipientBottomSheetDialogFragment extends BottomSheetDialogF
   private Button                   secureCallButton;
   private Button                   blockButton;
   private Button                   unblockButton;
+  private Button                   addContactButton;
+  private Button                   addToGroupButton;
   private Button                   viewSafetyNumberButton;
   private Button                   makeGroupAdminButton;
   private Button                   removeAdminButton;
@@ -67,6 +78,7 @@ public final class RecipientBottomSheetDialogFragment extends BottomSheetDialogF
     setStyle(DialogFragment.STYLE_NORMAL,
              ThemeUtil.isDarkTheme(requireContext()) ? R.style.Theme_Signal_RecipientBottomSheet
                                                      : R.style.Theme_Signal_RecipientBottomSheet_Light);
+
     super.onCreate(savedInstanceState);
   }
 
@@ -74,18 +86,20 @@ public final class RecipientBottomSheetDialogFragment extends BottomSheetDialogF
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.recipient_bottom_sheet, container, false);
 
-    avatar                 = view.findViewById(R.id.recipient_avatar);
-    fullName               = view.findViewById(R.id.full_name);
-    usernameNumber         = view.findViewById(R.id.username_number);
-    messageButton          = view.findViewById(R.id.message_button);
-    secureCallButton       = view.findViewById(R.id.secure_call_button);
-    blockButton            = view.findViewById(R.id.block_button);
-    unblockButton          = view.findViewById(R.id.unblock_button);
-    viewSafetyNumberButton = view.findViewById(R.id.view_safety_number_button);
-    makeGroupAdminButton   = view.findViewById(R.id.make_group_admin_button);
-    removeAdminButton      = view.findViewById(R.id.remove_group_admin_button);
-    removeFromGroupButton  = view.findViewById(R.id.remove_from_group_button);
-    adminActionBusy        = view.findViewById(R.id.admin_action_busy);
+    avatar                 = view.findViewById(R.id.rbs_recipient_avatar);
+    fullName               = view.findViewById(R.id.rbs_full_name);
+    usernameNumber         = view.findViewById(R.id.rbs_username_number);
+    messageButton          = view.findViewById(R.id.rbs_message_button);
+    secureCallButton       = view.findViewById(R.id.rbs_secure_call_button);
+    blockButton            = view.findViewById(R.id.rbs_block_button);
+    unblockButton          = view.findViewById(R.id.rbs_unblock_button);
+    addContactButton       = view.findViewById(R.id.rbs_add_contact_button);
+    addToGroupButton       = view.findViewById(R.id.rbs_add_to_group_button);
+    viewSafetyNumberButton = view.findViewById(R.id.rbs_view_safety_number_button);
+    makeGroupAdminButton   = view.findViewById(R.id.rbs_make_group_admin_button);
+    removeAdminButton      = view.findViewById(R.id.rbs_remove_group_admin_button);
+    removeFromGroupButton  = view.findViewById(R.id.rbs_remove_from_group_button);
+    adminActionBusy        = view.findViewById(R.id.rbs_admin_action_busy);
 
     return view;
   }
@@ -125,6 +139,18 @@ public final class RecipientBottomSheetDialogFragment extends BottomSheetDialogF
       unblockButton.setVisibility(blocked ? View.VISIBLE : View.GONE);
 
       secureCallButton.setVisibility(recipient.isRegistered() ? View.VISIBLE : View.GONE);
+
+      if (recipient.isSystemContact() || recipient.isGroup()) {
+        addContactButton.setVisibility(View.GONE);
+      } else {
+        addContactButton.setVisibility(View.VISIBLE);
+        addContactButton.setOnClickListener(v -> {
+          startActivityForResult(RecipientExporter.export(recipient).asAddContactIntent(), REQUEST_CODE_ADD_CONTACT);
+        });
+      }
+
+      addToGroupButton.setText(groupId == null ? R.string.RecipientBottomSheet_add_to_a_group : R.string.RecipientBottomSheet_add_to_another_group);
+      addToGroupButton.setVisibility(recipient.isRegistered() && !recipient.isGroup() ? View.VISIBLE : View.GONE);
     });
 
     viewModel.getAdminActionStatus().observe(getViewLifecycleOwner(), adminStatus -> {
@@ -167,6 +193,11 @@ public final class RecipientBottomSheetDialogFragment extends BottomSheetDialogF
 
     removeFromGroupButton.setOnClickListener(view -> viewModel.onRemoveFromGroupClicked(requireActivity(), this::dismiss));
 
+    addToGroupButton.setOnClickListener(view -> {
+      dismiss();
+      viewModel.onAddToGroupButton(requireActivity());
+    });
+
     viewModel.getAdminActionBusy().observe(getViewLifecycleOwner(), busy -> {
       adminActionBusy.setVisibility(busy ? View.VISIBLE : View.GONE);
 
@@ -174,5 +205,12 @@ public final class RecipientBottomSheetDialogFragment extends BottomSheetDialogF
       removeAdminButton.setEnabled(!busy);
       removeFromGroupButton.setEnabled(!busy);
     });
+  }
+
+  @Override
+  public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE_ADD_CONTACT) {
+      viewModel.onAddedToContacts();
+    }
   }
 }

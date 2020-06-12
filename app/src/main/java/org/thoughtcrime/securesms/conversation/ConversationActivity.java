@@ -249,7 +249,6 @@ import org.whispersystems.libsignal.util.guava.Optional;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
@@ -618,7 +617,14 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
       handleImageFromDeviceCameraApp();
       break;
     case ADD_CONTACT:
-      onRecipientChanged(recipient.get());
+      SimpleTask.run(() -> {
+        try {
+          DirectoryHelper.refreshDirectoryFor(this, recipient.get(), false);
+        } catch (IOException e) {
+          Log.w(TAG, "Failed to refresh user after adding to contacts.");
+        }
+        return null;
+      }, nothing -> onRecipientChanged(recipient.get()));
       break;
     case PICK_LOCATION:
       SignalPlace place = new SignalPlace(PlacePickerActivity.addressFromData(data));
@@ -731,6 +737,7 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
     GroupActiveState groupActiveState = groupViewModel.getGroupActiveState().getValue();
     boolean isActiveGroup             = groupActiveState != null && groupActiveState.isActiveGroup();
     boolean isActiveV2Group           = groupActiveState != null && groupActiveState.isActiveV2Group();
+    boolean isInActiveGroup           = groupActiveState != null && !groupActiveState.isActiveGroup();
 
     if (isInMessageRequest()) {
       if (isActiveGroup) {
@@ -748,10 +755,14 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
 
     if (isSecureText) {
       if (recipient.get().getExpireMessages() > 0) {
-        inflater.inflate(R.menu.conversation_expiring_on, menu);
+        if (!isInActiveGroup) {
+          inflater.inflate(R.menu.conversation_expiring_on, menu);
+        }
         titleView.showExpiring(recipient);
       } else {
-        inflater.inflate(R.menu.conversation_expiring_off, menu);
+        if (!isInActiveGroup) {
+          inflater.inflate(R.menu.conversation_expiring_off, menu);
+        }
         titleView.clearExpiring();
       }
     }
@@ -815,7 +826,7 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
       hideMenuItem(menu, R.id.menu_mute_notifications);
     }
 
-    if (FeatureFlags.newGroupUI()) {
+    if (FeatureFlags.newGroupUI() && isPushGroupConversation()) {
       hideMenuItem(menu, R.id.menu_group_recipients);
     }
 
@@ -905,7 +916,7 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
     case R.id.menu_conversation_settings:     handleConversationSettings();                      return true;
     case R.id.menu_expiring_messages_off:
     case R.id.menu_expiring_messages:         handleSelectMessageExpiration();                   return true;
-    case android.R.id.home:                   onBackPressed();                                   return true;
+    case android.R.id.home:                   onNavigateUp();                                    return true;
     }
 
     return false;
@@ -1968,7 +1979,7 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
       return;
     }
 
-    ApplicationDependencies.getJobManager().add(RetrieveProfileJob.forRecipient(recipient.get()));
+    RetrieveProfileJob.enqueueAsync(recipient.getId());
   }
 
   private void onRecipientChanged(@NonNull Recipient recipient) {

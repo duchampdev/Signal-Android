@@ -3,7 +3,6 @@ package org.thoughtcrime.securesms.groups.ui.managegroup;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -31,6 +30,7 @@ import org.thoughtcrime.securesms.R;
 import org.thoughtcrime.securesms.components.AvatarImageView;
 import org.thoughtcrime.securesms.components.ThreadPhotoRailView;
 import org.thoughtcrime.securesms.contacts.avatars.FallbackContactPhoto;
+import org.thoughtcrime.securesms.contacts.avatars.GroupFallbackPhoto80;
 import org.thoughtcrime.securesms.groups.GroupId;
 import org.thoughtcrime.securesms.groups.ui.GroupMemberListView;
 import org.thoughtcrime.securesms.groups.ui.LeaveGroupDialog;
@@ -47,7 +47,6 @@ import org.thoughtcrime.securesms.recipients.RecipientId;
 import org.thoughtcrime.securesms.recipients.ui.bottomsheet.RecipientBottomSheetDialogFragment;
 import org.thoughtcrime.securesms.util.DateUtils;
 import org.thoughtcrime.securesms.util.LifecycleCursorWrapper;
-import org.thoughtcrime.securesms.util.ThemeUtil;
 
 import java.util.List;
 import java.util.Locale;
@@ -96,27 +95,7 @@ public class ManageGroupFragment extends Fragment {
   private final Recipient.FallbackPhotoProvider fallbackPhotoProvider = new Recipient.FallbackPhotoProvider() {
     @Override
     public @NonNull FallbackContactPhoto getPhotoForGroup() {
-      return new FallbackContactPhoto() {
-        @Override
-        public Drawable asDrawable(Context context, int color) {
-          return ThemeUtil.getThemedDrawable(context, R.attr.group_resource_placeholder_80);
-        }
-
-        @Override
-        public Drawable asDrawable(Context context, int color, boolean inverted) {
-          return asDrawable(context, color);
-        }
-
-        @Override
-        public Drawable asSmallDrawable(Context context, int color, boolean inverted) {
-          throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public Drawable asCallCard(Context context) {
-          throw new UnsupportedOperationException();
-        }
-      };
+      return new GroupFallbackPhoto80();
     }
   };
 
@@ -210,7 +189,12 @@ public class ManageGroupFragment extends Fragment {
     toolbar.setOnMenuItemClickListener(this::onMenuItemSelected);
     toolbar.inflateMenu(R.menu.manage_group_fragment);
 
-    viewModel.getCanEditGroupAttributes().observe(getViewLifecycleOwner(), canEdit -> toolbar.getMenu().findItem(R.id.action_edit).setVisible(canEdit));
+    viewModel.getCanEditGroupAttributes().observe(getViewLifecycleOwner(), canEdit -> {
+      toolbar.getMenu().findItem(R.id.action_edit).setVisible(canEdit);
+      disappearingMessages.setEnabled(canEdit);
+      disappearingMessagesRow.setEnabled(canEdit);
+    });
+
     viewModel.getTitle().observe(getViewLifecycleOwner(), groupName::setText);
     viewModel.getMemberCountSummary().observe(getViewLifecycleOwner(), memberCountUnderAvatar::setText);
     viewModel.getFullMemberCountSummary().observe(getViewLifecycleOwner(), memberCountAboveList::setText);
@@ -276,7 +260,6 @@ public class ManageGroupFragment extends Fragment {
       editGroupAccessValue.setEnabled(admin);
     });
 
-    viewModel.getCanEditGroupAttributes().observe(getViewLifecycleOwner(), canEdit -> disappearingMessages.setEnabled(canEdit));
     viewModel.getCanAddMembers().observe(getViewLifecycleOwner(), canEdit -> addMembers.setVisibility(canEdit ? View.VISIBLE : View.GONE));
 
     groupMemberList.setRecipientClickListener(recipient -> RecipientBottomSheetDialogFragment.create(recipient.getId(), groupId).show(requireFragmentManager(), "BOTTOM"));
