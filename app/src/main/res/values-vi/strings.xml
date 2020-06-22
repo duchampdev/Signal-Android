@@ -79,7 +79,6 @@
   <string name="BlockUnblockDialog_you_will_no_longer_receive_messages_or_updates">Bạn sẽ không còn nhận tin nhắn hay cập nhật từ nhóm này, và thành viên nhóm sẽ không thể thêm lại bạn vào nhóm.</string>
   <string name="BlockUnblockDialog_group_members_wont_be_able_to_add_you">Thành viên nhóm sẽ không thể thêm lại bạn vào nhóm.</string>
   <string name="BlockUnblockDialog_group_members_will_be_able_to_add_you">Các thành viên trong nhóm có thể thêm lại bạn vào nhóm.</string>
-  <string name="BlockUnblockDialog_you_will_be_able_to_call_and_message_each_other">Các bạn sẽ có thể nhắn tin và gọi cho nhau.</string>
   <string name="BlockUnblockDialog_blocked_people_wont_be_able_to_call_you_or_send_you_messages">Người dùng bị chặn sẽ không thể gọi hoặc gửi tin nhắn cho bạn.</string>
   <string name="BlockUnblockDialog_unblock_s">Bỏ chặn %1$s?</string>
   <string name="BlockUnblockDialog_unblock">Bỏ chặn</string>
@@ -264,7 +263,6 @@
   <string name="ConversationFragment_you_can_swipe_to_the_left_reply">Bạn có thể vuốt tin nhắn sang bên trái để trả lời nhanh</string>
   <string name="ConversationFragment_outgoing_view_once_media_files_are_automatically_removed">Tin nhắn đa phương tiện xem một lần sẽ tự động xóa sau khi được gửi</string>
   <string name="ConversationFragment_you_already_viewed_this_message">Bạn đã xem tin nhắn này rồi</string>
-  <string name="ConversationFragment__you_can_add_notes_for_yourself_in_this_conversation">Bạn có thể thêm ghi chú trong cuộc trò chuyện này. Nếu tài khoản của bạn có thiết bị liên kết, ghi chú cũng sẽ được đồng bộ.</string>
   <!--ConversationListActivity-->
   <string name="ConversationListActivity_there_is_no_browser_installed_on_your_device">Bạn chưa cài trình duyệt nào trên điện thoại.</string>
   <!--ConversationListFragment-->
@@ -299,7 +297,6 @@
   <string name="CreateProfileActivity_problem_setting_profile">Lỗi thiết lập hồ sơ</string>
   <string name="CreateProfileActivity_profile_photo">Ảnh đại diện</string>
   <string name="CreateProfileActivity_set_up_your_profile">Thiết lập hồ sơ</string>
-  <string name="CreateProfileActivity_signal_profiles_are_end_to_end_encrypted">Hồ sơ Signal được mã hóa đầu cuối và dịch vụ Signal không thể truy cập thông tin này.</string>
   <string name="CreateProfileActivity_set_avatar_description">Đặt ảnh đại diện</string>
   <!--CustomDefaultPreference-->
   <string name="CustomDefaultPreference_using_custom">Dùng tùy chỉnh: %s</string>
@@ -351,23 +348,7 @@
   <!--GiphyFragmentPageAdapter-->
   <string name="GiphyFragmentPagerAdapter_gifs">ảnh GIF</string>
   <string name="GiphyFragmentPagerAdapter_stickers">Nhãn dán</string>
-  <!--GroupCreateActivity-->
-  <string name="GroupCreateActivity_actionbar_title">Tạo nhóm mới</string>
-  <string name="GroupCreateActivity_actionbar_edit_title">Sửa nhóm</string>
-  <string name="GroupCreateActivity_group_name_hint">Tên nhóm</string>
-  <string name="GroupCreateActivity_actionbar_mms_title">Tạo nhóm MMS mới</string>
-  <string name="GroupCreateActivity_contacts_dont_support_push">Bạn đã chọn một liên hệ không hỗ trợ nhóm Signal, vậy nên nhóm này sẽ dùng MMS.</string>
-  <string name="GroupCreateActivity_youre_not_registered_for_signal">Bạn chưa đăng ký dịch vụ gọi và nhắn tin Signal, vậy nên nhóm Signal không khả dụng. Hãy thử đăng ký từ mục Cài đặt &gt; Nâng cao.</string>
-  <string name="GroupCreateActivity_contacts_no_members">Cần có ít nhất một người trong nhóm!</string>
-  <string name="GroupCreateActivity_contacts_invalid_number">Một người trong nhóm có số điện thoại không hợp lệ. Vui lòng điều chỉnh liên lạc đó hoặc xóa đi và thử lại.</string>
-  <string name="GroupCreateActivity_avatar_content_description">Biểu tượng nhóm</string>
-  <string name="GroupCreateActivity_menu_apply_button">Áp dụng</string>
-  <string name="GroupCreateActivity_creating_group">Đang tạo %1$s…</string>
-  <string name="GroupCreateActivity_updating_group">Đang cập nhật %1$s…</string>
-  <string name="GroupCreateActivity_cannot_add_non_push_to_existing_group">Không thể thêm %1$s vì họ không phải người dùng Signal.</string>
-  <string name="GroupCreateActivity_loading_group_details">Đang tải chi tiết nhóm…</string>
-  <string name="GroupCreateActivity_youre_already_in_the_group">Bạn đã gia nhập nhóm này rồi.</string>
-  <string name="GroupCreateActivity_remove_member_description">Loại bỏ thành viên</string>
+  <!--AddToGroupActivity-->
   <!--GroupShareProfileView-->
   <string name="GroupShareProfileView_share_your_profile_name_and_photo_with_this_group">Chia sẻ ảnh đại diện và tên của bạn với nhóm này?</string>
   <string name="GroupShareProfileView_do_you_want_to_make_your_profile_name_and_photo_visible_to_all_current_and_future_members_of_this_group">Bạn có muốn tất cả thành viên hiện có và trong tương lai của nhóm thấy ảnh đại diện và tên bạn?</string>
@@ -412,6 +393,16 @@
   <string name="ManageGroupActivity_add_members">Thêm thành viên</string>
   <string name="ManageGroupActivity_view_all_members">Xem tất cả thành viên</string>
   <string name="ManageGroupActivity_none">Không</string>
+  <!--ManageRecipientActivity-->
+  <string name="ManageRecipientActivity_disappearing_messages">Tin nhắn tạm thời</string>
+  <string name="ManageRecipientActivity_block">Chặn</string>
+  <string name="ManageRecipientActivity_unblock">Bỏ chặn</string>
+  <string name="ManageRecipientActivity_view_safety_number">Xem số an toàn</string>
+  <string name="ManageRecipientActivity_mute_notifications">Tạm im thông báo</string>
+  <string name="ManageRecipientActivity_custom_notifications">Thông báo tuỳ chỉnh</string>
+  <string name="ManageRecipientActivity_off">Tắt</string>
+  <string name="ManageRecipientActivity_on">Bật</string>
+  <string name="ManageRecipientActivity_message_description">Tin nhắn</string>
   <plurals name="GroupMemberList_invited">
     <item quantity="other">%1$s đã mời %2$d người</item>
   </plurals>
@@ -420,6 +411,11 @@
   <string name="CustomNotificationsDialogFragment__messages">Tin nhắn</string>
   <string name="CustomNotificationsDialogFragment__notification_sound">Âm báo</string>
   <string name="CustomNotificationsDialogFragment__vibrate">Rung</string>
+  <string name="CustomNotificationsDialogFragment__call_settings">Cài đặt cuộc gọi</string>
+  <string name="CustomNotificationsDialogFragment__ringtone">Nhạc chuông</string>
+  <string name="CustomNotificationsDialogFragment__enabled">Đã bật</string>
+  <string name="CustomNotificationsDialogFragment__disabled">Tắt</string>
+  <string name="CustomNotificationsDialogFragment__default">Mặc định</string>
   <!--GV2 Invite cancellation confirmation-->
   <string name="GroupManagement_cancel_own_single_invite">Bạn có muốn hủy lời mời bạn gửi tới %1$s?</string>
   <plurals name="GroupManagement_cancel_others_invites">
@@ -454,9 +450,6 @@
   <string name="Job_working_in_the_background">Đang xử lí duới nền…</string>
   <!--LearnMoreTextView-->
   <string name="LearnMoreTextView_learn_more">Tìm hiểu thêm</string>
-  <!--MessageDetailsRecipient-->
-  <string name="MessageDetailsRecipient_failed_to_send">Không thể gửi</string>
-  <string name="MessageDetailsRecipient_new_safety_number">Mã số an toàn mới</string>
   <!--LongMessageActivity-->
   <string name="LongMessageActivity_unable_to_find_message">Không thể tìm tin nhắn</string>
   <string name="LongMessageActivity_message_from_s">Tin nhắn từ %1$s</string>
@@ -623,10 +616,6 @@
   <string name="MessageRequestBottomView_delete">Xóa</string>
   <string name="MessageRequestBottomView_block">Chặn</string>
   <string name="MessageRequestBottomView_unblock">Bỏ chặn</string>
-  <string name="MessageRequestBottomView_do_you_want_to_let_s_message_you_they_wont_know_youve_seen_their_messages_until_you_accept">Bạn có muốn cho phép %1$s nhắn tin cho bạn? Họ sẽ không biết bạn đã xem tin nhắn hay chưa cho đến khi bạn chấp nhận.</string>
-  <!-- Removed by excludeNonTranslatables <string name="MessageRequestBottomView_do_you_want_to_join_the_group_s_they_wont_know_youve_seen_their_messages_until_you_accept">Bạn có muốn tham gia nhóm %1$s? Họ sẽ không biết bạn đã xem tin nhắn hay chưa cho đến khi bạn chấp nhận.</string> -->
-  <!-- Removed by excludeNonTranslatables <string name="MessageRequestBottomView_unblock_s_to_message_and_call_each_other">Bỏ chặn %1$s để nhắn tin và gọi cho nhau.</string> -->
-  <!-- Removed by excludeNonTranslatables <string name="MessageRequestBottomView_unblock_to_allow_group_members_to_add_you_to_this_group_again">Bỏ chặn để thành viên nhóm có thể thêm lại bạn vào nhóm.</string> -->
   <string name="MessageRequestProfileView_member_of_one_group">Thành viên của %1$s</string>
   <string name="MessageRequestProfileView_member_of_two_groups">Thành viên của %1$s và %2$s</string>
   <string name="MessageRequestProfileView_member_of_many_groups">Thành viên của %1$s, %2$s và %3$s</string>
@@ -1097,6 +1086,7 @@ Nhận thông tin trao đổi mã khóa về phiên bản giao thức không h�
   <!--contact_selection_list_fragment-->
   <string name="contact_selection_list_fragment__signal_needs_access_to_your_contacts_in_order_to_display_them">Signal cần quyền truy cập danh bạ để hiển thị chúng.</string>
   <string name="contact_selection_list_fragment__show_contacts">Hiển thị danh bạ</string>
+  <!--contact_selection_list_item-->
   <!--conversation_activity-->
   <string name="conversation_activity__type_message_push">Tin nhắn Signal</string>
   <string name="conversation_activity__type_message_sms_insecure">SMS không bảo mật</string>
@@ -1249,19 +1239,6 @@ Nhận thông tin trao đổi mã khóa về phiên bản giao thức không h�
   <string name="EditProfileFragment__group_name">Tên nhóm</string>
   <!--recipient_preferences_activity-->
   <string name="recipient_preference_activity__shared_media">Tệp đa phương tiện đã chia sẻ</string>
-  <!--recipient_preferences-->
-  <string name="recipient_preferences__mute_conversation">Tạm im cuộc trò chuyện</string>
-  <string name="recipient_preferences__custom_notifications">Thông báo tuỳ chỉnh</string>
-  <string name="recipient_preferences__custom_notifications_settings">Cài đặt thông báo hệ thống</string>
-  <string name="recipient_preferences__notification_sound">Âm báo</string>
-  <string name="recipient_preferences__vibrate">Rung</string>
-  <string name="recipient_preferences__block">Chặn</string>
-  <string name="recipient_preferences__color">Màu</string>
-  <string name="recipient_preferences__view_safety_number">Xem mã số an toàn</string>
-  <string name="recipient_preferences__chat_settings">Cài đặt trò chuyện</string>
-  <string name="recipient_preferences__privacy">Riêng tư</string>
-  <string name="recipient_preferences__call_settings">Cài đặt cuộc gọi</string>
-  <string name="recipient_preferences__ringtone">Nhạc chuông</string>
   <!--- redphone_call_controls-->
   <string name="redphone_call_card__signal_call">Cuộc gọi Signal</string>
   <!--registration_activity-->
@@ -1293,9 +1270,10 @@ Nhận thông tin trao đổi mã khóa về phiên bản giao thức không h�
   <string name="message_details_header__received">Đã nhận</string>
   <string name="message_details_header__disappears">Tự hủy</string>
   <string name="message_details_header__via">Qua</string>
-  <string name="message_details_header__to">Đến:</string>
-  <string name="message_details_header__from">Từ:</string>
-  <string name="message_details_header__with">Với:</string>
+  <!--message_details_recipient_header-->
+  <!--message_Details_recipient-->
+  <string name="message_details_recipient__failed_to_send">Không thể gửi</string>
+  <string name="message_details_recipient__new_safety_number">Số an toàn mới</string>
   <!--AndroidManifest.xml-->
   <string name="AndroidManifest__create_passphrase">Tạo mật khẩu</string>
   <string name="AndroidManifest__select_contacts">Chọn liên hệ</string>
@@ -1821,12 +1799,11 @@ Nhận thông tin trao đổi mã khóa về phiên bản giao thức không h�
   <string name="recipient_preferences__about">Thông tin</string>
   <string name="Recipient_unknown">Vô danh</string>
   <!--RecipientBottomSheet-->
-  <string name="RecipientBottomSheet_message">Tin nhắn</string>
-  <string name="RecipientBottomSheet_call">Gọi</string>
   <string name="RecipientBottomSheet_block">Chặn</string>
   <string name="RecipientBottomSheet_unblock">Bỏ chặn</string>
   <string name="RecipientBottomSheet_add_to_contacts">Thêm vào danh bạ</string>
   <string name="RecipientBottomSheet_view_safety_number">Xem số an toàn</string>
+  <string name="RecipientBottomSheet_message_description">Tin nhắn</string>
   <string name="RecipientBottomSheet_remove">Loại bỏ</string>
   <string name="RecipientBottomSheet_copied_to_clipboard">Đã sao chép vào clipboard</string>
   <string name="GroupRecipientListItem_admin">Quản trị viên</string>
