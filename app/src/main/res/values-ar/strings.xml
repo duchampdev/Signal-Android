@@ -169,7 +169,6 @@
   <string name="ContactShareEditActivity_type_missing">غير ذلك</string>
   <string name="ContactShareEditActivity_invalid_contact">جهة الاتصال التي تم اختيارها غير صالحة.</string>
   <!--ConversationItem-->
-  <string name="ConversationItem_error_not_delivered">فشل الإرسال، اضغط للتفاصيل</string>
   <string name="ConversationItem_received_key_exchange_message_tap_to_process">تم استلام رسالة تبادل مفاتيح، أنقر للمتابعة.</string>
   <string name="ConversationItem_group_action_left">%1$s تَرك المجموعة.</string>
   <string name="ConversationItem_click_to_approve_unencrypted">فشل الإرسال، انقر للاستعاضة بارسال غير آمن</string>
@@ -357,8 +356,6 @@
     <item quantity="many">تم نقل %d رسالة إلى الوارد</item>
     <item quantity="other">تم نقل %d رسالة إلى الوارد</item>
   </plurals>
-  <string name="ConversationListFragment__your_profile_name_has_been_created">تم إنشاء اسم ملفك الشخصي.</string>
-  <string name="ConversationListFragment__your_profile_name_has_been_saved">تم حفظ اسم ملفك الشخصي.</string>
   <!--ConversationListItem-->
   <string name="ConversationListItem_key_exchange_message">رسالة تبادل المفاتيح</string>
   <!--ConversationListItemAction-->
@@ -523,6 +520,7 @@
   <string name="GroupManagement_choose_who_can_change_the_group_name_and_photo">اختر من بإمكانه تغيير اسم المجموعة وصورتها.</string>
   <!--ManageRecipientActivity-->
   <string name="ManageRecipientActivity_disappearing_messages">الرسائل المُختفية</string>
+  <string name="ManageRecipientActivity_chat_color">لون المحادثة.</string>
   <string name="ManageRecipientActivity_block">حظر</string>
   <string name="ManageRecipientActivity_unblock">رفع الحظر</string>
   <string name="ManageRecipientActivity_view_safety_number">عرض رقم السلامة</string>
@@ -532,9 +530,14 @@
   <string name="ManageRecipientActivity_off">مغلق</string>
   <string name="ManageRecipientActivity_on">يعمل</string>
   <string name="ManageRecipientActivity_add_to_a_group">إضافة إلى مجموعة</string>
+  <string name="ManageRecipientActivity_view_all_groups">مشاهدة جميع المجموعات</string>
   <string name="ManageRecipientActivity_see_all">مشاهدة الكل</string>
+  <string name="ManageRecipientActivity_no_groups_in_common">لا يوجد مجموعات مشتركة</string>
   <string name="ManageRecipientActivity_edit_name_and_picture">عدّل الاسم والصورة</string>
   <string name="ManageRecipientActivity_message_description">رسالة</string>
+  <string name="ManageRecipientActivity_voice_call_description">مكالمة صوتية</string>
+  <string name="ManageRecipientActivity_insecure_voice_call_description">مكالمة صوتية غير آمنة</string>
+  <string name="ManageRecipientActivity_video_call_description">مكالمة فيديو</string>
   <plurals name="GroupMemberList_invited">
     <item quantity="zero">قام %1$sبدعوة%2$dأشخاص</item>
     <item quantity="one">دعا %1$s شخص واحد </item>
@@ -844,7 +847,6 @@
   <string name="PassphraseChangeActivity_enter_new_passphrase_exclamation">أدخل عبارة سرية جديدة!</string>
   <!--DeviceProvisioningActivity-->
   <string name="DeviceProvisioningActivity_link_this_device">ربط هذا الجهاز؟</string>
-  <string name="DeviceProvisioningActivity_cancel">إلغاء</string>
   <string name="DeviceProvisioningActivity_continue">استمر</string>
   <string name="DeviceProvisioningActivity_content_intro">سوف يتمكن من </string>
   <string name="DeviceProvisioningActivity_content_bullets">
@@ -1056,7 +1058,6 @@
   <string name="SubmitDebugLogActivity_success">تمّ بنجاح!</string>
   <string name="SubmitDebugLogActivity_copy_this_url_and_add_it_to_your_issue">انسخـ/ـي هذا الرابط وأضفـ(ـيـ)ـه إلى بلاغك أو إلى بريد الدعم:\n\n<b>%1$s</b></string>
   <string name="SubmitDebugLogActivity_copied_to_clipboard">تمّ النسخ إلى الحافظة</string>
-  <string name="SubmitDebugLogActivity_ok">موافق</string>
   <string name="SubmitDebugLogActivity_share">شارك</string>
   <!--SupportEmailUtil-->
   <string name="SupportEmailUtil_subject">الموضوع:</string>
@@ -1123,7 +1124,6 @@
   <string name="UsernameEditFragment_encountered_a_network_error">حدث خطأ فى الشبكة</string>
   <string name="UsernameEditFragment_this_username_is_taken">اسم المستخدم هذا غير متوفّر.</string>
   <string name="UsernameEditFragment_this_username_is_available">اسم المستخدم هذا متاح.</string>
-  <string name="UsernameEditFragment_usernames_can_only_include">اسم المستخدم يمكن أن يحتوي فقط على a-Z و0-9 والشرطة السفلية.</string>
   <string name="UsernameEditFragment_usernames_cannot_begin_with_a_number">اسم المستخدم لا يمكن أن يبدأ برقم.</string>
   <string name="UsernameEditFragment_username_is_invalid">اسم المستخدم غير صالح</string>
   <string name="UsernameEditFragment_usernames_must_be_between_a_and_b_characters">اسم المستخدم لا بد أن يكون بين %1$d و%2$d رمز.</string>
@@ -1371,6 +1371,8 @@
   <string name="QuoteView_original_missing">لم يتم العثور على الرسالة الأصلية</string>
   <!--conversation_fragment-->
   <string name="conversation_fragment__scroll_to_the_bottom_content_description">النزول إلى الأسفل</string>
+  <!--safety_number_change_dialog-->
+  <string name="safety_number_change_dialog__view">معاينة </string>
   <!--country_selection_fragment-->
   <string name="country_selection_fragment__loading_countries">تحميل البلدان جارٍ …</string>
   <string name="country_selection_fragment__search">بحث</string>
@@ -1553,6 +1555,12 @@
   <string name="message_details_header__disappears">مُختفية </string>
   <string name="message_details_header__via">بواسطة</string>
   <!--message_details_recipient_header-->
+  <string name="message_details_recipient_header__pending_send">معلّق</string>
+  <string name="message_details_recipient_header__sent_to">تمَّ الإرسال إلى</string>
+  <string name="message_details_recipient_header__sent_from">أرسلت من</string>
+  <string name="message_details_recipient_header__delivered_to">تم تسليم الرسالة إلى</string>
+  <string name="message_details_recipient_header__read_by">تمت القراءة من قبل</string>
+  <string name="message_details_recipient_header__not_sent">لم يتم الإرسال</string>
   <!--message_Details_recipient-->
   <string name="message_details_recipient__failed_to_send">الإرسال فشل.</string>
   <string name="message_details_recipient__new_safety_number">رقم سلامة جديد</string>
@@ -1989,13 +1997,6 @@
   <string name="KbsMegaphone__update_pin">تحديث الرقم التعريفي الشخصي</string>
   <string name="KbsMegaphone__well_remind_you_later_creating_a_pin">سنذّكرك لاحقاً. اختيار كلمة مرور رقمية سيكون إجبارياً في %1$dأيام.</string>
   <string name="KbsMegaphone__well_remind_you_later_confirming_your_pin">سنذكّرك لاحقاً ، إدخال كلمة السر الرقمية ستكون إجبارية بعد %1$d أيام.</string>
-  <!--Profile Names Megaphone-->
-  <string name="ProfileNamesMegaphone__add_a_profile_name">إضافة اسم للملف الشخصي</string>
-  <string name="ProfileNamesMegaphone__this_will_be_displayed_when_you_start">سوف يظهر هذا حينما تبدأ محادثة جديدة أو تقوم بمشاركتها.</string>
-  <string name="ProfileNamesMegaphone__add_profile_name">إضافة اسم للملف الشخصي</string>
-  <string name="ProfileNamesMegaphone__confirm_your_profile_name">أكد اسم ملفك الشخصي</string>
-  <string name="ProfileNamesMegaphone__your_profile_can_now_include">يمكن أن يحوي حسابك لقبك اختياريا.</string>
-  <string name="ProfileNamesMegaphone__confirm_name">أكد الاسم</string>
   <!--transport_selection_list_item-->
   <string name="transport_selection_list_item__transport_icon">أيقونة النقل.</string>
   <string name="ConversationListFragment_loading">قيد التحميل…</string>
@@ -2124,6 +2125,9 @@
   <string name="RecipientBottomSheet_remove_as_admin">أزل من كونه إداريًا</string>
   <string name="RecipientBottomSheet_remove_from_group">أزل من المجموعة</string>
   <string name="RecipientBottomSheet_message_description">رسالة</string>
+  <string name="RecipientBottomSheet_voice_call_description">مكالمة صوتية</string>
+  <string name="RecipientBottomSheet_insecure_voice_call_description">مكالمة صوتية غير آمنة</string>
+  <string name="RecipientBottomSheet_video_call_description">مكالمة فيديو</string>
   <string name="RecipientBottomSheet_remove_s_as_group_admin">أأزيل %1$s من كونه إداريًا في المجموعة؟</string>
   <string name="RecipientBottomSheet_s_will_be_able_to_edit_group">سيستطيع %1$s تعديل خصائص وأعضاء هذه المجموعة</string>
   <string name="RecipientBottomSheet_remove_s_from_s">أأزيل %1$s من \"%2$s\"؟</string>

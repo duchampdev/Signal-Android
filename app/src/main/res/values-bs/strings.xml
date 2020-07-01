@@ -160,7 +160,6 @@
   <string name="ContactShareEditActivity_type_missing">Ostalo</string>
   <string name="ContactShareEditActivity_invalid_contact">Odabrani kontakt nije valjan</string>
   <!--ConversationItem-->
-  <string name="ConversationItem_error_not_delivered">Slanje nije uspjelo. Dodirnite za detalje.</string>
   <string name="ConversationItem_received_key_exchange_message_tap_to_process">Primljena je poruka za razmjenu ključeva, pritisnite da nastavite.</string>
   <string name="ConversationItem_group_action_left">%1$s je napustio/la grupu.</string>
   <string name="ConversationItem_click_to_approve_unencrypted">Slanje nije uspjelo. Dodirnite za nešifriranu alternativu.</string>
@@ -288,6 +287,7 @@
   <string name="ConversationFragment_you_can_swipe_to_the_left_reply">Na svaku poruku možete brzo odgovoriti tako što ćete je povući ulijevo</string>
   <string name="ConversationFragment_outgoing_view_once_media_files_are_automatically_removed">Jednokratne multimedijske datoteke automatski će se izbrisati nakon što su poslane</string>
   <string name="ConversationFragment_you_already_viewed_this_message">Već ste vidjeli ovu poruku</string>
+  <string name="ConversationFragment__you_can_add_notes_for_yourself_in_this_conversation">U ovoj konverzaciji možete dodati bilješke za sebe.\nAko Signal koristite na više uređaja, ove će bilješke biti sinhronizovane među njima.</string>
   <!--ConversationListActivity-->
   <string name="ConversationListActivity_there_is_no_browser_installed_on_your_device">Preglednik nije instaliran na Vašem uređaju.</string>
   <!--ConversationListFragment-->
@@ -315,8 +315,6 @@
     <item quantity="few">%d konverzacije premještene u inbox</item>
     <item quantity="other">%d konverzacija premješteno u inbox</item>
   </plurals>
-  <string name="ConversationListFragment__your_profile_name_has_been_created">Upisano je ime u Vaš profil.</string>
-  <string name="ConversationListFragment__your_profile_name_has_been_saved">Pohranjeno je ime u Vašem profilu.</string>
   <!--ConversationListItem-->
   <string name="ConversationListItem_key_exchange_message">Poruka za razmjenu ključa</string>
   <!--ConversationListItemAction-->
@@ -474,6 +472,7 @@
   <string name="GroupManagement_choose_who_can_change_the_group_name_and_photo">Odredite ko može promijeniti ime i sliku grupe</string>
   <!--ManageRecipientActivity-->
   <string name="ManageRecipientActivity_disappearing_messages">Nestajuće poruke</string>
+  <string name="ManageRecipientActivity_chat_color">Boja poruka</string>
   <string name="ManageRecipientActivity_block">Blokiraj</string>
   <string name="ManageRecipientActivity_unblock">Deblokiraj</string>
   <string name="ManageRecipientActivity_view_safety_number">Vidi sigurnosni broj</string>
@@ -483,9 +482,19 @@
   <string name="ManageRecipientActivity_off">Isključeno</string>
   <string name="ManageRecipientActivity_on">Uključeno</string>
   <string name="ManageRecipientActivity_add_to_a_group">Uvrsti u grupu</string>
+  <string name="ManageRecipientActivity_view_all_groups">Vidi sve grupe</string>
   <string name="ManageRecipientActivity_see_all">Vidi sve</string>
+  <string name="ManageRecipientActivity_no_groups_in_common">Nema zajedničkih grupa</string>
+  <plurals name="ManageRecipientActivity_d_groups_in_common">
+    <item quantity="one">%d zajednička grupa</item>
+    <item quantity="few">%d zajedničke grupe</item>
+    <item quantity="other">%d zajedničkih grupa</item>
+  </plurals>
   <string name="ManageRecipientActivity_edit_name_and_picture">Upišite ime i dodajte sliku</string>
   <string name="ManageRecipientActivity_message_description">Poruka</string>
+  <string name="ManageRecipientActivity_voice_call_description">Poziv</string>
+  <string name="ManageRecipientActivity_insecure_voice_call_description">Nezaštićen poziv</string>
+  <string name="ManageRecipientActivity_video_call_description">Videopoziv</string>
   <plurals name="GroupMemberList_invited">
     <item quantity="one">%1$s je pozvao/la jednu osobu</item>
     <item quantity="few">%1$s je pozvao/la %2$d osobe</item>
@@ -759,7 +768,6 @@
   <string name="PassphraseChangeActivity_enter_new_passphrase_exclamation">Unesite novu lozinku!</string>
   <!--DeviceProvisioningActivity-->
   <string name="DeviceProvisioningActivity_link_this_device">Uvezati ovaj uređaj?</string>
-  <string name="DeviceProvisioningActivity_cancel">OTKAŽI</string>
   <string name="DeviceProvisioningActivity_continue">NASTAVI</string>
   <string name="DeviceProvisioningActivity_content_intro">Moći će da</string>
   <string name="DeviceProvisioningActivity_content_bullets">
@@ -881,6 +889,7 @@
   <string name="RegistrationActivity_more_information">Više informacija</string>
   <string name="RegistrationActivity_less_information">Manje informacija</string>
   <string name="RegistrationActivity_signal_needs_access_to_your_contacts_and_media_in_order_to_connect_with_friends">Signalu je potrebno dopuštenje da pristupi Vašim kontaktima i datotekama kako biste uspostavili vezu sa prijateljima i razmjenjivali poruke i zaštićene pozive</string>
+  <string name="RegistrationActivity_rate_limited_to_service">Pokušali ste previše puta registrovati ovaj broj. Molimo pokušajte ponovo kasnije.</string>
   <string name="RegistrationActivity_unable_to_connect_to_service">Povezivanje nije uspjelo. Molimo provjerite internet-konekciju i pokušajte ponovo.</string>
   <string name="RegistrationActivity_to_easily_verify_your_phone_number_signal_can_automatically_detect_your_verification_code">Da biste na jednostavan način potvrdili svoj telefonski broj, možete Signalu omogućiti pristup SMS porukama i on će automatski preuzeti kōd za verifikaciju.</string>
   <plurals name="RegistrationActivity_debug_log_hint">
@@ -978,7 +987,6 @@
   <string name="SubmitDebugLogActivity_success">Uspješno završeno!</string>
   <string name="SubmitDebugLogActivity_copy_this_url_and_add_it_to_your_issue">Kopirajte ovu adresu i priložite je uz svoj izvještaj o problemu ili email za podršku:\n\n<b>%1$s</b></string>
   <string name="SubmitDebugLogActivity_copied_to_clipboard">Kopirano u međuspremnik</string>
-  <string name="SubmitDebugLogActivity_ok">Uredu</string>
   <string name="SubmitDebugLogActivity_share">Dijeli</string>
   <!--SupportEmailUtil-->
   <string name="SupportEmailUtil_subject">Tema:</string>
@@ -1045,7 +1053,6 @@
   <string name="UsernameEditFragment_encountered_a_network_error">Došlo je do greške u mreži.</string>
   <string name="UsernameEditFragment_this_username_is_taken">Ovo korisničko ime već je rezervisano.</string>
   <string name="UsernameEditFragment_this_username_is_available">Ovo je korisničko ime dostupno.</string>
-  <string name="UsernameEditFragment_usernames_can_only_include">Korisničko ime može sadržavati samo slova bez kvačica, brojeve i donju crtu.</string>
   <string name="UsernameEditFragment_usernames_cannot_begin_with_a_number">Korisničko ime ne može početi brojem.</string>
   <string name="UsernameEditFragment_username_is_invalid">Korisničko ime nije valjano.</string>
   <string name="UsernameEditFragment_usernames_must_be_between_a_and_b_characters">Korisničko ime mora sadržavati najmanje %1$d, a najviše %2$d znakova.</string>
@@ -1287,6 +1294,8 @@
   <string name="QuoteView_original_missing">Originalna poruka nije pronađena</string>
   <!--conversation_fragment-->
   <string name="conversation_fragment__scroll_to_the_bottom_content_description">Spusti do dna</string>
+  <!--safety_number_change_dialog-->
+  <string name="safety_number_change_dialog__view">Pregled</string>
   <!--country_selection_fragment-->
   <string name="country_selection_fragment__loading_countries">Učitavam države…</string>
   <string name="country_selection_fragment__search">Traži</string>
@@ -1446,6 +1455,12 @@
   <string name="message_details_header__disappears">Nestaje za</string>
   <string name="message_details_header__via">Preko</string>
   <!--message_details_recipient_header-->
+  <string name="message_details_recipient_header__pending_send">U obradi</string>
+  <string name="message_details_recipient_header__sent_to">Poslano za</string>
+  <string name="message_details_recipient_header__sent_from">Poslano od</string>
+  <string name="message_details_recipient_header__delivered_to">Isporučeno za</string>
+  <string name="message_details_recipient_header__read_by">Pročitao/la</string>
+  <string name="message_details_recipient_header__not_sent">Nije poslano</string>
   <!--message_Details_recipient-->
   <string name="message_details_recipient__failed_to_send">Slanje nije uspjelo</string>
   <string name="message_details_recipient__new_safety_number">Novi sigurnosni broj</string>
@@ -1887,13 +1902,6 @@
   <string name="KbsMegaphone__update_pin">Ažurirajte PIN</string>
   <string name="KbsMegaphone__well_remind_you_later_creating_a_pin">Podsjetit ćemo Vas kasnije. Kreiranje PIN-a postat će obavezno za %1$d dana.</string>
   <string name="KbsMegaphone__well_remind_you_later_confirming_your_pin">Podsjetit ćemo Vas kasnije. Potvrda Vašeg PIN-a postat će obavezna za %1$d dana.</string>
-  <!--Profile Names Megaphone-->
-  <string name="ProfileNamesMegaphone__add_a_profile_name">Dodajte ime u profil</string>
-  <string name="ProfileNamesMegaphone__this_will_be_displayed_when_you_start">Ovo će biti prikazano kada započnete novu konverzaciju ili podijelite profil.</string>
-  <string name="ProfileNamesMegaphone__add_profile_name">Dodajte ime u profil</string>
-  <string name="ProfileNamesMegaphone__confirm_your_profile_name">Potvrdite svoje ime u profilu</string>
-  <string name="ProfileNamesMegaphone__your_profile_can_now_include">Vaš profil sada može sadržavati i prezime.</string>
-  <string name="ProfileNamesMegaphone__confirm_name">Potvrdite ime</string>
   <!--transport_selection_list_item-->
   <string name="transport_selection_list_item__transport_icon">Sličica transporta</string>
   <string name="ConversationListFragment_loading">Učitavanje…</string>
@@ -2021,6 +2029,9 @@
   <string name="RecipientBottomSheet_remove_as_admin">Ukloni administratorske ovlasti</string>
   <string name="RecipientBottomSheet_remove_from_group">Udalji iz grupe</string>
   <string name="RecipientBottomSheet_message_description">Poruka</string>
+  <string name="RecipientBottomSheet_voice_call_description">Poziv</string>
+  <string name="RecipientBottomSheet_insecure_voice_call_description">Nezaštićen poziv</string>
+  <string name="RecipientBottomSheet_video_call_description">Videopoziv</string>
   <string name="RecipientBottomSheet_remove_s_as_group_admin">Smijeniti %1$s kao administratora grupe?</string>
   <string name="RecipientBottomSheet_s_will_be_able_to_edit_group">%1$s će moći uređivati ovu grupu i njene članove</string>
   <string name="RecipientBottomSheet_remove_s_from_s">Udaljiti %1$s iz \"%2$s\"?</string>
