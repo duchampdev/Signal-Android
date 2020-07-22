@@ -201,7 +201,7 @@
   <string name="ConversationActivity_transport_insecure_mms">Nezabezpečená MMS</string>
   <string name="ConversationActivity_transport_signal">Signal</string>
   <string name="ConversationActivity_lets_switch_to_signal">Prejdime na Signal %1$s</string>
-  <string name="ConversationActivity_error_leaving_group">Chyba pri opustení skupiny</string>
+  <!-- Removed by excludeNonTranslatables <string name="ConversationActivity_error_leaving_group">Chyba pri opustení skupiny</string> -->
   <string name="ConversationActivity_specify_recipient">Prosím vyberte kontakt</string>
   <string name="ConversationActivity_unblock_this_contact_question">Odblokovať tento kontakt?</string>
   <string name="ConversationActivity_unblock_this_group_question">Odblokovať túto skupinu?</string>
@@ -342,6 +342,7 @@
   <string name="CreateProfileActivity_problem_setting_profile">Chyba pri nastavení profilu</string>
   <string name="CreateProfileActivity_profile_photo">Profilová fotka</string>
   <string name="CreateProfileActivity_set_up_your_profile">Nastavte si svoj profil</string>
+  <string name="CreateProfileActivity_signal_profiles_are_end_to_end_encrypted">Váš profil využíva koncové šifrovanie. Váš profil a jeho zmeny budú vidieť vaše kontakty, keď začnete alebo prijmete nové konverzácie a keď sa pridáte do nových skupín.</string>
   <string name="CreateProfileActivity_set_avatar_description">Nastaviť avatar</string>
   <!--CustomDefaultPreference-->
   <string name="CustomDefaultPreference_using_custom">Používa sa vlastné: %s</string>
