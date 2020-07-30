@@ -46,7 +46,7 @@ public final class FeatureFlags {
 
   private static final String TAG = Log.tag(FeatureFlags.class);
 
-  private static final long FETCH_INTERVAL = TimeUnit.HOURS.toMillis(0);
+  private static final long FETCH_INTERVAL = TimeUnit.HOURS.toMillis(2);
 
   private static final String USERNAMES                  = "android.usernames";
   private static final String ATTACHMENTS_V3             = "android.attachmentsV3.2";
@@ -58,6 +58,7 @@ public final class FeatureFlags {
   private static final String CDS                        = "android.cds";
   private static final String RECIPIENT_TRUST            = "android.recipientTrust";
   private static final String INTERNAL_USER              = "android.internalUser";
+  private static final String MENTIONS                   = "android.mentions";
 
   /**
    * We will only store remote values for flags in this set. If you want a flag to be controllable
@@ -71,7 +72,8 @@ public final class FeatureFlags {
       GROUPS_V2_CREATE,
       GROUPS_V2_CAPACITY,
       RECIPIENT_TRUST,
-      INTERNAL_USER
+      INTERNAL_USER,
+      MENTIONS
   );
 
   /**
@@ -219,6 +221,11 @@ public final class FeatureFlags {
   /** Whether or not we allow different trust levels for recipient address sources. */
   public static boolean recipientTrust() {
     return getBoolean(RECIPIENT_TRUST, false);
+  }
+
+  /** Whether or not we allow mentions send support in groups. */
+  public static boolean mentions() {
+    return getBoolean(MENTIONS, false);
   }
 
   /** Only for rendering debug info. */
