@@ -44,6 +44,8 @@ import android.provider.Browser;
 import android.provider.ContactsContract;
 import android.provider.Telephony;
 import android.text.Editable;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -75,6 +77,7 @@ import androidx.core.content.pm.ShortcutManagerCompat;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.CustomTarget;
@@ -114,6 +117,7 @@ import org.thoughtcrime.securesms.components.emoji.EmojiStrings;
 import org.thoughtcrime.securesms.components.emoji.MediaKeyboard;
 import org.thoughtcrime.securesms.components.identity.UnverifiedBannerView;
 import org.thoughtcrime.securesms.components.location.SignalPlace;
+import org.thoughtcrime.securesms.components.mention.MentionAnnotation;
 import org.thoughtcrime.securesms.components.reminder.ExpiredBuildReminder;
 import org.thoughtcrime.securesms.components.reminder.Reminder;
 import org.thoughtcrime.securesms.components.reminder.ReminderView;
@@ -127,6 +131,7 @@ import org.thoughtcrime.securesms.contactshare.ContactShareEditActivity;
 import org.thoughtcrime.securesms.contactshare.ContactUtil;
 import org.thoughtcrime.securesms.contactshare.SimpleTextWatcher;
 import org.thoughtcrime.securesms.conversation.ConversationGroupViewModel.GroupActiveState;
+import org.thoughtcrime.securesms.conversation.ConversationMessage.ConversationMessageFactory;
 import org.thoughtcrime.securesms.conversation.ui.error.SafetyNumberChangeDialog;
 import org.thoughtcrime.securesms.conversation.ui.mentions.MentionsPickerViewModel;
 import org.thoughtcrime.securesms.conversationlist.model.MessageResult;
@@ -139,12 +144,14 @@ import org.thoughtcrime.securesms.database.GroupDatabase;
 import org.thoughtcrime.securesms.database.IdentityDatabase;
 import org.thoughtcrime.securesms.database.IdentityDatabase.IdentityRecord;
 import org.thoughtcrime.securesms.database.IdentityDatabase.VerifiedStatus;
-import org.thoughtcrime.securesms.database.MessagingDatabase.MarkedMessageInfo;
+import org.thoughtcrime.securesms.database.MentionUtil;
+import org.thoughtcrime.securesms.database.MentionUtil.UpdatedBodyAndMentions;
 import org.thoughtcrime.securesms.database.MmsSmsColumns.Types;
 import org.thoughtcrime.securesms.database.RecipientDatabase;
 import org.thoughtcrime.securesms.database.RecipientDatabase.RegisteredState;
 import org.thoughtcrime.securesms.database.ThreadDatabase;
 import org.thoughtcrime.securesms.database.identity.IdentityRecordList;
+import org.thoughtcrime.securesms.database.model.Mention;
 import org.thoughtcrime.securesms.database.model.MessageRecord;
 import org.thoughtcrime.securesms.database.model.MmsMessageRecord;
 import org.thoughtcrime.securesms.database.model.ReactionRecord;
@@ -199,7 +206,6 @@ import org.thoughtcrime.securesms.mms.Slide;
 import org.thoughtcrime.securesms.mms.SlideDeck;
 import org.thoughtcrime.securesms.mms.StickerSlide;
 import org.thoughtcrime.securesms.mms.VideoSlide;
-import org.thoughtcrime.securesms.notifications.MarkReadReceiver;
 import org.thoughtcrime.securesms.notifications.NotificationChannels;
 import org.thoughtcrime.securesms.permissions.Permissions;
 import org.thoughtcrime.securesms.profiles.GroupShareProfileView;
@@ -224,6 +230,7 @@ import org.thoughtcrime.securesms.stickers.StickerLocator;
 import org.thoughtcrime.securesms.stickers.StickerManagementActivity;
 import org.thoughtcrime.securesms.stickers.StickerPackInstallEvent;
 import org.thoughtcrime.securesms.stickers.StickerSearchRepository;
+import org.thoughtcrime.securesms.util.Base64;
 import org.thoughtcrime.securesms.util.BitmapUtil;
 import org.thoughtcrime.securesms.util.CharacterCalculator.CharacterState;
 import org.thoughtcrime.securesms.util.CommunicationActions;
@@ -251,10 +258,12 @@ import org.whispersystems.libsignal.util.Pair;
 import org.whispersystems.libsignal.util.guava.Optional;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -544,7 +553,6 @@ public class ConversationActivity extends PassphraseRequiredActivity
     }
 
     ApplicationDependencies.getMessageNotifier().setVisibleThread(threadId);
-    markThreadAsRead();
   }
 
   @Override
@@ -672,6 +680,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
       boolean    initiating     = threadId == -1;
       QuoteModel quote          = result.isViewOnce() ? null : inputPanel.getQuote().orNull();
       SlideDeck  slideDeck      = new SlideDeck();
+      List<Mention> mentions    = new ArrayList<>(result.getMentions());
 
       for (Media mediaItem : result.getNonUploadedMedia()) {
         if (MediaUtil.isVideoType(mediaItem.getMimeType())) {
@@ -693,6 +702,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
                        quote,
                        Collections.emptyList(),
                        Collections.emptyList(),
+                       mentions,
                        expiresIn,
                        result.isViewOnce(),
                        subscriptionId,
@@ -1397,7 +1407,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
   private ListenableFuture<Boolean> initializeDraft() {
     final SettableFuture<Boolean> result = new SettableFuture<>();
 
-    final String         draftText        = getIntent().getStringExtra(TEXT_EXTRA);
+    final CharSequence   draftText        = getIntent().getCharSequenceExtra(TEXT_EXTRA);
     final Uri            draftMedia       = getIntent().getData();
     final String         draftContentType = getIntent().getType();
     final MediaType      draftMediaType   = MediaType.from(draftContentType);
@@ -1461,19 +1471,34 @@ public class ConversationActivity extends PassphraseRequiredActivity
   private ListenableFuture<Boolean> initializeDraftFromDatabase() {
     SettableFuture<Boolean> future = new SettableFuture<>();
 
-    new AsyncTask<Void, Void, List<Draft>>() {
+    new AsyncTask<Void, Void, Pair<Drafts, CharSequence>>() {
       @Override
-      protected List<Draft> doInBackground(Void... params) {
-        DraftDatabase draftDatabase = DatabaseFactory.getDraftDatabase(ConversationActivity.this);
-        List<Draft> results         = draftDatabase.getDrafts(threadId);
+      protected Pair<Drafts, CharSequence> doInBackground(Void... params) {
+        Context       context       = ConversationActivity.this;
+        DraftDatabase draftDatabase = DatabaseFactory.getDraftDatabase(context);
+        Drafts        results       = draftDatabase.getDrafts(threadId);
+        Draft         mentionsDraft = results.getDraftOfType(Draft.MENTION);
+        Spannable     updatedText   = null;
+
+        if (mentionsDraft != null) {
+          String                 text     = results.getDraftOfType(Draft.TEXT).getValue();
+          List<Mention>          mentions = MentionUtil.bodyRangeListToMentions(context, Base64.decodeOrThrow(mentionsDraft.getValue()));
+          UpdatedBodyAndMentions updated  = MentionUtil.updateBodyAndMentionsWithDisplayNames(context, text, mentions);
+
+          updatedText = new SpannableString(updated.getBody());
+          MentionAnnotation.setMentionAnnotations(updatedText, updated.getMentions());
+        }
 
         draftDatabase.clearDrafts(threadId);
 
-        return results;
+        return new Pair<>(results, updatedText);
       }
 
       @Override
-      protected void onPostExecute(List<Draft> drafts) {
+      protected void onPostExecute(Pair<Drafts, CharSequence> draftsWithUpdatedMentions) {
+        Drafts       drafts      = Objects.requireNonNull(draftsWithUpdatedMentions.first());
+        CharSequence updatedText = draftsWithUpdatedMentions.second();
+
         if (drafts.isEmpty()) {
           future.set(false);
           updateToggleButtonState();
@@ -1497,7 +1522,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
           try {
             switch (draft.getType()) {
               case Draft.TEXT:
-                composeText.setText(draft.getValue());
+                composeText.setText(updatedText == null ? draft.getValue() : updatedText);
                 listener.onSuccess(true);
                 break;
               case Draft.LOCATION:
@@ -1898,8 +1923,9 @@ public class ConversationActivity extends PassphraseRequiredActivity
     MentionsPickerViewModel mentionsViewModel = ViewModelProviders.of(this, new MentionsPickerViewModel.Factory()).get(MentionsPickerViewModel.class);
 
     recipient.observe(this, mentionsViewModel::onRecipientChange);
+
     composeText.setMentionQueryChangedListener(query -> {
-      if (getRecipient().isGroup()) {
+      if (getRecipient().isPushV2Group()) {
         if (!mentionsSuggestions.resolved()) {
           mentionsSuggestions.get();
         }
@@ -1907,12 +1933,26 @@ public class ConversationActivity extends PassphraseRequiredActivity
       }
     });
 
+    composeText.setMentionValidator(annotations -> {
+      if (!getRecipient().isPushV2Group()) {
+        return annotations;
+      }
+
+      Set<String> validRecipientIds = Stream.of(getRecipient().getParticipants())
+                                            .map(r -> MentionAnnotation.idToMentionAnnotationValue(r.getId()))
+                                            .collect(Collectors.toSet());
+
+      return Stream.of(annotations)
+                   .filterNot(a -> validRecipientIds.contains(a.getValue()))
+                   .toList();
+    });
+
     mentionsViewModel.getSelectedRecipient().observe(this, recipient -> {
       String replacementDisplayName = recipient.getDisplayName(this);
       if (replacementDisplayName.equals(recipient.getDisplayUsername())) {
         replacementDisplayName = recipient.getUsername().or(replacementDisplayName);
       }
-      composeText.replaceTextWithMention(replacementDisplayName, recipient.requireUuid());
+      composeText.replaceTextWithMention(replacementDisplayName, recipient.getId());
     });
   }
 
@@ -2097,7 +2137,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
     long       expiresIn      = recipient.get().getExpireMessages() * 1000L;
     boolean    initiating     = threadId == -1;
 
-    sendMediaMessage(isSmsForced(), "", attachmentManager.buildSlideDeck(), null, contacts, Collections.emptyList(), expiresIn, false, subscriptionId, initiating, false);
+    sendMediaMessage(isSmsForced(), "", attachmentManager.buildSlideDeck(), null, contacts, Collections.emptyList(), Collections.emptyList(), expiresIn, false, subscriptionId, initiating, false);
   }
 
   private void selectContactInfo(ContactData contactData) {
@@ -2121,7 +2161,11 @@ public class ConversationActivity extends PassphraseRequiredActivity
     Drafts drafts = new Drafts();
 
     if (!Util.isEmpty(composeText)) {
-      drafts.add(new Draft(Draft.TEXT, composeText.getTextTrimmed()));
+      drafts.add(new Draft(Draft.TEXT, composeText.getTextTrimmed().toString()));
+      List<Mention> draftMentions = composeText.getMentions();
+      if (!draftMentions.isEmpty()) {
+        drafts.add(new Draft(Draft.MENTION, Base64.encodeBytes(MentionUtil.mentionsToBodyRangeList(draftMentions).toByteArray())));
+      }
     }
 
     for (Slide slide : attachmentManager.buildSlideDeck().getSlides()) {
@@ -2211,7 +2255,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
   }
 
   private void calculateCharactersRemaining() {
-    String          messageBody     = composeText.getTextTrimmed();
+    String          messageBody     = composeText.getTextTrimmed().toString();
     TransportOption transportOption = sendButton.getSelectedTransport();
     CharacterState  characterState  = transportOption.calculateCharacters(messageBody);
 
@@ -2294,7 +2338,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
   }
 
   private String getMessage() throws InvalidMessageException {
-    String rawText = composeText.getTextTrimmed();
+    String rawText = composeText.getTextTrimmed().toString();
 
     if (rawText.length() < 1 && !attachmentManager.isAttachmentPresent())
       throw new InvalidMessageException(getString(R.string.ConversationActivity_message_is_empty_exclamation));
@@ -2306,21 +2350,6 @@ public class ConversationActivity extends PassphraseRequiredActivity
     return sendButton.getSelectedTransport().getType() == Type.TEXTSECURE
            ? MediaConstraints.getPushMediaConstraints()
            : MediaConstraints.getMmsMediaConstraints(sendButton.getSelectedTransport().getSimSubscriptionId().or(-1));
-  }
-
-  private void markThreadAsRead() {
-    new AsyncTask<Long, Void, Void>() {
-      @Override
-      protected Void doInBackground(Long... params) {
-        Context                 context    = ConversationActivity.this;
-        List<MarkedMessageInfo> messageIds = DatabaseFactory.getThreadDatabase(context).setRead(params[0], false);
-
-        ApplicationDependencies.getMessageNotifier().updateNotification(context);
-        MarkReadReceiver.process(context, messageIds);
-
-        return null;
-      }
-    }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, threadId);
   }
 
   private void markLastSeen() {
@@ -2378,6 +2407,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
                                        recipient.isGroup()                     ||
                                        recipient.getEmail().isPresent()        ||
                                        inputPanel.getQuote().isPresent()       ||
+                                       composeText.hasMentions()               ||
                                        linkPreviewViewModel.hasLinkPreview()   ||
                                        needsSplit;
 
@@ -2408,9 +2438,10 @@ public class ConversationActivity extends PassphraseRequiredActivity
   private void sendMediaMessage(@NonNull MediaSendActivityResult result) {
     long                 expiresIn     = recipient.get().getExpireMessages() * 1000L;
     QuoteModel           quote         = result.isViewOnce() ? null : inputPanel.getQuote().orNull();
+    List<Mention>        mentions      = new ArrayList<>(result.getMentions());
     boolean              initiating    = threadId == -1;
-    OutgoingMediaMessage message       = new OutgoingMediaMessage(recipient.get(), new SlideDeck(), result.getBody(), System.currentTimeMillis(), -1, expiresIn, result.isViewOnce(), distributionType, quote, Collections.emptyList(), Collections.emptyList());
-    OutgoingMediaMessage secureMessage = new OutgoingSecureMediaMessage(message                                                                                                                                                                                      );
+    OutgoingMediaMessage message       = new OutgoingMediaMessage(recipient.get(), new SlideDeck(), result.getBody(), System.currentTimeMillis(), -1, expiresIn, result.isViewOnce(), distributionType, quote, Collections.emptyList(), Collections.emptyList(), mentions);
+    OutgoingMediaMessage secureMessage = new OutgoingSecureMediaMessage(message);
 
     ApplicationContext.getInstance(this).getTypingStatusSender().onTypingStopped(threadId);
 
@@ -2434,7 +2465,18 @@ public class ConversationActivity extends PassphraseRequiredActivity
       throws InvalidMessageException
   {
     Log.i(TAG, "Sending media message...");
-    sendMediaMessage(forceSms, getMessage(), attachmentManager.buildSlideDeck(), inputPanel.getQuote().orNull(), Collections.emptyList(), linkPreviewViewModel.getActiveLinkPreviews(), expiresIn, viewOnce, subscriptionId, initiating, true);
+    sendMediaMessage(forceSms,
+                     getMessage(),
+                     attachmentManager.buildSlideDeck(),
+                     inputPanel.getQuote().orNull(),
+                     Collections.emptyList(),
+                     linkPreviewViewModel.getActiveLinkPreviews(),
+                     composeText.getMentions(),
+                     expiresIn,
+                     viewOnce,
+                     subscriptionId,
+                     initiating,
+                     true);
   }
 
   private ListenableFuture<Void> sendMediaMessage(final boolean forceSms,
@@ -2443,6 +2485,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
                                                   QuoteModel quote,
                                                   List<Contact> contacts,
                                                   List<LinkPreview> previews,
+                                                  List<Mention> mentions,
                                                   final long expiresIn,
                                                   final boolean viewOnce,
                                                   final int subscriptionId,
@@ -2463,7 +2506,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
       }
     }
 
-    OutgoingMediaMessage outgoingMessageCandidate = new OutgoingMediaMessage(recipient.get(), slideDeck, body, System.currentTimeMillis(), subscriptionId, expiresIn, viewOnce, distributionType, quote, contacts, previews);
+    OutgoingMediaMessage outgoingMessageCandidate = new OutgoingMediaMessage(recipient.get(), slideDeck, body, System.currentTimeMillis(), subscriptionId, expiresIn, viewOnce, distributionType, quote, contacts, previews, mentions);
 
     final SettableFuture<Void> future  = new SettableFuture<>();
     final Context              context = getApplicationContext();
@@ -2582,7 +2625,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
   private void updateLinkPreviewState() {
     if (TextSecurePreferences.isLinkPreviewsEnabled(this) && !sendButton.getSelectedTransport().isSms() && !attachmentManager.isAttachmentPresent()) {
       linkPreviewViewModel.onEnabled();
-      linkPreviewViewModel.onTextChanged(this, composeText.getTextTrimmed(), composeText.getSelectionStart(), composeText.getSelectionEnd());
+      linkPreviewViewModel.onTextChanged(this, composeText.getTextTrimmed().toString(), composeText.getSelectionStart(), composeText.getSelectionEnd());
     } else {
       linkPreviewViewModel.onUserCancel();
     }
@@ -2665,7 +2708,20 @@ public class ConversationActivity extends PassphraseRequiredActivity
         SlideDeck  slideDeck      = new SlideDeck();
         slideDeck.addSlide(audioSlide);
 
-        sendMediaMessage(forceSms, "", slideDeck, inputPanel.getQuote().orNull(), Collections.emptyList(), Collections.emptyList(), expiresIn, false, subscriptionId, initiating, true).addListener(new AssertedSuccessListener<Void>() {
+        ListenableFuture<Void> sendResult = sendMediaMessage(forceSms,
+                                                             "",
+                                                             slideDeck,
+                                                             inputPanel.getQuote().orNull(),
+                                                             Collections.emptyList(),
+                                                             Collections.emptyList(),
+                                                             composeText.getMentions(),
+                                                             expiresIn,
+                                                             false,
+                                                             subscriptionId,
+                                                             initiating,
+                                                             true);
+
+        sendResult.addListener(new AssertedSuccessListener<Void>() {
           @Override
           public void onSuccess(Void nothing) {
             new AsyncTask<Void, Void, Void>() {
@@ -2759,7 +2815,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
 
   @Override
   public void onCursorPositionChanged(int start, int end) {
-    linkPreviewViewModel.onTextChanged(this, composeText.getTextTrimmed(), start, end);
+    linkPreviewViewModel.onTextChanged(this, composeText.getTextTrimmed().toString(), start, end);
   }
 
   @Override
@@ -2799,7 +2855,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
 
     slideDeck.addSlide(stickerSlide);
 
-    sendMediaMessage(transport.isSms(), "", slideDeck, null, Collections.emptyList(), Collections.emptyList(), expiresIn, false, subscriptionId, initiating, clearCompose);
+    sendMediaMessage(transport.isSms(), "", slideDeck, null, Collections.emptyList(), Collections.emptyList(), Collections.emptyList(), expiresIn, false, subscriptionId, initiating, clearCompose);
   }
 
   private void silentlySetComposeText(String text) {
@@ -2977,7 +3033,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
   {
     reactionOverlay.setOnToolbarItemClickedListener(toolbarListener);
     reactionOverlay.setOnHideListener(onHideListener);
-    reactionOverlay.show(this, maskTarget, messageRecord, panelParent.getMeasuredHeight());
+    reactionOverlay.show(this, maskTarget, messageRecord, inputAreaHeight());
   }
 
   @Override
@@ -3002,7 +3058,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
 
   @Override
   public void handleReactionDetails(@NonNull View maskTarget) {
-    reactionOverlay.showMask(maskTarget, titleView.getMeasuredHeight(), panelParent.getMeasuredHeight());
+    reactionOverlay.showMask(maskTarget, titleView.getMeasuredHeight(), inputAreaHeight());
   }
 
   @Override
@@ -3028,7 +3084,9 @@ public class ConversationActivity extends PassphraseRequiredActivity
   }
 
   @Override
-  public void handleReplyMessage(MessageRecord messageRecord) {
+  public void handleReplyMessage(ConversationMessage conversationMessage) {
+    MessageRecord messageRecord = conversationMessage.getMessageRecord();
+
     Recipient author;
 
     if (messageRecord.isOutgoing()) {
@@ -3064,7 +3122,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
       inputPanel.setQuote(GlideApp.with(this),
                           messageRecord.getDateSent(),
                           author,
-                          messageRecord.getBody(),
+                          conversationMessage.getDisplayBody(this),
                           slideDeck);
     } else {
       SlideDeck slideDeck = messageRecord.isMms() ? ((MmsMessageRecord) messageRecord).getSlideDeck() : new SlideDeck();
@@ -3078,7 +3136,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
       inputPanel.setQuote(GlideApp.with(this),
                           messageRecord.getDateSent(),
                           author,
-                          messageRecord.getBody(),
+                          conversationMessage.getDisplayBody(this),
                           slideDeck);
     }
 
@@ -3100,6 +3158,19 @@ public class ConversationActivity extends PassphraseRequiredActivity
     handleSecurityChange(isSecureText, isDefaultSms);
     updateToggleButtonState();
     updateLinkPreviewState();
+  }
+
+  private int inputAreaHeight() {
+    int height = panelParent.getMeasuredHeight();
+
+    if (attachmentKeyboardStub.resolved()) {
+      View keyboard = attachmentKeyboardStub.get();
+      if (keyboard.getVisibility() == View.VISIBLE) {
+        return height + keyboard.getMeasuredHeight();
+      }
+    }
+
+    return height;
   }
 
   private void onMessageRequestDeleteClicked(@NonNull MessageRequestViewModel requestModel) {
@@ -3232,6 +3303,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
                      quote,
                      Collections.emptyList(),
                      Collections.emptyList(),
+                     composeText.getMentions(),
                      expiresIn,
                      false,
                      subscriptionId,
@@ -3290,7 +3362,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
     }
   }
 
-  private class QuoteRestorationTask extends AsyncTask<Void, Void, MessageRecord> {
+  private class QuoteRestorationTask extends AsyncTask<Void, Void, ConversationMessage> {
 
     private final String                  serialized;
     private final SettableFuture<Boolean> future;
@@ -3301,20 +3373,27 @@ public class ConversationActivity extends PassphraseRequiredActivity
     }
 
     @Override
-    protected MessageRecord doInBackground(Void... voids) {
+    protected ConversationMessage doInBackground(Void... voids) {
       QuoteId quoteId = QuoteId.deserialize(ConversationActivity.this, serialized);
 
-      if (quoteId != null) {
-        return DatabaseFactory.getMmsSmsDatabase(getApplicationContext()).getMessageFor(quoteId.getId(), quoteId.getAuthor());
+      if (quoteId == null) {
+        return null;
       }
 
-      return null;
+      Context context = getApplicationContext();
+
+      MessageRecord messageRecord = DatabaseFactory.getMmsSmsDatabase(context).getMessageFor(quoteId.getId(), quoteId.getAuthor());
+      if (messageRecord == null) {
+        return null;
+      }
+
+      return ConversationMessageFactory.createWithUnresolvedData(context, messageRecord);
     }
 
     @Override
-    protected void onPostExecute(MessageRecord messageRecord) {
-      if (messageRecord != null) {
-        handleReplyMessage(messageRecord);
+    protected void onPostExecute(ConversationMessage conversationMessage) {
+      if (conversationMessage != null) {
+        handleReplyMessage(conversationMessage);
         future.set(true);
       } else {
         Log.e(TAG, "Failed to restore a quote from a draft. No matching message record.");
