@@ -366,6 +366,9 @@
   <!--GV2 access levels-->
   <!--GV2 invites sent-->
   <string name="GroupManagement_learn_more">ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ</string>
+  <!--LinkPreviewsMegaphone-->
+  <string name="LinkPreviewsMegaphone_disable">ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ</string>
+  <!--LinkPreviewView-->
   <!--PendingMembersActivity-->
   <string name="PendingMembersActivity_people_you_invited">ನೀವು ಆಹ್ವಾನಿಸಿದ ಜನರು</string>
   <string name="PendingMembersActivity_invites_by_other_group_members">ಗುಂಪಿನ ಇತರ ಸದಸ್ಯರು ಆಹ್ವಾನಿಸಿದ ಜನರು</string>
@@ -410,6 +413,8 @@
   <string name="CustomNotificationsDialogFragment__disabled">ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ</string>
   <string name="CustomNotificationsDialogFragment__default">ಡೀಫಾಲ್ಟ್</string>
   <!--GV2 Invite Revoke confirmation dialog-->
+  <!--GroupJoinBottomSheetDialogFragment-->
+  <!--GroupJoinUpdateRequiredBottomSheetDialogFragment-->
   <!--CropImageActivity-->
   <string name="CropImageActivity_group_avatar">ಗುಂಪಿನ ಅವತಾರ್</string>
   <string name="CropImageActivity_profile_avatar">ಅವತಾರ್</string>
@@ -833,7 +838,7 @@
   <string name="UnverifiedSendDialog_send">ಕಳುಹಿಸು</string>
   <!--UsernameEditFragment-->
   <string name="UsernameEditFragment_username">ಬಳಕೆದಾರ ಹೆಸರು</string>
-  <string name="UsernameEditFragment_submit">ಸಲ್ಲಿಸಿ</string>
+  <!-- Removed by excludeNonTranslatables <string name="UsernameEditFragment_submit">ಸಲ್ಲಿಸಿ</string> -->
   <string name="UsernameEditFragment_delete">ಅಳಿಸಿ</string>
   <string name="UsernameEditFragment_successfully_set_username">ಬಳಕೆದಾರ ಹೆಸರು ಯಶಸ್ವಿಯಾಗಿ ಹೊಂದಿಸಲಾಗಿದೆ.</string>
   <string name="UsernameEditFragment_successfully_removed_username">ಬಳಕೆದಾರ ಹೆಸರನ್ನು ಯಶಸ್ವಿಯಾಗಿ ತೆಗೆದುಹಾಕಲಾಗಿದೆ.</string>
@@ -843,7 +848,7 @@
   <string name="UsernameEditFragment_usernames_cannot_begin_with_a_number">ಬಳಕೆದಾರ ಹೆಸರುಗಳು ಸಂಖ್ಯೆಯಿಂದ ಪ್ರಾರಂಭವಾಗುವುದಿಲ್ಲ.</string>
   <string name="UsernameEditFragment_username_is_invalid">ಬಳಕೆದಾರ ಹೆಸರು ಅಮಾನ್ಯವಾಗಿದೆ.</string>
   <string name="UsernameEditFragment_usernames_must_be_between_a_and_b_characters">ಬಳಕೆದಾರ ಹೆಸರುಗಳ  %1$d ಮತ್ತು %2$d ಅಕ್ಷರಗಳ ನಡುವೆ ಇರಬೇಕು.</string>
-  <string name="UsernameEditFragment_other_signal_users_can_send_message_requests_to_your_unique_username">ಇತರ Signal ಬಳಕೆದಾರರು ಸಂದೇಶ ವಿನಂತಿಗಳನ್ನು ನಿಮ್ಮ ದೂರವಾಣಿ ಸಂಖ್ಯೆ ತಿಳಿಯದೆ ನಿಮ್ಮ ಅನನ್ಯ ಬಳಕೆದಾರ ಹೆಸರಿಗೆ ಕಳುಹಿಸಬಹುದು. ಬಳಕೆದಾರ ಹೆಸರನ್ನು ಆಯ್ಕೆ ಮಾಡುವುದು ಐಚ್ಛಿಕವಾಗಿದೆ.</string>
+  <!-- Removed by excludeNonTranslatables <string name="UsernameEditFragment_other_signal_users_can_send_message_requests_to_your_unique_username">ಇತರ Signal ಬಳಕೆದಾರರು ಸಂದೇಶ ವಿನಂತಿಗಳನ್ನು ನಿಮ್ಮ ದೂರವಾಣಿ ಸಂಖ್ಯೆ ತಿಳಿಯದೆ ನಿಮ್ಮ ಅನನ್ಯ ಬಳಕೆದಾರ ಹೆಸರಿಗೆ ಕಳುಹಿಸಬಹುದು. ಬಳಕೆದಾರ ಹೆಸರನ್ನು ಆಯ್ಕೆ ಮಾಡುವುದು ಐಚ್ಛಿಕವಾಗಿದೆ.</string> -->
   <!--VerifyIdentityActivity-->
   <string name="VerifyIdentityActivity_your_contact_is_running_an_old_version_of_signal">ನಿಮ್ಮ ಸಂಪರ್ಕವು ಹಳೆಯ Signal ಆವೃತ್ತಿಯನ್ನು ಚಲಾಯಿಸುತ್ತಿದ್ದಾರೆ. ನಿಮ್ಮ ಸುರಕ್ಷತಾ ಸಂಖ್ಯೆ  ಪರಿಶೀಲಿಸುವ ಮೊದಲು ದಯವಿಟ್ಟು ಅವರನ್ನು ನವೀಕರಿಸಲು ಕೇಳಿ.</string>
   <string name="VerifyIdentityActivity_your_contact_is_running_a_newer_version_of_Signal">ನಿಮ್ಮ ಸಂಪರ್ಕವು QR ಕೋಡ್ ಫಾರ್ಮ್ಯಾಟ್‌ಗೆ ಹೊಂದಿಕೊಳ್ಳದ Signal ನ ಇತ್ತೀಚಿನ ಆವೃತ್ತಿಯನ್ನು ರನ್ ಮಾಡುತ್ತಿದೆ. ಹೋಲಿಕೆ ಮಾಡಲು ದಯವಿಟ್ಟು ನವೀಕರಿಸಿ.</string>
@@ -864,8 +869,6 @@
   <string name="MmsMessageRecord_mms_message_encrypted_for_non_existing_session">ಅಸ್ತಿತ್ವದಲ್ಲಿಲ್ಲದ ಅವಧಿಗಾಗಿ ಎಂಎಂಎಸ್ ಸಂದೇಶ ಎನ್‌ಕ್ರಿಪ್ಟ್ ಮಾಡಲಾಗಿದೆ</string>
   <!--MuteDialog-->
   <string name="MuteDialog_mute_notifications">ಅಧಿಸೂಚನೆಗಳನ್ನು ಮ್ಯೂಟ್ ಮಾಡಿ</string>
-  <!--OutdatedBuildReminder-->
-  <string name="OutdatedBuildReminder_no_web_browser_installed">ಯಾವುದೇ ವೆಬ್ ಬ್ರೌಸರ್ ಸ್ಥಾಪಿಸಲಾಗಿಲ್ಲ!</string>
   <!--ApplicationMigrationService-->
   <string name="ApplicationMigrationService_import_in_progress">ಇಂಪೋರ್ಟ್ ಪ್ರಗತಿಯಲ್ಲಿದೆ</string>
   <string name="ApplicationMigrationService_importing_text_messages">ಪಠ್ಯ ಸಂದೇಶಗಳನ್ನು ಇಂಪೋರ್ಟ್ ಮಾಡಲಾಗುತ್ತಿದೆ</string>
@@ -1284,8 +1287,6 @@
   <string name="preferences__use_signal_for_viewing_and_storing_all_incoming_multimedia_messages">ಎಲ್ಲಾ ಒಳಬರುವ ಮಲ್ಟಿಮೀಡಿಯಾ ಸಂದೇಶಗಳಿಗಾಗಿ Signal ಬಳಸಿ</string>
   <string name="preferences__pref_enter_sends_title">ಎಂಟರ್ ಕೀ ಕಳುಹಿಸುತ್ತದೆ </string>
   <string name="preferences__pressing_the_enter_key_will_send_text_messages">ಎಂಟರ್ ಕೀಯನ್ನು ಒತ್ತಿದರೆ ಪಠ್ಯ ಸಂದೇಶಗಳನ್ನು ಕಳುಹಿಸುತ್ತದೆ</string>
-  <string name="preferences__send_link_previews">ಲಿಂಕ್ ಪೂರ್ವವೀಕ್ಷಣೆಗಳನ್ನು ಕಳುಹಿಸಿ</string>
-  <string name="preferences__previews_are_supported_for">Imgur, Instagram, Pinterest, Reddit, ಮತ್ತು YouTube ಲಿಂಕ್‌ಗಳಿಗಾಗಿ ಪೂರ್ವವೀಕ್ಷಣೆಗಳನ್ನು ಬೆಂಬಲಿಸಲಾಗಿದೆ</string>
   <string name="preferences__choose_identity">ಗುರುತನ್ನು ಆಯ್ದುಕೊಳ್ಳಿ</string>
   <string name="preferences__choose_your_contact_entry_from_the_contacts_list">ಸಂಪರ್ಕಗಳ ಪಟ್ಟಿಯಿಂದ ನಿಮ್ಮ ಸಂಪರ್ಕ ನಮೂದನ್ನು ಆಯ್ದುಕೊಳ್ಳಿ.</string>
   <string name="preferences__change_passphrase">ಪಾಸ್‌‌ಫ್ರೇಸ್ ಬದಲಾಯಿಸಿ</string>
@@ -1434,6 +1435,7 @@
   <!--conversation_list-->
   <string name="conversation_list_settings_shortcut">ಸೆಟ್ಟಿಂಗ್‌ಗಳು ಶಾರ್ಟ್‌‌ಕಟ್</string>
   <string name="conversation_list_search_description">ಹುಡುಕಿ</string>
+  <string name="conversation_list__chats">ಚಾಟ್‌‌ ಗಳು</string>
   <!--conversation_list_item_view-->
   <string name="conversation_list_item_view__contact_photo_image">ಸಂಪರ್ಕದ ಫೋಟೊ ಇಮೇಜ್</string>
   <string name="conversation_list_item_view__archived">ಆರ್ಕೈವ್ ಮಾಡಲಾಗಿದೆ</string>
@@ -1619,6 +1621,7 @@
   <string name="KbsMegaphone__update_pin">ಪಿನ್ ನವೀಕರಿಸಿ</string>
   <string name="KbsMegaphone__well_remind_you_later_creating_a_pin">ನಾವು ನಿಮಗೆ ನಂತರ ನೆನಪಿಸುತ್ತೇವೆ. %1$d ದಿನಗಳಲ್ಲಿ ಪಿನ್ ರಚಿಸುವುದು ಕಡ್ಡಾಯವಾಗಲಿದೆ.</string>
   <string name="KbsMegaphone__well_remind_you_later_confirming_your_pin">ನಾವು ನಿಮಗೆ ನಂತರ ನೆನಪಿಸುತ್ತೇವೆ. ನಿಮ್ಮ ಪಿನ್ ಅನ್ನು ದೃಢೀಕರಿಸುವುದು %1$dದಿನಗಳಲ್ಲಿ ಕಡ್ಡಾಯವಾಗಲಿದೆ. </string>
+  <!--Mention Megaphone-->
   <!--transport_selection_list_item-->
   <string name="transport_selection_list_item__transport_icon">ಸಾರಿಗೆ ಐಕನ್</string>
   <string name="ConversationListFragment_loading">ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ…</string>

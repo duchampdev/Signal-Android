@@ -397,6 +397,7 @@
   <!--GroupMembersDialog-->
   <string name="GroupMembersDialog_you">Ju</string>
   <!--GV2 access levels-->
+  <string name="GroupManagement_access_level_anyone">Këdo</string>
   <string name="GroupManagement_access_level_all_members">Krejt anëtarët</string>
   <string name="GroupManagement_access_level_only_admins">Vetëm përgjegjësit</string>
   <!--GV2 invites sent-->
@@ -407,6 +408,14 @@
   <string name="GroupManagement_invite_single_user">“%1$s” s’mund të shtohet automatikisht te ky grup nga ju.\n\nËshtë ftuar të marrë pjesë, dhe s’do të shohë ndonjë mesazh grupi, para se të pranojnë ftesën.</string>
   <string name="GroupManagement_learn_more">Mësoni më tepër</string>
   <string name="GroupManagement_invite_multiple_users">Këta përdorues s’mund të shtohen automatikisht te ky grup nga ju.\n\n Janë ftuar të marrin pjesë te grupi, dhe s’do të shohin ndonjë mesazh grupi, përpara se të pranojnë ftesat.</string>
+  <!--LinkPreviewsMegaphone-->
+  <string name="LinkPreviewsMegaphone_disable">Çaktivizoje</string>
+  <string name="LinkPreviewsMegaphone_preview_any_link">Bëni paraparje të çfarëdo lidhjeje</string>
+  <string name="LinkPreviewsMegaphone_you_can_now_retrieve_link_previews_directly_from_any_website">Tanimë, për mesazhet që dërgoni, mund të bëni paraparje lidhjesh drejt e nga çfarëdo sajti.</string>
+  <!--LinkPreviewView-->
+  <string name="LinkPreviewView_no_link_preview_available">S’ka lidhje për paraparje</string>
+  <string name="LinkPreviewView_this_group_link_is_not_active">Kjo lidhje grupi s’është aktive</string>
+  <!--LinkPreviewRepository-->
   <!--PendingMembersActivity-->
   <string name="PendingMemberInvitesActivity_pending_group_invites">Ftesa për në grupe pezull</string>
   <string name="PendingMembersActivity_people_you_invited">Persona që keni ftuar</string>
@@ -424,6 +433,7 @@
     <item quantity="one">Gabim gjatë shfuqizimit të ftesës</item>
     <item quantity="other">Gabim gjatë shfuqizimit të ftesave</item>
   </plurals>
+  <!--RequestingMembersFragment-->
   <!--AddMembersActivity-->
   <string name="AddMembersActivity__done">U bë</string>
   <string name="AddMembersActivity__this_person_cant_be_added_to_legacy_groups">Ky përdorues s’mund të shtohet te grupe të dikurshëm.</string>
@@ -542,12 +552,37 @@ të përditësojnë Signal-in, ose t’i hiqni para krijimit të grupit.</item>
   <string name="CustomNotificationsDialogFragment__enabled">E aktivizuar</string>
   <string name="CustomNotificationsDialogFragment__disabled">E çaktivizuar</string>
   <string name="CustomNotificationsDialogFragment__default">Parazgjedhje</string>
+  <!--ShareableGroupLinkDialogFragment-->
+  <string name="ShareableGroupLinkDialogFragment__share">Ndajeni Me të Tjerë</string>
+  <string name="ShareableGroupLinkDialogFragment__enabled">E aktivizuar</string>
+  <string name="ShareableGroupLinkDialogFragment__disabled">E çaktivizuar</string>
+  <string name="ShareableGroupLinkDialogFragment__default">Parazgjedhje</string>
+  <!--GroupLinkShareQrDialogFragment-->
   <!--GV2 Invite Revoke confirmation dialog-->
   <string name="InviteRevokeConfirmationDialog_revoke_own_single_invite">Doni të shfuqizohet ftesa që u dërgua te %1$s?</string>
   <plurals name="InviteRevokeConfirmationDialog_revoke_others_invites">
     <item quantity="one">Doni të shfuqizohet ftesa dërguar nga %1$s?</item>
     <item quantity="other">Doni të shfuqizohen %2$d ftesa dërguar nga %1$s?</item>
   </plurals>
+  <!--GroupJoinBottomSheetDialogFragment-->
+  <string name="GroupJoinBottomSheetDialogFragment_you_are_already_a_member">Jeni tashmë anëtar</string>
+  <string name="GroupJoinBottomSheetDialogFragment_join">Merrni pjesë</string>
+  <string name="GroupJoinBottomSheetDialogFragment_request_to_join">Kërkoni të bëheni pjesë</string>
+  <string name="GroupJoinBottomSheetDialogFragment_encountered_a_network_error">U has një gabim rrjeti.</string>
+  <string name="GroupJoinBottomSheetDialogFragment_this_group_link_is_not_active">Kjo lidhje grupi s’është aktive</string>
+  <string name="GroupJoinBottomSheetDialogFragment_unable_to_get_group_information_please_try_again_later">S’arrihet të merren të dhëna grupi, ju lutemi, riprovoni më vonë</string>
+  <string name="GroupJoinBottomSheetDialogFragment_direct_join">Doni të bëheni pjesë e këtij grupi dhe të ndani me anëtarët e tij emrin dhe foton tuaj?</string>
+  <string name="GroupJoinBottomSheetDialogFragment_admin_approval_needed">Përpara se të bëheni pjesë e këtij grupi, kërkesën tuaj duhet ta miratojë një përgjegjës i grupit. Kur kërkoni të bëheni pjesë, emri dhe fotoja juaj do të ndahet me anëtarët e tij.</string>
+  <plurals name="GroupJoinBottomSheetDialogFragment_group_dot_d_members">
+    <item quantity="one">Grup · %1$d anëtar</item>
+    <item quantity="other">Grup · %1$d anëtarë</item>
+  </plurals>
+  <!--GroupJoinUpdateRequiredBottomSheetDialogFragment-->
+  <string name="GroupJoinUpdateRequiredBottomSheetDialogFragment_update_signal_to_use_group_links">Që të përdorni lidhje grupi, përditësoni Signal-in</string>
+  <string name="GroupJoinUpdateRequiredBottomSheetDialogFragment_update_message">Versioni i Signal-it që po përdorni nuk mbulon lidhje grupi që mund të ndahen me të tjerë. Që të bëheni pjesë e këtij grupi përmes një lidhjeje, përditësojeni me versionin më të ri.</string>
+  <string name="GroupJoinUpdateRequiredBottomSheetDialogFragment_update_signal">Përditësoni Signal-in</string>
+  <!--GV2 Request confirmation dialog-->
+  <string name="RequestConfirmationDialog_add">Shtoje</string>
   <!--CropImageActivity-->
   <string name="CropImageActivity_group_avatar">Avatar grupi</string>
   <string name="CropImageActivity_profile_avatar">Avatar</string>
@@ -775,6 +810,35 @@ të përditësojnë Signal-in, ose t’i hiqni para krijimit të grupit.</item>
   <string name="MessageRecord_you_changed_who_can_edit_group_membership_to_s">Ndryshuat cilët mund të përpunojnë anëtarësi grupi te \"%1$s\".</string>
   <string name="MessageRecord_s_changed_who_can_edit_group_membership_to_s">%1$s ndryshoi se cilët mund të përpunojnë anëtarësi grupi te \"%2$s\".</string>
   <string name="MessageRecord_who_can_edit_group_membership_has_been_changed_to_s">Te \"%1$s\" është ndryshuas se kush mund të përpunojë anëtarësi te grupi.</string>
+  <!--GV2 group link invite access level change-->
+  <string name="MessageRecord_you_turned_on_the_sharable_group_link">Aktivizuat lidhjen e grupit të ndashme me të tjerë.</string>
+  <string name="MessageRecord_you_turned_on_the_sharable_group_link_with_admin_approval">Aktivizuat lidhjen e grupit të ndashme me të tjerë, me miratim përgjegjësi.</string>
+  <string name="MessageRecord_you_turned_off_the_sharable_group_link">Çaktivizuat lidhjen e grupit të ndashme me të tjerë.</string>
+  <string name="MessageRecord_s_turned_on_the_sharable_group_link">%1$s aktivizoi lidhjen e grupit të ndashme me të tjerë.</string>
+  <string name="MessageRecord_s_turned_on_the_sharable_group_link_with_admin_approval">%1$s aktivizoi lidhjen e grupit të ndashme me të tjerët, me miratim përgjegjësi.</string>
+  <string name="MessageRecord_s_turned_off_the_sharable_group_link">%1$s çaktivizoi lidhjen e grupit të ndashme me të tjerë.</string>
+  <string name="MessageRecord_the_sharable_group_link_has_been_turned_on">Lidhja e ndashme e grupit është aktivizuar.</string>
+  <string name="MessageRecord_the_sharable_group_link_has_been_turned_on_with_admin_approval">Lidhja e ndashme e grupit është aktivizuar me miratim përgjegjësi.</string>
+  <string name="MessageRecord_the_sharable_group_link_has_been_turned_off">Lidhja e grupit e ndashme me të tjerët është çaktivizuar.</string>
+  <!--GV2 group link reset-->
+  <string name="MessageRecord_you_reset_the_sharable_group_link">Kthyet te parazgjedhjet lidhjen e ndashme të grupit.</string>
+  <string name="MessageRecord_s_reset_the_sharable_group_link">%1$s ktheu te parazgjedhjet lidhjen e ndashme të grupit.</string>
+  <string name="MessageRecord_the_sharable_group_link_has_been_reset">Lidhja e ndashme e grupit është kthyer te parazgjedhjet.</string>
+  <!--GV2 group link joins-->
+  <string name="MessageRecord_you_joined_the_group_via_the_sharable_group_link">U bëtë pjesë e grupit përmes lidhjes së ndashme të grupit</string>
+  <string name="MessageRecord_s_joined_the_group_via_the_sharable_group_link">%1$s u bë pjesë e grupit përmes lidhjes së ndashme të grupit.</string>
+  <!--GV2 group link requests-->
+  <string name="MessageRecord_you_sent_a_request_to_join_the_group">Dërguat një kërkesë të bëheni pjesë e grupit.</string>
+  <string name="MessageRecord_s_requested_to_join_via_the_sharable_group_link">%1$s kërkoi të bëhet pjesë e grupit përmes një lidhjes së ndashme të grupit.</string>
+  <!--GV2 group link approvals-->
+  <string name="MessageRecord_s_approved_your_request_to_join_the_group">%1$s miratoi kërkesën tuaj për t’u bërë pjesë e grupit.</string>
+  <string name="MessageRecord_s_approved_a_request_to_join_the_group_from_s">%1$s miratoi një kërkesë për t’u bërë pjesë e grupit nga %2$s.</string>
+  <string name="MessageRecord_your_request_to_join_the_group_has_been_approved">Kërkesa jua për t’u bërë pjesë e grupit u miratua.</string>
+  <string name="MessageRecord_a_request_to_join_the_group_from_s_has_been_approved">U miratua një kërkesë për t’u bërë pjesë e grupit nga %1$s.</string>
+  <!--GV2 group link deny-->
+  <string name="MessageRecord_your_request_to_join_the_group_has_been_denied_by_an_admin">Kërkesa juaj për t’u bërë pjesë e grupit është hedhur poshtë nga një përgjegjës.</string>
+  <string name="MessageRecord_s_denied_a_request_to_join_the_group_from_s">%1$s hodhi poshtë një kërkesë për t’u bërë pjesë e grupit nga %2$s.</string>
+  <string name="MessageRecord_a_request_to_join_the_group_from_s_has_been_denied">U hodh poshtë një kërkesë për t’u bërë pjesë e grupit nga %1$s.</string>
   <!--End of GV2 specific update messages-->
   <string name="MessageRecord_your_safety_number_with_s_has_changed">Numri juaj i sigurisë me %s është ndryshuar.</string>
   <string name="MessageRecord_you_marked_your_safety_number_with_s_verified">E shënuat numrin tuaj të sigurisë me %s si të verifikuar</string>
@@ -893,10 +957,10 @@ të përditësojnë Signal-in, ose t’i hiqni para krijimit të grupit.</item>
   <!--RecipientProvider-->
   <string name="RecipientProvider_unnamed_group">Grup i paemër</string>
   <!--RedPhone-->
-  <string name="RedPhone_answering">Përgjigje</string>
-  <string name="RedPhone_ending_call">Po përfundohet thirrja</string>
-  <string name="RedPhone_dialing">Po thirret</string>
-  <string name="RedPhone_ringing">Po bie zilja</string>
+  <string name="RedPhone_answering">Po përgjigjeni…</string>
+  <string name="RedPhone_ending_call">Po përfundohet thirrja…</string>
+  <string name="RedPhone_dialing">Po i bihet numrit…</string>
+  <string name="RedPhone_ringing">Po i bihet ziles…</string>
   <string name="RedPhone_busy">I zënë</string>
   <string name="RedPhone_connected">U lidh</string>
   <string name="RedPhone_recipient_unavailable">Marrësi s\'është në gjendje</string>
@@ -1089,7 +1153,7 @@ të përditësojnë Signal-in, ose t’i hiqni para krijimit të grupit.</item>
   <string name="UnverifiedSendDialog_send">Dërgoje</string>
   <!--UsernameEditFragment-->
   <string name="UsernameEditFragment_username">Emër përdoruesi</string>
-  <string name="UsernameEditFragment_submit">Parashtroje</string>
+  <!-- Removed by excludeNonTranslatables <string name="UsernameEditFragment_submit">Parashtroje</string> -->
   <string name="UsernameEditFragment_delete">Fshije</string>
   <string name="UsernameEditFragment_successfully_set_username">Emri i përdoruesit u caktua me sukses.</string>
   <string name="UsernameEditFragment_successfully_removed_username">Emri i përdoruesit u hoq me sukses.</string>
@@ -1100,7 +1164,7 @@ të përditësojnë Signal-in, ose t’i hiqni para krijimit të grupit.</item>
   <string name="UsernameEditFragment_usernames_cannot_begin_with_a_number">Emrat e përdoruesve s’mund të fillojnë me një numër.</string>
   <string name="UsernameEditFragment_username_is_invalid">Emri i përdoruesit është i pavlefshëm.</string>
   <string name="UsernameEditFragment_usernames_must_be_between_a_and_b_characters">Emrat e përdoruesit duhet të jenë mes %1$d dhe %2$d shenjash.</string>
-  <string name="UsernameEditFragment_other_signal_users_can_send_message_requests_to_your_unique_username">Përdorues të tjerë të Signal-it mund të dërgojnë kërkesa mesazhi te emri juaj unik i përdoruesit, pa ditur numrin tuaj të telefonit. Zgjedhja e një emri përdoruesi është në dëshirën tuaj.</string>
+  <!-- Removed by excludeNonTranslatables <string name="UsernameEditFragment_other_signal_users_can_send_message_requests_to_your_unique_username">Përdorues të tjerë të Signal-it mund të dërgojnë kërkesa mesazhi te emri juaj unik i përdoruesit, pa ditur numrin tuaj të telefonit. Zgjedhja e një emri përdoruesi është në dëshirën tuaj.</string> -->
   <!--VerifyIdentityActivity-->
   <string name="VerifyIdentityActivity_your_contact_is_running_an_old_version_of_signal">Kontakti juaj xhiron një version të vjetër të Signal-it. Ju lutemi, kërkojini ta përditësojë, para se të verifikohet numri juaj i sigurisë.</string>
   <string name="VerifyIdentityActivity_your_contact_is_running_a_newer_version_of_Signal">Kontakti juaj xhiron një version më të ri të Signal-it, me një format kodi QR të papërputhshëm. Ju lutemi, që të krahasohen, përditësojeni.</string>
@@ -1121,8 +1185,6 @@ të përditësojnë Signal-in, ose t’i hiqni para krijimit të grupit.</item>
   <string name="MmsMessageRecord_mms_message_encrypted_for_non_existing_session">Mesazh MMS i fshehtëzuar për sesion që s\’ekziston</string>
   <!--MuteDialog-->
   <string name="MuteDialog_mute_notifications">Heshtoji njoftimet</string>
-  <!--OutdatedBuildReminder-->
-  <string name="OutdatedBuildReminder_no_web_browser_installed">S\’ka shfletues të instaluar</string>
   <!--ApplicationMigrationService-->
   <string name="ApplicationMigrationService_import_in_progress">Importim në ecuri e sipër</string>
   <string name="ApplicationMigrationService_importing_text_messages">Po importohen mesazhe tekst</string>
@@ -1595,8 +1657,8 @@ të përditësojnë Signal-in, ose t’i hiqni para krijimit të grupit.</item>
   <string name="preferences__use_signal_for_viewing_and_storing_all_incoming_multimedia_messages">Përdore Signal për krejt mesazhet multimedia ardhëse</string>
   <string name="preferences__pref_enter_sends_title">Tasti Enter dërgon</string>
   <string name="preferences__pressing_the_enter_key_will_send_text_messages">Shtypja e tastit Enter do të sjellë dërgim mesazhesh tekst</string>
-  <string name="preferences__send_link_previews">Dërgo paraparje lidhjesh</string>
-  <string name="preferences__previews_are_supported_for">Paraparjet mbulohen për lidhje Imgur, Instagram, Pinterest, Reddit, dhe YouTube.</string>
+  <string name="preferences__generate_link_previews">Prodho lidhje për paraparje</string>
+  <string name="preferences__retrieve_link_previews_from_websites_for_messages">Merrni, për mesazhet që dërgoni, paraparje lidhjesh drejt e nga sajtet.</string>
   <string name="preferences__choose_identity">Zgjidhni identitet</string>
   <string name="preferences__choose_your_contact_entry_from_the_contacts_list">Zgjidhni kontaktin tuaj nga lista e kontakteve.</string>
   <string name="preferences__change_passphrase">Ndryshoje frazëkalimin</string>
@@ -1749,6 +1811,8 @@ aktivizoni Kyçje Regjistrimi, teksa PIN-i është i çaktivizuar.</string>
   <string name="conversation_insecure__invite">Fto</string>
   <!--conversation_list_batch-->
   <string name="conversation_list_batch__menu_delete_selected">Fshi të përzgjedhurit</string>
+  <string name="conversation_list_batch__menu_pin_selected">U përzgjodh fiksim</string>
+  <string name="conversation_list_batch__menu_unpin_selected">U përzgjodh shfiksim</string>
   <string name="conversation_list_batch__menu_select_all">Përzgjidhi krejt</string>
   <string name="conversation_list_batch_archive__menu_archive_selected">Arkivo të përzgjedhurit</string>
   <string name="conversation_list_batch_unarchive__menu_unarchive_selected">Çarkivo të përzgjedhurit</string>
@@ -1758,6 +1822,9 @@ aktivizoni Kyçje Regjistrimi, teksa PIN-i është i çaktivizuar.</string>
   <!--conversation_list-->
   <string name="conversation_list_settings_shortcut">Shkurtore rregullimesh</string>
   <string name="conversation_list_search_description">Kërko</string>
+  <string name="conversation_list__pinned">E fiksuar</string>
+  <string name="conversation_list__chats">Biseda</string>
+  <string name="conversation_list__you_can_only_pin_up_to_d_chats">Mund të fiksoni deri në %1$d fjalosje</string>
   <!--conversation_list_item_view-->
   <string name="conversation_list_item_view__contact_photo_image">Foto Kontakti</string>
   <string name="conversation_list_item_view__archived">Të arkivuar</string>
@@ -1953,6 +2020,9 @@ spastrohet dhe krejt lënda do të fshihet.</item>
   <string name="KbsMegaphone__update_pin">Përditësoni PIN-in</string>
   <string name="KbsMegaphone__well_remind_you_later_creating_a_pin">Do t’jua kujtojmë më vonë. Krijimi i një PIN-i do të jetë i detyrueshëm pas %1$d ditësh.</string>
   <string name="KbsMegaphone__well_remind_you_later_confirming_your_pin">Do t’jua kujtojmë më vonë. Ripohimi i PIN-it tuaj do të jetë i detyrueshëm pas %1$d ditësh.</string>
+  <!--Mention Megaphone-->
+  <string name="MentionsMegaphone__introducing_mentions">Ju paraqesim @Përmendjet</string>
+  <string name="MentionsMegaphone__get_someones_attention_in_a_group_by_typing">Tërhiqini vëmendjen dikujt në një “Grup të Ri” duke shtypur @</string>
   <!--transport_selection_list_item-->
   <string name="transport_selection_list_item__transport_icon">Ikonë bartjesh</string>
   <string name="ConversationListFragment_loading">Po ngarkohet…</string>
@@ -2096,5 +2166,9 @@ spastrohet dhe krejt lënda do të fshihet.</item>
   <string name="GroupsLearnMore_how_do_i_use_new_groups">Si t’i përdor Grupet e Rinj?</string>
   <string name="GroupsLearnMore_paragraph_2">Grupet e Dikurshëm s’mund të shndërrohen në Grupe të Rinj, por mund të krijoni një Grup të ri me të njëjtët anëtarë.</string>
   <string name="GroupsLearnMore_paragraph_3">Që të krijoni një Grup të Ri, krejt anëtarët duhet ta përditësojnë Signal-in me versionin më të ri.</string>
+  <!--GroupLinkBottomSheetDialogFragment-->
+  <string name="GroupLinkBottomSheet_copy">Kopjoje</string>
+  <string name="GroupLinkBottomSheet_share">Ndajeni Me të Tjerë</string>
+  <string name="GroupLinkBottomSheet_copied_to_clipboard">U kopjua në të papastër!</string>
   <!--EOF-->
 </resources>

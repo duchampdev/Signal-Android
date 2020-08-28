@@ -378,10 +378,14 @@
   <!--GroupMembersDialog-->
   <string name="GroupMembersDialog_you">మీరు</string>
   <!--GV2 access levels-->
+  <string name="GroupManagement_access_level_anyone">ఎవరైనా</string>
   <string name="GroupManagement_access_level_all_members">సభ్యులందరు</string>
   <string name="GroupManagement_access_level_only_admins">పరిపాలకులు మాత్రమే</string>
   <!--GV2 invites sent-->
   <string name="GroupManagement_learn_more">ఇంకా నేర్చుకో</string>
+  <!--LinkPreviewsMegaphone-->
+  <string name="LinkPreviewsMegaphone_disable">అచేతనించు</string>
+  <!--LinkPreviewView-->
   <!--PendingMembersActivity-->
   <string name="PendingMemberInvitesActivity_pending_group_invites">ఆమోదించవలసిన సమూహ ఆహ్వానములు</string>
   <string name="PendingMembersActivity_people_you_invited">మీరు ఆహ్వానించినవారు</string>
@@ -435,6 +439,9 @@
   <string name="CustomNotificationsDialogFragment__disabled">అచేతనం అయింది</string>
   <string name="CustomNotificationsDialogFragment__default">అప్రమేయం</string>
   <!--GV2 Invite Revoke confirmation dialog-->
+  <!--GroupJoinBottomSheetDialogFragment-->
+  <!--GroupJoinUpdateRequiredBottomSheetDialogFragment-->
+  <string name="GroupJoinUpdateRequiredBottomSheetDialogFragment_update_signal">Signal ను నవీకరించండి</string>
   <!--CropImageActivity-->
   <string name="CropImageActivity_group_avatar">గ్రూప్ అవతార్</string>
   <string name="CropImageActivity_profile_avatar">అవతారము</string>
@@ -634,6 +641,12 @@
   <!--GV2 membership access level change-->
   <string name="MessageRecord_you_changed_who_can_edit_group_membership_to_s">మీరు సమూహ సభ్యత్వాన్ని మార్చగలిగినవారు ని \"%1$s\"కు మార్చారు. </string>
   <string name="MessageRecord_s_changed_who_can_edit_group_membership_to_s">%1$s సమూహ సభ్యత్వాన్ని మార్చగలిగినవారు ని \"%2$s\"కు మార్చారు. </string>
+  <!--GV2 group link invite access level change-->
+  <!--GV2 group link reset-->
+  <!--GV2 group link joins-->
+  <!--GV2 group link requests-->
+  <!--GV2 group link approvals-->
+  <!--GV2 group link deny-->
   <!--End of GV2 specific update messages-->
   <string name="MessageRecord_your_safety_number_with_s_has_changed">%s తో మీ భద్రత సంఖ్య మార్చబడింది.</string>
   <string name="MessageRecord_you_marked_your_safety_number_with_s_verified">మీరు మీ భద్రతా నంబర్ను%s ధృవీకరించినట్లు గుర్తు పెట్టారు</string>
@@ -739,10 +752,7 @@
   <!--RecipientProvider-->
   <string name="RecipientProvider_unnamed_group">పేరులేని సమూహం</string>
   <!--RedPhone-->
-  <string name="RedPhone_answering">స్పందిస్తున్న </string>
-  <string name="RedPhone_ending_call"> కాల్ ముగుస్తుంది</string>
-  <string name="RedPhone_dialing">డయలింగ్</string>
-  <string name="RedPhone_ringing">మోగుతున్నది</string>
+  <string name="RedPhone_ringing">మోగుతున్నది…</string>
   <string name="RedPhone_busy">పనిలో ఉన్నారు </string>
   <string name="RedPhone_connected">కలిసింది</string>
   <string name="RedPhone_recipient_unavailable">గ్రహీత అందుబాటులోలేరు</string>
@@ -903,7 +913,7 @@
   <string name="UnverifiedSendDialog_send">పంపుము</string>
   <!--UsernameEditFragment-->
   <string name="UsernameEditFragment_username">వినియోగదారుడు </string>
-  <string name="UsernameEditFragment_submit">సమర్పించండి</string>
+  <!-- Removed by excludeNonTranslatables <string name="UsernameEditFragment_submit">సమర్పించండి</string> -->
   <string name="UsernameEditFragment_delete">తొలగించండి</string>
   <string name="UsernameEditFragment_successfully_set_username">వినియోగదారు పేరును విజయవంతంగా సెట్ చేయండి.</string>
   <string name="UsernameEditFragment_successfully_removed_username">వినియోగదారు పేరు విజయవంతంగా తొలగించబడింది.</string>
@@ -913,7 +923,7 @@
   <string name="UsernameEditFragment_usernames_cannot_begin_with_a_number">వినియోగదారు పేర్లు సంఖ్యతో ప్రారంభం కావు.</string>
   <string name="UsernameEditFragment_username_is_invalid">మీ యూసర్ నేమ్ సరైనది కాదు.</string>
   <string name="UsernameEditFragment_usernames_must_be_between_a_and_b_characters">వినియోగదారు పేర్లు %1$dమరియు %2$dఅక్షరాల మధ్య ఉండాలి.</string>
-  <string name="UsernameEditFragment_other_signal_users_can_send_message_requests_to_your_unique_username">ఇతర Signal వినియోగదారులు మీ ఫోన్ నంబర్ తెలియకుండానే మీ ప్రత్యేక వినియోగదారు పేరుకు సందేశ అభ్యర్థనలను పంపవచ్చు. వినియోగదారు పేరును ఎంచుకోవడం ఐచ్ఛికం.</string>
+  <!-- Removed by excludeNonTranslatables <string name="UsernameEditFragment_other_signal_users_can_send_message_requests_to_your_unique_username">ఇతర Signal వినియోగదారులు మీ ఫోన్ నంబర్ తెలియకుండానే మీ ప్రత్యేక వినియోగదారు పేరుకు సందేశ అభ్యర్థనలను పంపవచ్చు. వినియోగదారు పేరును ఎంచుకోవడం ఐచ్ఛికం.</string> -->
   <!--VerifyIdentityActivity-->
   <string name="VerifyIdentityActivity_your_contact_is_running_an_old_version_of_signal">మీ పరిచయం Signal యొక్క ఒక పాత వెర్షన్ను పై నడుస్థుంది. మీ భద్రత సంఖ్య ధ్రువీకరించే ముందుగా అప్డేట్ కోరండి.</string>
   <string name="VerifyIdentityActivity_your_contact_is_running_a_newer_version_of_Signal">మీ పరిచయం అననుకూల QR కోడ్ ఫార్మాట్ Signal యొక్క కొత్త సంస్కరణను అమలు చేస్తోంది. దయచేసి పోల్చడానికి అప్డేట్ చెయండీ.</string>
@@ -934,8 +944,6 @@
   <string name="MmsMessageRecord_mms_message_encrypted_for_non_existing_session">ఎంఎంఎస్ సందేశాన్ని మనుగడలో కాని సెషన్ కోసం గుప్తీకరించబడింది</string>
   <!--MuteDialog-->
   <string name="MuteDialog_mute_notifications">  ప్రకటనలను మ్యూట్లో ఉంచు</string>
-  <!--OutdatedBuildReminder-->
-  <string name="OutdatedBuildReminder_no_web_browser_installed">వెబ్ బ్రౌజర్ ఇన్స్టాల్ చేయబడలేదు</string>
   <!--ApplicationMigrationService-->
   <string name="ApplicationMigrationService_import_in_progress">దిగుమతి పురోగతిలో ఉంది</string>
   <string name="ApplicationMigrationService_importing_text_messages">సాధా సందేశాలు దిగుమతి అవుతున్నాయి </string>
@@ -1350,8 +1358,6 @@
   <string name="preferences__use_signal_for_viewing_and_storing_all_incoming_multimedia_messages">వచ్చే మల్టీమీడియా సందేశాల కోసం Signal ఉపయోగించండి</string>
   <string name="preferences__pref_enter_sends_title">ఎంటర్ కీ పంపుతుంది </string>
   <string name="preferences__pressing_the_enter_key_will_send_text_messages"> ప్రారంబించే కీ ని నొక్కడం ద్వారా సందేశాలను పంపుతోంది</string>
-  <string name="preferences__send_link_previews">లింక్ పూర్వప్రదర్శనను పంపండి</string>
-  <string name="preferences__previews_are_supported_for">Imgur, Instagram, Pinterest, Reddit మరియు YouTube లింక్‌లకు పూర్వప్రదర్శనలు మద్దతు ఇస్తున్నాయి</string>
   <string name="preferences__choose_identity">గుర్తింపును ఎంచుకోండి</string>
   <string name="preferences__choose_your_contact_entry_from_the_contacts_list">కాంటాక్ట్స్ జాబితా నుండి మీ పరిచయం ఎంట్రీ ఎంచుకోండి.</string>
   <string name="preferences__change_passphrase">సంకేతపదమును మార్చు</string>
@@ -1499,6 +1505,7 @@
   <!--conversation_list-->
   <string name="conversation_list_settings_shortcut">సెట్టింగుల సత్వరమార్గం</string>
   <string name="conversation_list_search_description">వెతకండి</string>
+  <string name="conversation_list__chats">మాటామంతి</string>
   <!--conversation_list_item_view-->
   <string name="conversation_list_item_view__contact_photo_image">పరిచయ ఫొటొ చిత్రం</string>
   <string name="conversation_list_item_view__archived">భద్రపరచబడినది</string>
@@ -1651,6 +1658,7 @@
   <string name="KbsMegaphone__create_pin">పిన్ సృష్టించండి</string>
   <string name="KbsMegaphone__introducing_pins">పిన్‌లను పరిచయం చేస్తోంది</string>
   <string name="KbsMegaphone__update_pin">పిన్‌ను నవీకరించండి</string>
+  <!--Mention Megaphone-->
   <!--transport_selection_list_item-->
   <string name="transport_selection_list_item__transport_icon">రవాణా చిహ్నం</string>
   <string name="ConversationListFragment_loading">లోడ్…</string>

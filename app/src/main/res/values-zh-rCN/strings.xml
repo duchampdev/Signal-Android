@@ -355,10 +355,15 @@
   <!--GV2 access levels-->
   <!--GV2 invites sent-->
   <string name="GroupManagement_learn_more">了解更多</string>
+  <!--LinkPreviewsMegaphone-->
+  <string name="LinkPreviewsMegaphone_disable">关闭</string>
+  <!--LinkPreviewView-->
+  <!--LinkPreviewRepository-->
   <!--PendingMembersActivity-->
   <string name="PendingMembersActivity_people_you_invited">你邀请的人</string>
   <string name="PendingMembersActivity_invites_by_other_group_members">其他群组成员的邀请</string>
   <string name="PendingMembersActivity_missing_detail_explanation">未显示其他群组成员邀请的人员详情。当受邀者选择加入时，他们的信息将分享至群组。在加入之前，他们不会看到任何消息。</string>
+  <!--RequestingMembersFragment-->
   <!--AddMembersActivity-->
   <string name="AddMembersActivity__done">完成</string>
   <!--AddGroupDetailsFragment-->
@@ -403,7 +408,19 @@
   <string name="CustomNotificationsDialogFragment__enabled">已启用</string>
   <string name="CustomNotificationsDialogFragment__disabled">已禁用</string>
   <string name="CustomNotificationsDialogFragment__default">默认</string>
+  <!--ShareableGroupLinkDialogFragment-->
+  <string name="ShareableGroupLinkDialogFragment__share">分享</string>
+  <string name="ShareableGroupLinkDialogFragment__enabled">已启用</string>
+  <string name="ShareableGroupLinkDialogFragment__disabled">已禁用</string>
+  <string name="ShareableGroupLinkDialogFragment__default">默认</string>
+  <!--GroupLinkShareQrDialogFragment-->
   <!--GV2 Invite Revoke confirmation dialog-->
+  <!--GroupJoinBottomSheetDialogFragment-->
+  <string name="GroupJoinBottomSheetDialogFragment_encountered_a_network_error">网络出错。</string>
+  <!--GroupJoinUpdateRequiredBottomSheetDialogFragment-->
+  <string name="GroupJoinUpdateRequiredBottomSheetDialogFragment_update_signal">升级 Signal</string>
+  <!--GV2 Request confirmation dialog-->
+  <string name="RequestConfirmationDialog_add">添加</string>
   <!--CropImageActivity-->
   <string name="CropImageActivity_group_avatar">群组头像</string>
   <string name="CropImageActivity_profile_avatar">头像</string>
@@ -558,6 +575,12 @@
   <!--GV2 avatar change-->
   <!--GV2 attribute access level change-->
   <!--GV2 membership access level change-->
+  <!--GV2 group link invite access level change-->
+  <!--GV2 group link reset-->
+  <!--GV2 group link joins-->
+  <!--GV2 group link requests-->
+  <!--GV2 group link approvals-->
+  <!--GV2 group link deny-->
   <!--End of GV2 specific update messages-->
   <string name="MessageRecord_your_safety_number_with_s_has_changed">您与 %s 的安全码已更改。</string>
   <string name="MessageRecord_you_marked_your_safety_number_with_s_verified">已将您与 %s 的安全码标记为已验证</string>
@@ -656,10 +679,7 @@
   <!--RecipientProvider-->
   <string name="RecipientProvider_unnamed_group">未命名群组</string>
   <!--RedPhone-->
-  <string name="RedPhone_answering">正在接听</string>
-  <string name="RedPhone_ending_call">正在挂断</string>
-  <string name="RedPhone_dialing">拨号中</string>
-  <string name="RedPhone_ringing">响铃中</string>
+  <string name="RedPhone_ringing">响铃中…</string>
   <string name="RedPhone_busy">占线</string>
   <string name="RedPhone_connected">已接通</string>
   <string name="RedPhone_recipient_unavailable">接收人无法应答</string>
@@ -840,7 +860,7 @@
   <string name="UnverifiedSendDialog_send">发送</string>
   <!--UsernameEditFragment-->
   <string name="UsernameEditFragment_username">用户名</string>
-  <string name="UsernameEditFragment_submit">提交</string>
+  <!-- Removed by excludeNonTranslatables <string name="UsernameEditFragment_submit">提交</string> -->
   <string name="UsernameEditFragment_delete">删除</string>
   <string name="UsernameEditFragment_successfully_set_username">成功设置用户名。</string>
   <string name="UsernameEditFragment_successfully_removed_username">成功移除用户名。</string>
@@ -850,7 +870,7 @@
   <string name="UsernameEditFragment_usernames_cannot_begin_with_a_number">用户名不能以数字开头。</string>
   <string name="UsernameEditFragment_username_is_invalid">用户名无效。</string>
   <string name="UsernameEditFragment_usernames_must_be_between_a_and_b_characters">用户名所含字符数量必须在 %1$d 与 %2$d 之间。</string>
-  <string name="UsernameEditFragment_other_signal_users_can_send_message_requests_to_your_unique_username">通过唯一用户名，Signal 用户可向你发送消息请求，而无需获悉你的电话号码。用户名设置是可选的。</string>
+  <!-- Removed by excludeNonTranslatables <string name="UsernameEditFragment_other_signal_users_can_send_message_requests_to_your_unique_username">通过唯一用户名，Signal 用户可向你发送消息请求，而无需获悉你的电话号码。用户名设置是可选的。</string> -->
   <!--VerifyIdentityActivity-->
   <string name="VerifyIdentityActivity_your_contact_is_running_an_old_version_of_signal">联系人正在使用旧版 Signal。在验证安全码之前，请提示他们升级。</string>
   <string name="VerifyIdentityActivity_your_contact_is_running_a_newer_version_of_Signal">联系人正在使用较新版本的 Signal，其二维码格式不兼容。请升级并比较。</string>
@@ -871,8 +891,6 @@
   <string name="MmsMessageRecord_mms_message_encrypted_for_non_existing_session">加密彩信的对话不存在</string>
   <!--MuteDialog-->
   <string name="MuteDialog_mute_notifications">静音通知</string>
-  <!--OutdatedBuildReminder-->
-  <string name="OutdatedBuildReminder_no_web_browser_installed">未安装网络浏览器！</string>
   <!--ApplicationMigrationService-->
   <string name="ApplicationMigrationService_import_in_progress">正在导入数据</string>
   <string name="ApplicationMigrationService_importing_text_messages">正在导入文本信息</string>
@@ -1296,8 +1314,6 @@
   <string name="preferences__use_signal_for_viewing_and_storing_all_incoming_multimedia_messages">使用 Signal 接收全部彩信。</string>
   <string name="preferences__pref_enter_sends_title">按回车发送</string>
   <string name="preferences__pressing_the_enter_key_will_send_text_messages">按回车键发送短信</string>
-  <string name="preferences__send_link_previews">发送链接预览</string>
-  <string name="preferences__previews_are_supported_for">预览支持来自 Instagram、Pinterest、Reddit 和 YouTube 的链接</string>
   <string name="preferences__choose_identity">选择联系人</string>
   <string name="preferences__choose_your_contact_entry_from_the_contacts_list">从联系人列表选择联系人条目。</string>
   <string name="preferences__change_passphrase">修改密码</string>
@@ -1452,6 +1468,7 @@
   <!--conversation_list-->
   <string name="conversation_list_settings_shortcut">设置快捷方式</string>
   <string name="conversation_list_search_description">搜索</string>
+  <string name="conversation_list__chats">聊天</string>
   <!--conversation_list_item_view-->
   <string name="conversation_list_item_view__contact_photo_image">联系人图片</string>
   <string name="conversation_list_item_view__archived">已存档</string>
@@ -1631,6 +1648,7 @@
   <string name="KbsMegaphone__update_pin">更新 PIN</string>
   <string name="KbsMegaphone__well_remind_you_later_creating_a_pin">稍后您会被提示。在%1$d天内会强制要求创建PIN码。</string>
   <string name="KbsMegaphone__well_remind_you_later_confirming_your_pin">稍后您会被提示。在%1$d天内会强制要求确认你的PIN码。</string>
+  <!--Mention Megaphone-->
   <!--transport_selection_list_item-->
   <string name="transport_selection_list_item__transport_icon">传输图标</string>
   <string name="ConversationListFragment_loading">正在加载…</string>
@@ -1751,5 +1769,10 @@
   <string name="RecipientBottomSheet_copied_to_clipboard">已复制到剪切板</string>
   <string name="GroupRecipientListItem_admin">管理员</string>
   <!--GroupsLearnMoreBottomSheetDialogFragment-->
+  <!--GroupLinkBottomSheetDialogFragment-->
+  <string name="GroupLinkBottomSheet_copy">复制</string>
+  <string name="GroupLinkBottomSheet_qr_code">QR 代码</string>
+  <string name="GroupLinkBottomSheet_share">分享</string>
+  <string name="GroupLinkBottomSheet_copied_to_clipboard">已复制到剪切板</string>
   <!--EOF-->
 </resources>

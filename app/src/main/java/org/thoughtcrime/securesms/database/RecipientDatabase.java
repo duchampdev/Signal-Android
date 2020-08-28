@@ -120,6 +120,7 @@ public class RecipientDatabase extends Database {
   private static final String PROFILE_FAMILY_NAME      = "profile_family_name";
   private static final String PROFILE_JOINED_NAME      = "profile_joined_name";
   private static final String MENTION_SETTING          = "mention_setting";
+  private static final String STORAGE_PROTO            = "storage_proto";
 
   public  static final String SEARCH_PROFILE_NAME      = "search_signal_profile";
   private static final String SORT_NAME                = "sort_name";
@@ -150,7 +151,8 @@ public class RecipientDatabase extends Database {
   private static final String[] MENTION_SEARCH_PROJECTION  = new String[]{ID, removeWhitespace("COALESCE(" + nullIfEmpty(SYSTEM_DISPLAY_NAME) + ", " + nullIfEmpty(PROFILE_JOINED_NAME) + ", " + nullIfEmpty(PROFILE_GIVEN_NAME) + ", " + nullIfEmpty(USERNAME) + ", " + nullIfEmpty(PHONE) + ")") + " AS " + SORT_NAME};
 
   private static final String[] RECIPIENT_FULL_PROJECTION = ArrayUtils.concat(
-      new String[] { TABLE_NAME + "." + ID },
+      new String[] { TABLE_NAME + "." + ID,
+                     TABLE_NAME + "." + STORAGE_PROTO },
       TYPED_RECIPIENT_PROJECTION,
       new String[] {
         IdentityDatabase.TABLE_NAME + "." + IdentityDatabase.VERIFIED + " AS " + IDENTITY_STATUS,
@@ -279,7 +281,7 @@ public class RecipientDatabase extends Database {
   }
 
   public enum MentionSetting {
-    GLOBAL(0), ALWAYS_NOTIFY(1), DO_NOT_NOTIFY(2);
+    ALWAYS_NOTIFY(0), DO_NOT_NOTIFY(1);
 
     private final int id;
 
@@ -336,7 +338,8 @@ public class RecipientDatabase extends Database {
                                             GROUPS_V2_CAPABILITY     + " INTEGER DEFAULT " + Recipient.Capability.UNKNOWN.serialize() + ", " +
                                             STORAGE_SERVICE_ID       + " TEXT UNIQUE DEFAULT NULL, " +
                                             DIRTY                    + " INTEGER DEFAULT " + DirtyState.CLEAN.getId() + ", " +
-                                            MENTION_SETTING          + " INTEGER DEFAULT " + MentionSetting.GLOBAL.getId() + ");";
+                                            MENTION_SETTING          + " INTEGER DEFAULT " + MentionSetting.ALWAYS_NOTIFY.getId() + ", " +
+                                            STORAGE_PROTO            + " TEXT DEFAULT NULL);";
 
   private static final String INSIGHTS_INVITEE_LIST = "SELECT " + TABLE_NAME + "." + ID +
       " FROM " + TABLE_NAME +
@@ -907,6 +910,12 @@ public class RecipientDatabase extends Database {
     values.put(STORAGE_SERVICE_ID, Base64.encodeBytes(update.getId().getRaw()));
     values.put(DIRTY, DirtyState.CLEAN.getId());
 
+    if (update.hasUnknownFields()) {
+      values.put(STORAGE_PROTO, Base64.encodeBytes(update.serializeUnknownFields()));
+    } else {
+      values.putNull(STORAGE_PROTO);
+    }
+
     int updateCount = db.update(TABLE_NAME, values, STORAGE_SERVICE_ID + " = ?", new String[]{Base64.encodeBytes(storageId.getRaw())});
     if (updateCount < 1) {
       throw new AssertionError("Account update didn't match any rows!");
@@ -981,6 +990,12 @@ public class RecipientDatabase extends Database {
       values.put(COLOR, ContactColors.generateFor(profileName.toString()).serialize());
     }
 
+    if (contact.hasUnknownFields()) {
+      values.put(STORAGE_PROTO, Base64.encodeBytes(contact.serializeUnknownFields()));
+    } else {
+      values.putNull(STORAGE_PROTO);
+    }
+
     return values;
   }
 
@@ -992,6 +1007,13 @@ public class RecipientDatabase extends Database {
     values.put(BLOCKED, groupV1.isBlocked() ? "1" : "0");
     values.put(STORAGE_SERVICE_ID, Base64.encodeBytes(groupV1.getId().getRaw()));
     values.put(DIRTY, DirtyState.CLEAN.getId());
+
+    if (groupV1.hasUnknownFields()) {
+      values.put(STORAGE_PROTO, Base64.encodeBytes(groupV1.serializeUnknownFields()));
+    } else {
+      values.putNull(STORAGE_PROTO);
+    }
+
     return values;
   }
   
@@ -1003,6 +1025,13 @@ public class RecipientDatabase extends Database {
     values.put(BLOCKED, groupV2.isBlocked() ? "1" : "0");
     values.put(STORAGE_SERVICE_ID, Base64.encodeBytes(groupV2.getId().getRaw()));
     values.put(DIRTY, DirtyState.CLEAN.getId());
+
+    if (groupV2.hasUnknownFields()) {
+      values.put(STORAGE_PROTO, Base64.encodeBytes(groupV2.serializeUnknownFields()));
+    } else {
+      values.putNull(STORAGE_PROTO);
+    }
+
     return values;
   }
 
@@ -1113,6 +1142,7 @@ public class RecipientDatabase extends Database {
     int     groupsV2CapabilityValue    = CursorUtil.requireInt(cursor, GROUPS_V2_CAPABILITY);
     String  storageKeyRaw              = CursorUtil.requireString(cursor, STORAGE_SERVICE_ID);
     int     mentionSettingId           = CursorUtil.requireInt(cursor, MENTION_SETTING);
+    String  storageProtoRaw            = CursorUtil.getString(cursor, STORAGE_PROTO).orNull();
 
     Optional<String>  identityKeyRaw    = CursorUtil.getString(cursor, IDENTITY_KEY);
     Optional<Integer> identityStatusRaw = CursorUtil.getInt(cursor, IDENTITY_STATUS);
@@ -1159,8 +1189,9 @@ public class RecipientDatabase extends Database {
       }
     }
 
-    byte[] storageKey  = storageKeyRaw != null ? Base64.decodeOrThrow(storageKeyRaw) : null;
-    byte[] identityKey = identityKeyRaw.transform(Base64::decodeOrThrow).orNull();;
+    byte[] storageKey   = storageKeyRaw != null ? Base64.decodeOrThrow(storageKeyRaw) : null;
+    byte[] identityKey  = identityKeyRaw.transform(Base64::decodeOrThrow).orNull();
+    byte[] storageProto = storageProtoRaw != null ? Base64.decodeOrThrow(storageProtoRaw) : null;
 
     IdentityDatabase.VerifiedStatus identityStatus = identityStatusRaw.transform(IdentityDatabase.VerifiedStatus::forState).or(IdentityDatabase.VerifiedStatus.DEFAULT);
 
@@ -1180,7 +1211,8 @@ public class RecipientDatabase extends Database {
                                  Recipient.Capability.deserialize(uuidCapabilityValue),
                                  Recipient.Capability.deserialize(groupsV2CapabilityValue),
                                  InsightsBannerTier.fromId(insightsBannerTier),
-                                 storageKey, identityKey, identityStatus, MentionSetting.fromId(mentionSettingId));
+                                 storageKey, identityKey, identityStatus, MentionSetting.fromId(mentionSettingId),
+                                 storageProto);
   }
 
   public BulkOperationsHandle beginBulkSystemContactUpdate() {
@@ -2288,6 +2320,7 @@ public class RecipientDatabase extends Database {
     uuidValues.put(SYSTEM_CONTACT_URI, e164Settings.getSystemContactUri());
     uuidValues.put(PROFILE_SHARING, uuidSettings.isProfileSharing() || e164Settings.isProfileSharing());
     uuidValues.put(GROUPS_V2_CAPABILITY, uuidSettings.getGroupsV2Capability() != Recipient.Capability.UNKNOWN ? uuidSettings.getGroupsV2Capability().serialize() : e164Settings.getGroupsV2Capability().serialize());
+    uuidValues.put(MENTION_SETTING, uuidSettings.getMentionSetting() != MentionSetting.ALWAYS_NOTIFY ? uuidSettings.getMentionSetting().getId() : e164Settings.getMentionSetting().getId());
     if (uuidSettings.getProfileKey() != null) {
       updateProfileValuesForMerge(uuidValues, uuidSettings);
     } else if (e164Settings.getProfileKey() != null) {
@@ -2351,7 +2384,17 @@ public class RecipientDatabase extends Database {
       Log.w(TAG, "Had no sessions. No action necessary.");
     }
 
-    DatabaseFactory.getThreadDatabase(context).update(threadMerge.threadId, false, false, false);
+    // Mentions
+    ContentValues mentionRecipientValues = new ContentValues();
+    mentionRecipientValues.put(MentionDatabase.RECIPIENT_ID, byUuid.serialize());
+    db.update(MentionDatabase.TABLE_NAME, mentionRecipientValues, MentionDatabase.RECIPIENT_ID + " = ?", SqlUtil.buildArgs(byE164));
+    if (threadMerge.neededMerge) {
+      ContentValues mentionThreadValues = new ContentValues();
+      mentionThreadValues.put(MentionDatabase.THREAD_ID, threadMerge.threadId);
+      db.update(MentionDatabase.TABLE_NAME, mentionThreadValues, MentionDatabase.THREAD_ID + " = ?", SqlUtil.buildArgs(threadMerge.previousThreadId));
+    }
+
+    DatabaseFactory.getThreadDatabase(context).update(threadMerge.threadId, false, false);
 
     return byUuid;
   }
@@ -2501,6 +2544,7 @@ public class RecipientDatabase extends Database {
     private final byte[]                          identityKey;
     private final IdentityDatabase.VerifiedStatus identityStatus;
     private final MentionSetting                  mentionSetting;
+    private final byte[]                          storageProto;
 
     RecipientSettings(@NonNull RecipientId id,
                       @Nullable UUID uuid,
@@ -2540,7 +2584,8 @@ public class RecipientDatabase extends Database {
                       @Nullable byte[] storageId,
                       @Nullable byte[] identityKey,
                       @NonNull IdentityDatabase.VerifiedStatus identityStatus,
-                      @NonNull MentionSetting mentionSetting)
+                      @NonNull MentionSetting mentionSetting,
+                      @Nullable byte[] storageProto)
     {
       this.id                     = id;
       this.uuid                   = uuid;
@@ -2581,6 +2626,7 @@ public class RecipientDatabase extends Database {
       this.identityKey            = identityKey;
       this.identityStatus         = identityStatus;
       this.mentionSetting         = mentionSetting;
+      this.storageProto           = storageProto;
     }
 
     public RecipientId getId() {
@@ -2740,6 +2786,10 @@ public class RecipientDatabase extends Database {
 
     public @NonNull MentionSetting getMentionSetting() {
       return mentionSetting;
+    }
+
+    public @Nullable byte[] getStorageProto() {
+      return storageProto;
     }
   }
 

@@ -398,6 +398,7 @@
   <!--GroupMembersDialog-->
   <string name="GroupMembersDialog_you">Te</string>
   <!--GV2 access levels-->
+  <string name="GroupManagement_access_level_anyone">Bárki</string>
   <string name="GroupManagement_access_level_all_members">Összes tag</string>
   <string name="GroupManagement_access_level_only_admins">Csak adminisztrátorok</string>
   <!--GV2 invites sent-->
@@ -408,6 +409,14 @@
   <string name="GroupManagement_invite_single_user">Nem lehet \"%1$s\" nevű kontaktodat automatikusan a csoporthoz adni.\n\nBár már meg lett hívva, addig mégsem láthatja az csoportüzeneteket, míg el nem fogadja a meghívást.</string>
   <string name="GroupManagement_learn_more">További információ</string>
   <string name="GroupManagement_invite_multiple_users">Ezeket a felhasználókat nem lehet automatikusan a csoporthoz adni.\n\nBár már meg lettek hívva, addig mégsem láthatják a csoportüzeneteket, míg el nem fogadják a meghívást.</string>
+  <!--LinkPreviewsMegaphone-->
+  <string name="LinkPreviewsMegaphone_disable">Kikapcsolás</string>
+  <string name="LinkPreviewsMegaphone_preview_any_link">Előnézet bármely weboldalhoz</string>
+  <string name="LinkPreviewsMegaphone_you_can_now_retrieve_link_previews_directly_from_any_website">Mostantól bármely weboldalra vezető linkhez lekérheted annak előnézeti képét, mielőtt elküldenéd üzenetben.</string>
+  <!--LinkPreviewView-->
+  <string name="LinkPreviewView_no_link_preview_available">Nem érhető el előnézeti kép</string>
+  <string name="LinkPreviewView_this_group_link_is_not_active">Ez a csoporthivatkozás nem aktív</string>
+  <!--LinkPreviewRepository-->
   <!--PendingMembersActivity-->
   <string name="PendingMemberInvitesActivity_pending_group_invites">Függőben lévő csoportmeghívók</string>
   <string name="PendingMembersActivity_people_you_invited">Általad meghívott személyek</string>
@@ -425,6 +434,7 @@
     <item quantity="one">Nem sikerült visszavonni a meghívót</item>
     <item quantity="other">Nem sikerült visszavonni a meghívókat</item>
   </plurals>
+  <!--RequestingMembersFragment-->
   <!--AddMembersActivity-->
   <string name="AddMembersActivity__done">Befejezés</string>
   <string name="AddMembersActivity__this_person_cant_be_added_to_legacy_groups">Ez a személyt nem adható régi típusú csoporthoz.</string>
@@ -540,12 +550,31 @@
   <string name="CustomNotificationsDialogFragment__enabled">Engedélyezve</string>
   <string name="CustomNotificationsDialogFragment__disabled">Letiltva</string>
   <string name="CustomNotificationsDialogFragment__default">Alapértelmezett</string>
+  <!--ShareableGroupLinkDialogFragment-->
+  <string name="ShareableGroupLinkDialogFragment__share">Megosztás</string>
+  <string name="ShareableGroupLinkDialogFragment__enabled">Engedélyezve</string>
+  <string name="ShareableGroupLinkDialogFragment__disabled">Letiltva</string>
+  <string name="ShareableGroupLinkDialogFragment__default">Alapértelmezett</string>
+  <!--GroupLinkShareQrDialogFragment-->
   <!--GV2 Invite Revoke confirmation dialog-->
   <string name="InviteRevokeConfirmationDialog_revoke_own_single_invite">Biztosan vissza szeretnéd vonni a %1$s részére küldött meghívót?</string>
   <plurals name="InviteRevokeConfirmationDialog_revoke_others_invites">
     <item quantity="one">Biztosan vissza szeretnéd vonni a %1$s által küldött meghívót?</item>
     <item quantity="other">Biztosan vissza szeretnéd vonni a %1$s által küldött %2$d db meghívót?</item>
   </plurals>
+  <!--GroupJoinBottomSheetDialogFragment-->
+  <string name="GroupJoinBottomSheetDialogFragment_you_are_already_a_member">Már tag vagy</string>
+  <string name="GroupJoinBottomSheetDialogFragment_join">Csatlakozás</string>
+  <string name="GroupJoinBottomSheetDialogFragment_encountered_a_network_error">Hálózati hiba történt.</string>
+  <string name="GroupJoinBottomSheetDialogFragment_this_group_link_is_not_active">Ez a csoporthivatkozás nem aktív</string>
+  <string name="GroupJoinBottomSheetDialogFragment_unable_to_get_group_information_please_try_again_later">Nem sikerült a csoport információ lekérése. Kérlek próbáld újra később!</string>
+  <string name="GroupJoinBottomSheetDialogFragment_direct_join">Szeretnél csatlakozni a csoporthoz? Ezzel profilod láthatóvá is válik.</string>
+  <!--GroupJoinUpdateRequiredBottomSheetDialogFragment-->
+  <string name="GroupJoinUpdateRequiredBottomSheetDialogFragment_update_signal_to_use_group_links">Frissítsd a Signalt a csoporthivatkozások használatához</string>
+  <string name="GroupJoinUpdateRequiredBottomSheetDialogFragment_update_message">Az általad használt verziójú Signal nem támogatja a megosztható csoporthivatkozásokat. Frissíts a legújabb verzióra, hogy a hivatkozás használatával csatlakozhass ehhez a csoporthoz!</string>
+  <string name="GroupJoinUpdateRequiredBottomSheetDialogFragment_update_signal">Signal frissítése</string>
+  <!--GV2 Request confirmation dialog-->
+  <string name="RequestConfirmationDialog_add">Hozzáadás</string>
   <!--CropImageActivity-->
   <string name="CropImageActivity_group_avatar">Csoport avatar</string>
   <string name="CropImageActivity_profile_avatar">Avatar</string>
@@ -773,6 +802,16 @@
   <string name="MessageRecord_you_changed_who_can_edit_group_membership_to_s">Megváltoztattad a csoport tagjainak szerkeszthetőségét erre: \"%1$s\".</string>
   <string name="MessageRecord_s_changed_who_can_edit_group_membership_to_s">%1$s megváltoztatta a csoport tagjainak szerkeszthetőségét erre: \"%2$s\".</string>
   <string name="MessageRecord_who_can_edit_group_membership_has_been_changed_to_s">A csoporttagságot szerkeszthetők köre megváltozott erre: \"%1$s\"</string>
+  <!--GV2 group link invite access level change-->
+  <string name="MessageRecord_you_turned_on_the_sharable_group_link">Bekapcsoltad a megosztható csoporthivatkozást.</string>
+  <string name="MessageRecord_you_turned_off_the_sharable_group_link">Kikapcsoltad a megosztható csoporthivatkozást.</string>
+  <string name="MessageRecord_s_turned_on_the_sharable_group_link">%1$s bekapcsolta a megosztható csoporthivatkozást.</string>
+  <string name="MessageRecord_s_turned_off_the_sharable_group_link">%1$s kikapcsolta a megosztható csoporthivatkozást.</string>
+  <!--GV2 group link reset-->
+  <!--GV2 group link joins-->
+  <!--GV2 group link requests-->
+  <!--GV2 group link approvals-->
+  <!--GV2 group link deny-->
   <!--End of GV2 specific update messages-->
   <string name="MessageRecord_your_safety_number_with_s_has_changed">Megváltozott a biztonsági számod vele: %s.</string>
   <string name="MessageRecord_you_marked_your_safety_number_with_s_verified">Biztonsági számodat ellenőrzöttnek jelölted a következővel: %s</string>
@@ -893,10 +932,10 @@ Kérlek telepítsd újra a Google Play Szolgáltatásokat, majd próbáld újra!
   <!--RecipientProvider-->
   <string name="RecipientProvider_unnamed_group">Névnélküli csoport</string>
   <!--RedPhone-->
-  <string name="RedPhone_answering">Válaszolás</string>
-  <string name="RedPhone_ending_call">Hívás befejezése</string>
-  <string name="RedPhone_dialing">Tárcsázás</string>
-  <string name="RedPhone_ringing">Kicseng</string>
+  <string name="RedPhone_answering">Válaszolás…</string>
+  <string name="RedPhone_ending_call">Hívás befejezése…</string>
+  <string name="RedPhone_dialing">Tárcsázás…</string>
+  <string name="RedPhone_ringing">Kicseng…</string>
   <string name="RedPhone_busy">Foglalt</string>
   <string name="RedPhone_connected">Kapcsolódva</string>
   <string name="RedPhone_recipient_unavailable">A címzett nem elérhető</string>
@@ -1092,7 +1131,7 @@ Kulcs-csere üzenet érkezett érvénytelen protokoll verzióhoz.
   <string name="UnverifiedSendDialog_send">Küldés</string>
   <!--UsernameEditFragment-->
   <string name="UsernameEditFragment_username">Felhasználónév</string>
-  <string name="UsernameEditFragment_submit">Küldés</string>
+  <!-- Removed by excludeNonTranslatables <string name="UsernameEditFragment_submit">Küldés</string> -->
   <string name="UsernameEditFragment_delete">Törlés</string>
   <string name="UsernameEditFragment_successfully_set_username">A felhasználónév beállítása sikeres volt.</string>
   <string name="UsernameEditFragment_successfully_removed_username">A felhasználónév eltávolítása sikeres volt.</string>
@@ -1103,7 +1142,7 @@ Kulcs-csere üzenet érkezett érvénytelen protokoll verzióhoz.
   <string name="UsernameEditFragment_usernames_cannot_begin_with_a_number">A felhasználónevek nem kezdődhetnek számmal.</string>
   <string name="UsernameEditFragment_username_is_invalid">A felhasználónév érvénytelen.</string>
   <string name="UsernameEditFragment_usernames_must_be_between_a_and_b_characters">A felhasználóneveknek %1$d és %2$d db karakter közé kell esniük.</string>
-  <string name="UsernameEditFragment_other_signal_users_can_send_message_requests_to_your_unique_username">Más Signal felhasználók a telefonszámod ismerete nélkül, mindössze a felhasználóneved alapján is küldhetnek számodra üzenetkérést. A felhasználónév kiválasztása nem kötelező.</string>
+  <!-- Removed by excludeNonTranslatables <string name="UsernameEditFragment_other_signal_users_can_send_message_requests_to_your_unique_username">Más Signal felhasználók a telefonszámod ismerete nélkül, mindössze a felhasználóneved alapján is küldhetnek számodra üzenetkérést. A felhasználónév kiválasztása nem kötelező.</string> -->
   <!--VerifyIdentityActivity-->
   <string name="VerifyIdentityActivity_your_contact_is_running_an_old_version_of_signal">A kontaktod a Signal egy régebbi verzióját futtatja. Kérd meg, hogy frissítse azt biztonsági számotok ellenőrzése előtt!</string>
   <string name="VerifyIdentityActivity_your_contact_is_running_a_newer_version_of_Signal">A kontaktod a Signal egy újabb verzióját futtatja, amelynek QR kód formátuma nem kompatibilis a te verzióddal. Kérlek frissíts az összehasonlításhoz!</string>
@@ -1124,8 +1163,6 @@ Kulcs-csere üzenet érkezett érvénytelen protokoll verzióhoz.
   <string name="MmsMessageRecord_mms_message_encrypted_for_non_existing_session">Az MMS üzenet nem létező munkamenethez lett titkosítva</string>
   <!--MuteDialog-->
   <string name="MuteDialog_mute_notifications">Értesítések némítása</string>
-  <!--OutdatedBuildReminder-->
-  <string name="OutdatedBuildReminder_no_web_browser_installed">Nincs telepítve webböngésző!</string>
   <!--ApplicationMigrationService-->
   <string name="ApplicationMigrationService_import_in_progress">Importálás folyamatban</string>
   <string name="ApplicationMigrationService_importing_text_messages">Szöveges üzenetek importálása</string>
@@ -1599,8 +1636,8 @@ Kulcs-csere üzenet érkezett érvénytelen protokoll verzióhoz.
   <string name="preferences__use_signal_for_viewing_and_storing_all_incoming_multimedia_messages">Signal használata minden bejövő multimédia üzenethez</string>
   <string name="preferences__pref_enter_sends_title">Küldés az Enter lenyomásával</string>
   <string name="preferences__pressing_the_enter_key_will_send_text_messages">Az Enter billentyű megnyomása elküldi a szöveges üzeneteket</string>
-  <string name="preferences__send_link_previews">Előnézeti képek küldése</string>
-  <string name="preferences__previews_are_supported_for">Az előnézeti képek az Imgur, az Instagram, a Pinterest, a Reddit és a YouTube szolgáltatásokhoz érhetőek el.</string>
+  <string name="preferences__generate_link_previews">Hivatkozások előnézeti képének generálása</string>
+  <string name="preferences__retrieve_link_previews_from_websites_for_messages">Előnézeti képek lekérése közvetlenül a weboldalról az elküldendő üzenetekhez.</string>
   <string name="preferences__choose_identity">Azonosító választása</string>
   <string name="preferences__choose_your_contact_entry_from_the_contacts_list">Válaszd ki saját névjegyed a névjegyzékből.</string>
   <string name="preferences__change_passphrase">Jelmondat megváltoztatása</string>
@@ -1751,6 +1788,8 @@ Kulcs-csere üzenet érkezett érvénytelen protokoll verzióhoz.
   <string name="conversation_insecure__invite">Meghívás</string>
   <!--conversation_list_batch-->
   <string name="conversation_list_batch__menu_delete_selected">Kiválasztottak törlése</string>
+  <string name="conversation_list_batch__menu_pin_selected">Kiválasztottak rögzítése</string>
+  <string name="conversation_list_batch__menu_unpin_selected">Kiválasztottak rögzítésének feloldása</string>
   <string name="conversation_list_batch__menu_select_all">Összes kiválasztása</string>
   <string name="conversation_list_batch_archive__menu_archive_selected">Kiválasztottak archiválása</string>
   <string name="conversation_list_batch_unarchive__menu_unarchive_selected">Kiválasztottak kivétele archívumból</string>
@@ -1760,6 +1799,9 @@ Kulcs-csere üzenet érkezett érvénytelen protokoll verzióhoz.
   <!--conversation_list-->
   <string name="conversation_list_settings_shortcut">Beállítások parancsikon</string>
   <string name="conversation_list_search_description">Keresés</string>
+  <string name="conversation_list__pinned">Rögzítve</string>
+  <string name="conversation_list__chats">Csevegések</string>
+  <string name="conversation_list__you_can_only_pin_up_to_d_chats">Maximum %1$d beszélgetést rögzíthetsz</string>
   <!--conversation_list_item_view-->
   <string name="conversation_list_item_view__contact_photo_image">Kontakt fotó kép</string>
   <string name="conversation_list_item_view__archived">Archív</string>
@@ -1953,6 +1995,9 @@ Kulcs-csere üzenet érkezett érvénytelen protokoll verzióhoz.
   <string name="KbsMegaphone__update_pin">PIN kód frissítése</string>
   <string name="KbsMegaphone__well_remind_you_later_creating_a_pin">Később emlékeztetni fogunk. A PIN létrehozása %1$d nap múlva kötelező lesz.</string>
   <string name="KbsMegaphone__well_remind_you_later_confirming_your_pin">Később emlékeztetni fogunk. A PIN megerősítése %1$d nap múlva kötelező lesz.</string>
+  <!--Mention Megaphone-->
+  <string name="MentionsMegaphone__introducing_mentions">Bemutatkozik az @Említések</string>
+  <string name="MentionsMegaphone__get_someones_attention_in_a_group_by_typing">Hívd fel valaki figyelmét egy új típusú csoportban a @ használatával</string>
   <!--transport_selection_list_item-->
   <string name="transport_selection_list_item__transport_icon">Átvitel ikon</string>
   <string name="ConversationListFragment_loading">Betöltés…</string>
@@ -2096,5 +2141,9 @@ Kulcs-csere üzenet érkezett érvénytelen protokoll verzióhoz.
   <string name="GroupsLearnMore_how_do_i_use_new_groups">Hogyan használhatóm az új típusú csoportokat?</string>
   <string name="GroupsLearnMore_paragraph_2">A régi típusú csoportokat nem lehet új típusúvá alakítani, viszont lehetőséged van egy új típusú csoport létrehozására a régivel megegyező csoporttagsággal.</string>
   <string name="GroupsLearnMore_paragraph_3">Az új típusú csoport létrehozásához az összes tagnak frissítenie kell a Signal legújabb verziójára.</string>
+  <!--GroupLinkBottomSheetDialogFragment-->
+  <string name="GroupLinkBottomSheet_copy">Másolás</string>
+  <string name="GroupLinkBottomSheet_share">Megosztás</string>
+  <string name="GroupLinkBottomSheet_copied_to_clipboard">Vágólapra másolva</string>
   <!--EOF-->
 </resources>

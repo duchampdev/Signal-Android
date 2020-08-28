@@ -29,6 +29,7 @@ public class ConversationItemThumbnail extends FrameLayout {
   private ConversationItemFooter footer;
   private CornerMask             cornerMask;
   private Outliner               outliner;
+  private Outliner               pulseOutliner;
   private boolean                borderless;
 
   public ConversationItemThumbnail(Context context) {
@@ -80,6 +81,14 @@ public class ConversationItemThumbnail extends FrameLayout {
         outliner.draw(canvas);
       }
     }
+
+    if (pulseOutliner != null) {
+      pulseOutliner.draw(canvas);
+    }
+  }
+
+  public void setPulseOutliner(@NonNull Outliner outliner) {
+    this.pulseOutliner = outliner;
   }
 
   @Override
@@ -108,6 +117,10 @@ public class ConversationItemThumbnail extends FrameLayout {
   public void setCorners(int topLeft, int topRight, int bottomRight, int bottomLeft) {
     cornerMask.setRadii(topLeft, topRight, bottomRight, bottomLeft);
     outliner.setRadii(topLeft, topRight, bottomRight, bottomLeft);
+  }
+
+  public void setMinimumThumbnailWidth(int width) {
+    thumbnail.setMinimumThumbnailWidth(width);
   }
 
   public void setBorderless(boolean borderless) {

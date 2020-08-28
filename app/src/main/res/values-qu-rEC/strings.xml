@@ -565,7 +565,7 @@ Shuk ranti pakallayupay chaski chayamurka, shuk ñawpa mana alli protocolo kashk
   <string name="UnverifiedSendDialog_send_message">Chaskita kachanayanchu</string>
   <string name="UnverifiedSendDialog_send">Kachana</string>
   <!--UsernameEditFragment-->
-  <string name="UsernameEditFragment_submit">Kachana</string>
+  <!-- Removed by excludeNonTranslatables <string name="UsernameEditFragment_submit">Kachana</string> -->
   <string name="UsernameEditFragment_delete">Pichana</string>
   <!--VerifyIdentityActivity-->
   <string name="VerifyIdentityActivity_your_contact_is_running_an_old_version_of_signal">Kikinpa yupaymashi manara mushukyachin Signalta, Utiyashpa mushukyachichun mañapay manara kikinta pakalla yupayta mañakpillata.</string>
@@ -587,7 +587,7 @@ Shuk ranti pakallayupay chaski chayamurka, shuk ñawpa mana alli protocolo kashk
   <!--MuteDialog-->
   <string name="MuteDialog_mute_notifications">Chayamuk rikunakunata upallayachina</string>
   <!--OutdatedBuildReminder-->
-  <string name="OutdatedBuildReminder_no_web_browser_installed">Web panka mana churashkachu kan</string>
+  <!-- Removed by excludeNonTranslatables <string name="OutdatedBuildReminder_no_web_browser_installed">Web panka mana churashkachu kan</string> -->
   <!--ApplicationMigrationService-->
   <string name="ApplicationMigrationService_import_in_progress">Apamuna rurarikunmi.</string>
   <string name="ApplicationMigrationService_importing_text_messages">Killka chaskikunata apamukun.</string>

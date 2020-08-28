@@ -228,6 +228,8 @@
         <item name="conversation_list_compose_icon_tint">@color/core_white</item>
         <item name="conversation_list_camera_button_background">@color/core_white</item>
 
+        <item name="camera_icon_background_tint">@color/core_grey_02</item>
+
         <item name="fab_color">@color/core_ultramarine</item>
         <item name="lower_right_divet">@drawable/divet_lower_right_dark</item>
 
@@ -263,7 +265,8 @@
         <item name="conversation_title_color">@color/white</item>
         <item name="conversation_subtitle_color">@color/transparent_white_90</item>
         <item name="conversation_mention_background_color">@color/core_grey_20</item>
-        <item name="conversation_mention_divider_color">@color/core_grey_05</item>
+
+        <item name="mention_picker_background_color">@color/core_white</item>
 
         <item name="safety_number_change_dialog_button_background">@color/core_grey_05</item>
         <item name="safety_number_change_dialog_button_text_color">@color/core_ultramarine</item>
@@ -331,6 +334,7 @@
         <item name="conversation_item_image_outline_color">@color/transparent_black_20</item>
         <item name="conversation_item_reveal_viewed_background_color">?conversation_background</item>
         <item name="conversation_item_delete_for_everyone_text_color">@color/core_grey_90</item>
+        <item name="conversation_item_mention_pulse_color">@color/transparent_black</item>
         <item name="conversation_scroll_to_bottom_background">@drawable/scroll_to_bottom_background_light</item>
         <item name="conversation_scroll_to_bottom_foreground_color">@color/grey_600</item>
 
@@ -383,6 +387,8 @@
         <item name="menu_multi_select_icon">@drawable/ic_select_24</item>
         <item name="menu_archive_icon">@drawable/ic_archive_white_24dp</item>
         <item name="menu_edit_icon">@drawable/ic_compose_outline_tinted_24</item>
+        <item name="menu_pin_icon">@drawable/ic_pin_outline_24</item>
+        <item name="menu_unpin_icon">@drawable/ic_unpin_outline_24</item>
 
         <item name="message_icon">@drawable/ic_message_outline_tinted_bitmap_24</item>
         <item name="notifications_icon">@drawable/ic_bell_outline_24</item>
@@ -427,6 +433,8 @@
 
         <item name="pref_divider">@drawable/preference_divider_light</item>
 
+        <item name="preference_username_background">@drawable/preference_username_background_light</item>
+
         <item name="quote_missing_icon_color">@color/core_grey_60</item>
         <item name="quote_dismiss_button_tint">@color/core_grey_70</item>
 
@@ -439,6 +447,11 @@
         <item name="search_background">@color/white</item>
         <item name="invite_edit_text_background">@drawable/invite_edit_text_background_light</item>
         <item name="invite_share_icon">@drawable/ic_share_outline_24</item>
+
+        <item name="share_icon">@drawable/ic_share_outline_24_tinted</item>
+        <item name="copy_icon">@drawable/ic_copy_outline_24_tinted</item>
+        <item name="qr_icon">@drawable/ic_qrcode_24_tinted</item>
+        <item name="reset_link_icon">@drawable/ic_reset_24_tinted</item>
 
         <item name="shared_contact_details_header_background">@color/grey_100</item>
         <item name="shared_contact_details_titlebar">@color/grey_400</item>
@@ -484,6 +497,11 @@
 
         <item name="invite_edit_text_background">@drawable/invite_edit_text_background_dark</item>
         <item name="invite_share_icon">@drawable/ic_share_solid_24_dark</item>
+
+        <item name="share_icon">@drawable/ic_share_solid_24_tinted</item>
+        <item name="copy_icon">@drawable/ic_copy_solid_24_tinted</item>
+        <item name="qr_icon">@drawable/ic_qrcode_24_tinted</item>
+        <item name="reset_link_icon">@drawable/ic_reset_24_tinted</item>
 
         <item name="title_text_color_primary">@color/core_grey_05</item>
         <item name="title_text_color_secondary">@color/core_grey_25</item>
@@ -544,6 +562,8 @@
         <item name="conversation_list_compose_icon_tint">@color/core_white</item>
         <item name="conversation_list_camera_button_background">@color/core_grey_85</item>
 
+        <item name="camera_icon_background_tint">@color/core_grey_75</item>
+
         <item name="conversation_group_member_name">#99ffffff</item>
 
         <item name="conversation_item_bubble_background">@color/core_grey_75</item>
@@ -565,6 +585,7 @@
         <item name="conversation_item_image_outline_color">@color/transparent_white_20</item>
         <item name="conversation_item_reveal_viewed_background_color">?conversation_background</item>
         <item name="conversation_item_delete_for_everyone_text_color">@color/core_grey_15</item>
+        <item name="conversation_item_mention_pulse_color">@color/transparent</item>
 
         <item name="safety_number_change_dialog_button_background">@color/core_grey_75</item>
         <item name="safety_number_change_dialog_button_text_color">@color/core_grey_05</item>
@@ -622,10 +643,11 @@
         <item name="conversation_popup_theme">@style/ThemeOverlay.AppCompat.Dark</item>
         <item name="conversation_title_color">@color/transparent_white_90</item>
         <item name="conversation_subtitle_color">@color/transparent_white_80</item>
-        <item name="conversation_mention_background_color">@color/core_grey_75</item>
-        <item name="conversation_mention_divider_color">@color/core_grey_25</item>
+        <item name="conversation_mention_background_color">@color/core_grey_60</item>
         <item name="conversation_scroll_to_bottom_background">@drawable/scroll_to_bottom_background_dark</item>
         <item name="conversation_scroll_to_bottom_foreground_color">@color/core_white</item>
+
+        <item name="mention_picker_background_color">@color/core_grey_90</item>
 
         <item name="reactions_overlay_toolbar_icon_tint">@color/core_white</item>
         <item name="reactions_overlay_toolbar_overflow_style">@style/Signal.Toolbar.Overflow</item>
@@ -696,6 +718,8 @@
         <item name="menu_multi_select_icon">@drawable/ic_select_24</item>
         <item name="menu_archive_icon">@drawable/ic_archive_white_24dp</item>
         <item name="menu_edit_icon">@drawable/ic_compose_solid_tinted_24</item>
+        <item name="menu_pin_icon">@drawable/ic_pin_solid_24</item>
+        <item name="menu_unpin_icon">@drawable/ic_unpin_solid_24</item>
 
         <item name="message_icon">@drawable/ic_message_solid_tinted_bitmap_24</item>
         <item name="notifications_icon">@drawable/ic_bell_solid_24</item>
@@ -739,6 +763,8 @@
         <item name="pref_icon_tint">?attr/icon_tint</item>
 
         <item name="pref_divider">@drawable/preference_divider_dark</item>
+
+        <item name="preference_username_background">@drawable/preference_username_background_dark</item>
 
         <item name="quote_missing_icon_color">@color/core_grey_05</item>
         <item name="quote_dismiss_button_tint">@color/core_white</item>

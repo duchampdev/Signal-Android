@@ -397,6 +397,7 @@
   <!--GroupMembersDialog-->
   <string name="GroupMembersDialog_you">Zu</string>
   <!--GV2 access levels-->
+  <string name="GroupManagement_access_level_anyone">Edozein</string>
   <string name="GroupManagement_access_level_all_members">Partaide guztiak</string>
   <string name="GroupManagement_access_level_only_admins">Administratzaileak bakarrik</string>
   <!--GV2 invites sent-->
@@ -407,6 +408,10 @@
   <string name="GroupManagement_invite_single_user">\"%1$s\" erabiltzailea ezin duzu talde honetan modu automatikoan sartu. Sartzeko gonbidapena bidali zaie eta ezingo dute talde mezurik ikusi onartu arte.</string>
   <string name="GroupManagement_learn_more">Gehiago jakin</string>
   <string name="GroupManagement_invite_multiple_users">Ezin duzu erabiltzaile hauek modu automatikoan taldean sartu. Sartzeko gonbidapena bidali zaie eta ezingo dute talde mezurik ikusi onartu arte.</string>
+  <!--LinkPreviewsMegaphone-->
+  <string name="LinkPreviewsMegaphone_disable">Desgaitu</string>
+  <!--LinkPreviewView-->
+  <!--LinkPreviewRepository-->
   <!--PendingMembersActivity-->
   <string name="PendingMemberInvitesActivity_pending_group_invites">Falta diren talde gonbidapenak</string>
   <string name="PendingMembersActivity_people_you_invited">Gondibatu duzun jendea</string>
@@ -414,6 +419,7 @@
   <string name="PendingMembersActivity_invites_by_other_group_members">Taldeko beste partaideek egindako gonbidapenak</string>
   <string name="PendingMembersActivity_no_pending_invites_by_other_group_members">Taldeko beste partaideek egindako gonbidapenik ez dago.</string>
   <string name="PendingMembersActivity_missing_detail_explanation">Taldeko beste partaideek gonbidatutako pertsonen xehetasunak ez dira erakusten. Gonbidatuek taldean sartzea erabakitzen badute, beraien informazioa une horretan partekatuko da taldearekin. Taldean sartu arte ez dute mezurik ikusiko.</string>
+  <!--RequestingMembersFragment-->
   <!--AddMembersActivity-->
   <string name="AddMembersActivity__done">Eginda</string>
   <string name="AddMembersActivity__this_person_cant_be_added_to_legacy_groups">Pertsona hau ezin da jarauntsitako taldeetan gehitu.</string>
@@ -513,7 +519,19 @@
   <string name="CustomNotificationsDialogFragment__enabled">Aktibatuta</string>
   <string name="CustomNotificationsDialogFragment__disabled">Desaktibatuta</string>
   <string name="CustomNotificationsDialogFragment__default">Lehenetsia</string>
+  <!--ShareableGroupLinkDialogFragment-->
+  <string name="ShareableGroupLinkDialogFragment__share">Elkarbanatu</string>
+  <string name="ShareableGroupLinkDialogFragment__enabled">Aktibatuta</string>
+  <string name="ShareableGroupLinkDialogFragment__disabled">Desaktibatuta</string>
+  <string name="ShareableGroupLinkDialogFragment__default">Lehenetsia</string>
+  <!--GroupLinkShareQrDialogFragment-->
   <!--GV2 Invite Revoke confirmation dialog-->
+  <!--GroupJoinBottomSheetDialogFragment-->
+  <string name="GroupJoinBottomSheetDialogFragment_encountered_a_network_error">Sare errore bat izan da.</string>
+  <!--GroupJoinUpdateRequiredBottomSheetDialogFragment-->
+  <string name="GroupJoinUpdateRequiredBottomSheetDialogFragment_update_signal">Eguneratu Signal</string>
+  <!--GV2 Request confirmation dialog-->
+  <string name="RequestConfirmationDialog_add">Gehitu</string>
   <!--CropImageActivity-->
   <string name="CropImageActivity_group_avatar">Taldearen abatarra</string>
   <string name="CropImageActivity_profile_avatar">Abatarra</string>
@@ -739,6 +757,12 @@
   <string name="MessageRecord_you_changed_who_can_edit_group_membership_to_s">Aldatu duzu taldearen kidetza aldatu dezakeen pertsona. Orain \"%1$s\" da.</string>
   <string name="MessageRecord_s_changed_who_can_edit_group_membership_to_s">%1$s erabiltzaileak aldatu du taldearen kidetza aldatu dezakeen pertsona. Orain \"%2$s\" da.</string>
   <string name="MessageRecord_who_can_edit_group_membership_has_been_changed_to_s">Taldearen kidetza aldatu dezakeena aldatu da. Orain \"%1$s\" da.</string>
+  <!--GV2 group link invite access level change-->
+  <!--GV2 group link reset-->
+  <!--GV2 group link joins-->
+  <!--GV2 group link requests-->
+  <!--GV2 group link approvals-->
+  <!--GV2 group link deny-->
   <!--End of GV2 specific update messages-->
   <string name="MessageRecord_your_safety_number_with_s_has_changed">Zure segurtasun zenbakia %s aldatu da.</string>
   <string name="MessageRecord_you_marked_your_safety_number_with_s_verified">%s erabiltzailearekin duzun segurtasun zenbakia egiaztatu da</string>
@@ -854,10 +878,7 @@
   <!--RecipientProvider-->
   <string name="RecipientProvider_unnamed_group">Izenik gabeko taldea</string>
   <!--RedPhone-->
-  <string name="RedPhone_answering">Deia erantzuten</string>
-  <string name="RedPhone_ending_call">Deia amaitzen</string>
-  <string name="RedPhone_dialing">Markatzen</string>
-  <string name="RedPhone_ringing">Jotzen</string>
+  <string name="RedPhone_ringing">Deitzen…</string>
   <string name="RedPhone_busy">Lanpetuta</string>
   <string name="RedPhone_connected">Konektatuta</string>
   <string name="RedPhone_recipient_unavailable">Hartzaile eskuraezina</string>
@@ -1053,7 +1074,7 @@ Gakoaren elkar-trukeraro mezua jaso da protokoloaren bertsio baliogabe baterako.
   <string name="UnverifiedSendDialog_send">Bidali</string>
   <!--UsernameEditFragment-->
   <string name="UsernameEditFragment_username">Erabiltzailearen izena</string>
-  <string name="UsernameEditFragment_submit">Bidali</string>
+  <!-- Removed by excludeNonTranslatables <string name="UsernameEditFragment_submit">Bidali</string> -->
   <string name="UsernameEditFragment_delete">Ezabatu</string>
   <string name="UsernameEditFragment_successfully_set_username">Erabiltzaile izena ondo ezarri da.</string>
   <string name="UsernameEditFragment_successfully_removed_username">Erabiltzaile izena ondo ezabatu da.</string>
@@ -1064,7 +1085,7 @@ Gakoaren elkar-trukeraro mezua jaso da protokoloaren bertsio baliogabe baterako.
   <string name="UsernameEditFragment_usernames_cannot_begin_with_a_number">Erabiltzaile izenak ezin dira zenbaki batez hasi.</string>
   <string name="UsernameEditFragment_username_is_invalid">Erabiltzaile izena baliogabea da.</string>
   <string name="UsernameEditFragment_usernames_must_be_between_a_and_b_characters">Erabiltzaile izenek %1$d eta %2$d karaktere bitartean egon behar dira.</string>
-  <string name="UsernameEditFragment_other_signal_users_can_send_message_requests_to_your_unique_username">Beste Signal erabiltzaile batzuek mezu eskaerak bidali ditzakete zure erabiltzaile izen bakarrari zure telefono zenbakia jakin beharrik izan gabe.  Erabiltzaile izen bat hautatzea aukerakoa da.</string>
+  <!-- Removed by excludeNonTranslatables <string name="UsernameEditFragment_other_signal_users_can_send_message_requests_to_your_unique_username">Beste Signal erabiltzaile batzuek mezu eskaerak bidali ditzakete zure erabiltzaile izen bakarrari zure telefono zenbakia jakin beharrik izan gabe.  Erabiltzaile izen bat hautatzea aukerakoa da.</string> -->
   <!--VerifyIdentityActivity-->
   <string name="VerifyIdentityActivity_your_contact_is_running_an_old_version_of_signal">Zure kontaktua Signal-en bertsio zahar bat erabiltzen ari da. Mesedez, eskatu iezaiozu eguneratzeko zure segurtasun zenbaki berria egiaztatu baino lehenago.</string>
   <string name="VerifyIdentityActivity_your_contact_is_running_a_newer_version_of_Signal">Zure kontaktua Signal aplikazioaren bertsio berriago bat erabiltzen ari da eta horrek QR kode formatua eguneratu du. Eguneratu konparazioa egiteko.</string>
@@ -1085,8 +1106,6 @@ Gakoaren elkar-trukeraro mezua jaso da protokoloaren bertsio baliogabe baterako.
   <string name="MmsMessageRecord_mms_message_encrypted_for_non_existing_session">MMS mezua enkriptatuta esistitzen ez den saio baterako</string>
   <!--MuteDialog-->
   <string name="MuteDialog_mute_notifications">Desaktibatu jakinarazpenak</string>
-  <!--OutdatedBuildReminder-->
-  <string name="OutdatedBuildReminder_no_web_browser_installed">Ez dago nabigatzailerik instalatuta!</string>
   <!--ApplicationMigrationService-->
   <string name="ApplicationMigrationService_import_in_progress">Inportaketa indarrean</string>
   <string name="ApplicationMigrationService_importing_text_messages">Testu mezuak inportatzen</string>
@@ -1557,8 +1576,6 @@ Inportatu \'SMSBackup and Restorekin\' bateragarria den enkriptatu gabeko babesk
   <string name="preferences__use_signal_for_viewing_and_storing_all_incoming_multimedia_messages">Erabili Signal etorriko diren multimedia mezu guztiak jasotzeko</string>
   <string name="preferences__pref_enter_sends_title">Enter tekla sakatutakoan</string>
   <string name="preferences__pressing_the_enter_key_will_send_text_messages">Enter tekla sakatzeak testu mezuak bidaliko ditu</string>
-  <string name="preferences__send_link_previews">Loturen aurrebistak bidali</string>
-  <string name="preferences__previews_are_supported_for">Aurrebistak honako zerbitzuekin funtzionatzen du: Imgur, Instagram, Reddit eta YouTube</string>
   <string name="preferences__choose_identity">Aukeratu nortasuna</string>
   <string name="preferences__choose_your_contact_entry_from_the_contacts_list">Hautatu zure kontaktua kontaktuen zerrendatik.</string>
   <string name="preferences__change_passphrase">Aldatu pasahitza</string>
@@ -1715,6 +1732,7 @@ Inportatu \'SMSBackup and Restorekin\' bateragarria den enkriptatu gabeko babesk
   <!--conversation_list-->
   <string name="conversation_list_settings_shortcut">Ezarpenen lasterbidea</string>
   <string name="conversation_list_search_description">Bilatu</string>
+  <string name="conversation_list__chats">Txatak</string>
   <!--conversation_list_item_view-->
   <string name="conversation_list_item_view__contact_photo_image">Kontaktuaren argazkia</string>
   <string name="conversation_list_item_view__archived">Artxibatuta</string>
@@ -1908,6 +1926,7 @@ Inportatu \'SMSBackup and Restorekin\' bateragarria den enkriptatu gabeko babesk
   <string name="KbsMegaphone__update_pin">Eguneratu PINa</string>
   <string name="KbsMegaphone__well_remind_you_later_creating_a_pin">Beranduago gogoraraziko dizugu. PIN bat sortzea beharrezkoa izango da %1$d eguneta.</string>
   <string name="KbsMegaphone__well_remind_you_later_confirming_your_pin">Beranduago gogoraraziko dizugu. Zure PINa baieztatzea derrigorrezkoa izango da %1$d egunetan.</string>
+  <!--Mention Megaphone-->
   <!--transport_selection_list_item-->
   <string name="transport_selection_list_item__transport_icon">Garraio ikonoa</string>
   <string name="ConversationListFragment_loading">Kargatzen…</string>
@@ -2051,5 +2070,9 @@ Inportatu \'SMSBackup and Restorekin\' bateragarria den enkriptatu gabeko babesk
   <string name="GroupsLearnMore_how_do_i_use_new_groups">Nola erabili dezaket Talde Berriak?</string>
   <string name="GroupsLearnMore_paragraph_2">Jarauntsitako Taldeak ezin dira Talde Berri bihurtu, baina kide berak dituen Talde Berri bat sortu dezakezu.</string>
   <string name="GroupsLearnMore_paragraph_3">Talde Berri bat sortzeko, kide guztiek Signal-en azkenengo bertsioa izan behar dute.</string>
+  <!--GroupLinkBottomSheetDialogFragment-->
+  <string name="GroupLinkBottomSheet_copy">Kopiatu</string>
+  <string name="GroupLinkBottomSheet_share">Elkarbanatu</string>
+  <string name="GroupLinkBottomSheet_copied_to_clipboard">Arbelera kopiatuta</string>
   <!--EOF-->
 </resources>

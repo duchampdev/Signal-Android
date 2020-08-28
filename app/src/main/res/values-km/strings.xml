@@ -372,10 +372,15 @@
   <!--GroupMembersDialog-->
   <string name="GroupMembersDialog_you">អ្នក</string>
   <!--GV2 access levels-->
+  <string name="GroupManagement_access_level_anyone">អ្នកណាមួយ</string>
   <string name="GroupManagement_access_level_all_members">សមាជិកទាំងអស់</string>
   <string name="GroupManagement_access_level_only_admins">តែអ្នកគ្រប់គ្រង</string>
   <!--GV2 invites sent-->
   <string name="GroupManagement_learn_more">សិក្សាបន្ថែម</string>
+  <!--LinkPreviewsMegaphone-->
+  <string name="LinkPreviewsMegaphone_disable">បិទ</string>
+  <!--LinkPreviewView-->
+  <!--LinkPreviewRepository-->
   <!--PendingMembersActivity-->
   <string name="PendingMemberInvitesActivity_pending_group_invites">ការអញ្ជើញក្រុមមិនទាន់សម្រេច</string>
   <string name="PendingMembersActivity_people_you_invited">មនុស្សដែលអ្នកបានអញ្ជើញ</string>
@@ -383,6 +388,7 @@
   <string name="PendingMembersActivity_invites_by_other_group_members">អញ្ជើញតាមសមាជិកក្រុមផ្សេង</string>
   <string name="PendingMembersActivity_no_pending_invites_by_other_group_members">មិនមានការអញ្ជើញមិនទាន់សម្រេច ពីសមាជិកក្រុម។</string>
   <string name="PendingMembersActivity_missing_detail_explanation">ព័ត៌មានលំអិតនៃមនុស្ស ដែលត្រូវបានអញ្ជើញដោយសមាជិកក្រុមផ្សេង មិនត្រូវបានបង្ហាញ។ បើអ្នកត្រូវបានអញ្ជើញជ្រើសរើសចូលរួម ព័ត៌មានពួកគេនឹងត្រូវចែករំលែកជាមួយក្រុមគ្រប់ពេល។ ពួកគេនឹងមិនអាចឃើញសារក្នុងក្រុម រហូតដល់ពួកគេចូលរួមក្រុម។</string>
+  <!--RequestingMembersFragment-->
   <!--AddMembersActivity-->
   <string name="AddMembersActivity__done">បញ្ចប់</string>
   <plurals name="AddMembersActivity__add_d_members_to_s">
@@ -412,6 +418,7 @@
   <string name="ManageGroupActivity_leave_group">ចាកចេញពីក្រុម</string>
   <string name="ManageGroupActivity_mute_notifications">បិទសំឡេងសារជូនដំណឹង</string>
   <string name="ManageGroupActivity_custom_notifications">សារជូនដំណឹងផ្សេង</string>
+  <string name="ManageGroupActivity_mentions">ការនិយាយ</string>
   <string name="ManageGroupActivity_until_s">រហូតដល់ %1$s</string>
   <string name="ManageGroupActivity_off">បិទ</string>
   <string name="ManageGroupActivity_on">បើក</string>
@@ -430,6 +437,7 @@
   <string name="ManageGroupActivity_youre_not_a_member_of_the_group">អ្នកមិនមែនជាសមាជិកនៃក្រុម</string>
   <string name="ManageGroupActivity_edit_name_and_picture">កែប្រែឈ្មោះ និងរូបភាព</string>
   <!--GroupMentionSettingDialog-->
+  <string name="GroupMentionSettingDialog_receive_notifications_when_youre_mentioned_in_muted_chats">ទទួលបានការជូនដំណឹងនៅពេលដែលអ្នកត្រូវបានគេហៅនៅក្នុងការសន្ទនាស្ងាត់ ៗ ?</string>
   <!--ManageRecipientActivity-->
   <string name="ManageRecipientActivity_disappearing_messages">សារបាត់ទៅវិញ</string>
   <string name="ManageRecipientActivity_chat_color">ពណ៌ការជជែក</string>
@@ -467,7 +475,19 @@
   <string name="CustomNotificationsDialogFragment__enabled">បានបើក</string>
   <string name="CustomNotificationsDialogFragment__disabled">បានបិទ</string>
   <string name="CustomNotificationsDialogFragment__default">លំនាំដើម</string>
+  <!--ShareableGroupLinkDialogFragment-->
+  <string name="ShareableGroupLinkDialogFragment__share">ចែករំលែក</string>
+  <string name="ShareableGroupLinkDialogFragment__enabled">បានបើក</string>
+  <string name="ShareableGroupLinkDialogFragment__disabled">បានបិទ</string>
+  <string name="ShareableGroupLinkDialogFragment__default">លំនាំដើម</string>
+  <!--GroupLinkShareQrDialogFragment-->
   <!--GV2 Invite Revoke confirmation dialog-->
+  <!--GroupJoinBottomSheetDialogFragment-->
+  <string name="GroupJoinBottomSheetDialogFragment_encountered_a_network_error">បានជួបប្រទះកំហុសបណ្តាញ។</string>
+  <!--GroupJoinUpdateRequiredBottomSheetDialogFragment-->
+  <string name="GroupJoinUpdateRequiredBottomSheetDialogFragment_update_signal">ដំឡើង Signal</string>
+  <!--GV2 Request confirmation dialog-->
+  <string name="RequestConfirmationDialog_add">បន្ថែម</string>
   <!--CropImageActivity-->
   <string name="CropImageActivity_group_avatar">រូបតំណាងក្រុម</string>
   <string name="CropImageActivity_profile_avatar">រូបតំណាង</string>
@@ -661,6 +681,12 @@
   <!--GV2 membership access level change-->
   <string name="MessageRecord_you_changed_who_can_edit_group_membership_to_s">អ្នកបានផ្លាស់ប្តូរអ្នកដែលអាចកែប្រែសមាជិកភាពក្រុមទៅ \"%1$s\"។</string>
   <string name="MessageRecord_s_changed_who_can_edit_group_membership_to_s">%1$s បានផ្លាស់ប្តូរអ្នកដែលអាចកែប្រែសមាជិកភាពក្រុមទៅ \"%2$s\"។</string>
+  <!--GV2 group link invite access level change-->
+  <!--GV2 group link reset-->
+  <!--GV2 group link joins-->
+  <!--GV2 group link requests-->
+  <!--GV2 group link approvals-->
+  <!--GV2 group link deny-->
   <!--End of GV2 specific update messages-->
   <string name="MessageRecord_your_safety_number_with_s_has_changed">លេខសុវត្ថិភាពអ្នក %s បានផ្លាស់ប្តូរ។</string>
   <string name="MessageRecord_you_marked_your_safety_number_with_s_verified">អ្នកបានផ្ទៀងផ្ទាត់លេខសុវត្ថិភាពជាមួយ %s</string>
@@ -769,10 +795,7 @@
   <!--RecipientProvider-->
   <string name="RecipientProvider_unnamed_group">ក្រុមគ្មានឈ្មោះ</string>
   <!--RedPhone-->
-  <string name="RedPhone_answering">កំពុងឆ្លើយ</string>
-  <string name="RedPhone_ending_call">កំពុងបិទការហៅចេញ</string>
-  <string name="RedPhone_dialing">កំពុងហៅចេញ</string>
-  <string name="RedPhone_ringing">កំពុងរោទិ៍</string>
+  <string name="RedPhone_ringing">កំពុងរោទិ៍…</string>
   <string name="RedPhone_busy">រវល់</string>
   <string name="RedPhone_connected">បានភ្ជាប់</string>
   <string name="RedPhone_recipient_unavailable">អ្នកទទួលមិនទំនេរ</string>
@@ -961,7 +984,7 @@
   <string name="UnverifiedSendDialog_send">ផ្ញើ</string>
   <!--UsernameEditFragment-->
   <string name="UsernameEditFragment_username">ឈ្មោះអ្នកប្រើប្រាស់</string>
-  <string name="UsernameEditFragment_submit">បញ្ជូន</string>
+  <!-- Removed by excludeNonTranslatables <string name="UsernameEditFragment_submit">បញ្ជូន</string> -->
   <string name="UsernameEditFragment_delete">លុប</string>
   <string name="UsernameEditFragment_successfully_set_username">កំណត់ឈ្មោះអ្នកប្រើប្រាស់បានជោគជ័យ។</string>
   <string name="UsernameEditFragment_successfully_removed_username">លុបឈ្មោះអ្នកប្រើប្រាស់បានជោគជ័យ។</string>
@@ -971,7 +994,7 @@
   <string name="UsernameEditFragment_usernames_cannot_begin_with_a_number">ឈ្មោះអ្នកប្រើប្រាស់មិនអាចចាប់ផ្តើមពីលេខ។</string>
   <string name="UsernameEditFragment_username_is_invalid">ឈ្មោះអ្នកប្រើប្រាស់មិនត្រឹមត្រូវ។</string>
   <string name="UsernameEditFragment_usernames_must_be_between_a_and_b_characters">ឈ្មោះអ្នកប្រើប្រាស់ត្រូវនៅចន្លោះតួអក្សរ%1$d និង%2$d ។</string>
-  <string name="UsernameEditFragment_other_signal_users_can_send_message_requests_to_your_unique_username">អ្នកប្រើប្រាស់ Signal ផ្សេងអាចផ្ញើសារស្នើសុំមកកាន់ឈ្មោះអ្នកប្រើប្រាស់តែមួយគត់របស់អ្នក ដោយមិនចាំបាច់ដឹងលេខទូរស័ព្ទរបស់អ្នកទេ។ ការជ្រើសរើសឈ្មោះអ្នកប្រើប្រាស់មួយ គឺជាជម្រើស។ </string>
+  <!-- Removed by excludeNonTranslatables <string name="UsernameEditFragment_other_signal_users_can_send_message_requests_to_your_unique_username">អ្នកប្រើប្រាស់ Signal ផ្សេងអាចផ្ញើសារស្នើសុំមកកាន់ឈ្មោះអ្នកប្រើប្រាស់តែមួយគត់របស់អ្នក ដោយមិនចាំបាច់ដឹងលេខទូរស័ព្ទរបស់អ្នកទេ។ ការជ្រើសរើសឈ្មោះអ្នកប្រើប្រាស់មួយ គឺជាជម្រើស។ </string> -->
   <!--VerifyIdentityActivity-->
   <string name="VerifyIdentityActivity_your_contact_is_running_an_old_version_of_signal">លេខទំនាក់ទំនងអ្នក កំពុងប្រើប្រាស់នៅលើSignal ជំនាន់ចាស់។ សូមប្រាប់គេឲ្យធ្វើបច្ចុប្បន្នភាពកម្មវិធី មុនពេលផ្ទៀងផ្ទាត់លេខសុវត្ថិភាព។ </string>
   <string name="VerifyIdentityActivity_your_contact_is_running_a_newer_version_of_Signal">លេខទំនាក់ទំនងអ្នក កំពុងប្រើប្រាស់ Signalកំណែថ្មីជាង ជាមួយទម្រង់QRកូដ ដែលមិនត្រូវគ្នា។ សូមធ្វើបច្ចុប្បន្នភាព ដើម្បីប្រៀបធៀប។ </string>
@@ -992,8 +1015,6 @@
   <string name="MmsMessageRecord_mms_message_encrypted_for_non_existing_session">សារMMS ត្រូវបានកាណាល់កូដសម្ងាត់សម្រាប់កំឡុងពេលមិនប្រើប្រាស់</string>
   <!--MuteDialog-->
   <string name="MuteDialog_mute_notifications">បិទសំឡេងសារជូនដំណឹង</string>
-  <!--OutdatedBuildReminder-->
-  <string name="OutdatedBuildReminder_no_web_browser_installed">មិនបានដំឡើងកម្មវិធីរុករក!</string>
   <!--ApplicationMigrationService-->
   <string name="ApplicationMigrationService_import_in_progress">ការនាំចូលកំពុងដំណើរការ</string>
   <string name="ApplicationMigrationService_importing_text_messages">កំពុងនាំចូលសារជាអក្សរ</string>
@@ -1446,8 +1467,6 @@
   <string name="preferences__use_signal_for_viewing_and_storing_all_incoming_multimedia_messages">ប្រើ Signalសម្រាប់សារពហុមេឌៀដែលចូលមកទាំងអស់</string>
   <string name="preferences__pref_enter_sends_title">ចុច Enter ដើម្បីផ្ញើ</string>
   <string name="preferences__pressing_the_enter_key_will_send_text_messages">ចុចប៊ូតុង បញ្ចូន នឹងផ្ញើសារអក្សរ</string>
-  <string name="preferences__send_link_previews">ការមើល ការផ្ញើតំណភ្ជាប់</string>
-  <string name="preferences__previews_are_supported_for">ការមើលជាមុនបានគាំទ្រសម្រាប់ Imgur Instagram Pinterest Reddit និងតំណររបស់ YouTube</string>
   <string name="preferences__choose_identity">ជ្រើសរើសអត្តសញ្ញាណ</string>
   <string name="preferences__choose_your_contact_entry_from_the_contacts_list">ជ្រើសរើសលេខទំនាក់ទំនងរបស់អ្នកពីបញ្ជីទំនាក់ទំនង។</string>
   <string name="preferences__change_passphrase">ផ្លាស់ប្តូរឃ្លាសម្ងាត់</string>
@@ -1559,6 +1578,7 @@
   <string name="preferences_communication__sealed_sender_allow_from_anyone">អនុញ្ញាតពីនរណាម្នាក់</string>
   <string name="preferences_communication__sealed_sender_allow_from_anyone_description">បើក ត្រាអ្នកផ្ញើសម្រាប់សារទទួលបានពីអ្នកក្រៅបញ្ជីទំនាក់ទំនង និងមនុស្សដែលអ្នកមិនបានចែករំលែកទម្រង់របស់អ្នក។</string>
   <string name="preferences_communication__sealed_sender_learn_more">សិក្សាបន្ថែម</string>
+  <string name="preferences_notifications__mentions">ការនិយាយ</string>
   <!--Internal only preferences-->
   <!--****************************************-->
   <!--menus-->
@@ -1599,6 +1619,7 @@
   <!--conversation_list-->
   <string name="conversation_list_settings_shortcut">ផ្លូវកាត់ ការកំណត់</string>
   <string name="conversation_list_search_description">ស្វែងរក</string>
+  <string name="conversation_list__chats">ការជជែក</string>
   <!--conversation_list_item_view-->
   <string name="conversation_list_item_view__contact_photo_image">រូបថតទំនាក់ទំនង</string>
   <string name="conversation_list_item_view__archived">បានដាក់ទុកបណ្ណសារ   </string>
@@ -1781,6 +1802,7 @@
   <string name="KbsMegaphone__update_pin">បច្ចុប្បន្នភាពកូដ PIN</string>
   <string name="KbsMegaphone__well_remind_you_later_creating_a_pin">យើងនឹងរំលឹកអ្នកពេលក្រោយ។ ការបង្កើតលេខកូដ PIN នឹងចាំបាច់ក្នុង %1$d ថ្ងៃ។</string>
   <string name="KbsMegaphone__well_remind_you_later_confirming_your_pin">យើងនឹងរំលឹកអ្នកពេលក្រោយ។ ការបញ្ជាក់លេខកូដ PIN នឹងចាំបាច់ក្នុង %1$d ថ្ងៃ។</string>
+  <!--Mention Megaphone-->
   <!--transport_selection_list_item-->
   <string name="transport_selection_list_item__transport_icon">រូបសញ្ញាជញ្ជូន</string>
   <string name="ConversationListFragment_loading">កំពុងផ្ទុក…</string>
@@ -1918,5 +1940,9 @@
   <string name="RecipientBottomSheet_copied_to_clipboard">បានចម្លងទៅ clipboard</string>
   <string name="GroupRecipientListItem_admin">អ្នកគ្រប់គ្រង</string>
   <!--GroupsLearnMoreBottomSheetDialogFragment-->
+  <!--GroupLinkBottomSheetDialogFragment-->
+  <string name="GroupLinkBottomSheet_copy">ចម្លង</string>
+  <string name="GroupLinkBottomSheet_share">ចែករំលែក</string>
+  <string name="GroupLinkBottomSheet_copied_to_clipboard">បានចម្លងទៅ clipboard</string>
   <!--EOF-->
 </resources>
