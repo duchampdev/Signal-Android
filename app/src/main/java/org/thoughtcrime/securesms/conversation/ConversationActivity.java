@@ -243,6 +243,7 @@ import org.thoughtcrime.securesms.util.FeatureFlags;
 import org.thoughtcrime.securesms.util.IdentityUtil;
 import org.thoughtcrime.securesms.util.MediaUtil;
 import org.thoughtcrime.securesms.util.MessageUtil;
+import org.thoughtcrime.securesms.util.PlayStoreUtil;
 import org.thoughtcrime.securesms.util.ServiceUtil;
 import org.thoughtcrime.securesms.util.TextSecurePreferences;
 import org.thoughtcrime.securesms.util.TextSecurePreferences.MediaKeyboardMode;
@@ -302,8 +303,6 @@ public class ConversationActivity extends PassphraseRequiredActivity
   private static final int SHORTCUT_ICON_SIZE = Build.VERSION.SDK_INT >= 26 ? ViewUtil.dpToPx(72) : ViewUtil.dpToPx(48 + 16 * 2);
 
   private static final String TAG = ConversationActivity.class.getSimpleName();
-
-  public static final String SAFETY_NUMBER_DIALOG = "SAFETY_NUMBER";
 
   private static final String STATE_REACT_WITH_ANY_PAGE = "STATE_REACT_WITH_ANY_PAGE";
 
@@ -789,7 +788,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
   }
 
   @Override
-  public boolean onPrepareOptionsMenu(Menu menu) {
+  public boolean onCreateOptionsMenu(Menu menu) {
     MenuInflater inflater = this.getMenuInflater();
     menu.clear();
 
@@ -808,7 +807,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
       if (recipient != null && recipient.get().isMuted()) inflater.inflate(R.menu.conversation_muted, menu);
       else                                                inflater.inflate(R.menu.conversation_unmuted, menu);
 
-      super.onPrepareOptionsMenu(menu);
+      super.onCreateOptionsMenu(menu);
       return true;
     }
 
@@ -944,7 +943,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
       }
     });
 
-    super.onPrepareOptionsMenu(menu);
+    super.onCreateOptionsMenu(menu);
     return true;
   }
 
@@ -1385,7 +1384,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
   private void handleRecentSafetyNumberChange() {
     List<IdentityRecord> records = identityRecords.getUnverifiedRecords();
     records.addAll(identityRecords.getUntrustedRecords());
-    SafetyNumberChangeDialog.create(records).show(getSupportFragmentManager(), SAFETY_NUMBER_DIALOG);
+    SafetyNumberChangeDialog.show(getSupportFragmentManager(), records);
   }
 
   @Override
@@ -1405,6 +1404,9 @@ public class ConversationActivity extends PassphraseRequiredActivity
       public void onSuccess(Boolean result) { }
     });
   }
+
+  @Override
+  public void onCanceled() { }
 
   private void handleSecurityChange(boolean isSecureText, boolean isDefaultSms) {
     Log.i(TAG, "handleSecurityChange(" + isSecureText + ", " + isDefaultSms + ")");
@@ -1447,7 +1449,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
 
     if (stickerLocator != null && draftMedia != null) {
       Log.d(TAG, "Handling shared sticker.");
-      sendSticker(stickerLocator, draftMedia, 0, true);
+      sendSticker(stickerLocator, Objects.requireNonNull(draftContentType), draftMedia, 0, true);
       return new SettableFuture<>(false);
     }
 
@@ -1707,6 +1709,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
       reminderView.get().showReminder(new UnauthorizedReminder(this));
     } else if (ExpiredBuildReminder.isEligible()) {
       reminderView.get().showReminder(new ExpiredBuildReminder(this));
+      reminderView.get().setOnActionClickListener(this::handleReminderAction);
     } else if (ServiceOutageReminder.isEligible(this)) {
       ApplicationDependencies.getJobManager().add(new ServiceOutageDetectionJob());
       reminderView.get().showReminder(new ServiceOutageReminder(this));
@@ -1731,6 +1734,9 @@ public class ConversationActivity extends PassphraseRequiredActivity
         break;
       case R.id.reminder_action_view_insights:
         InsightsLauncher.showInsightsDashboard(getSupportFragmentManager());
+        break;
+      case R.id.reminder_action_update_now:
+        PlayStoreUtil.openPlayStoreOrOurApkDownloadPage(this);
         break;
       default:
         throw new IllegalArgumentException("Unknown ID: " + reminderActionId);
@@ -1925,11 +1931,6 @@ public class ConversationActivity extends PassphraseRequiredActivity
 
   private void initializeLinkPreviewObserver() {
     linkPreviewViewModel = ViewModelProviders.of(this, new LinkPreviewViewModel.Factory(new LinkPreviewRepository())).get(LinkPreviewViewModel.class);
-
-    if (!SignalStore.settings().isLinkPreviewsEnabled()) {
-      linkPreviewViewModel.onUserCancel();
-      return;
-    }
 
     linkPreviewViewModel.getLinkPreviewState().observe(this, previewState -> {
       if (previewState == null) return;
@@ -2923,7 +2924,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
   }
 
   private void sendSticker(@NonNull StickerRecord stickerRecord, boolean clearCompose) {
-    sendSticker(new StickerLocator(stickerRecord.getPackId(), stickerRecord.getPackKey(), stickerRecord.getStickerId()), stickerRecord.getUri(), stickerRecord.getSize(), clearCompose);
+    sendSticker(new StickerLocator(stickerRecord.getPackId(), stickerRecord.getPackKey(), stickerRecord.getStickerId(), stickerRecord.getEmoji()), stickerRecord.getContentType(), stickerRecord.getUri(), stickerRecord.getSize(), clearCompose);
 
     SignalExecutors.BOUNDED.execute(() ->
      DatabaseFactory.getStickerDatabase(getApplicationContext())
@@ -2931,9 +2932,9 @@ public class ConversationActivity extends PassphraseRequiredActivity
     );
   }
 
-  private void sendSticker(@NonNull StickerLocator stickerLocator, @NonNull Uri uri, long size, boolean clearCompose) {
+  private void sendSticker(@NonNull StickerLocator stickerLocator, @NonNull String contentType, @NonNull Uri uri, long size, boolean clearCompose) {
     if (sendButton.getSelectedTransport().isSms()) {
-      Media  media  = new Media(uri, MediaUtil.IMAGE_WEBP, System.currentTimeMillis(), StickerSlide.WIDTH, StickerSlide.HEIGHT, size, 0, false, Optional.absent(), Optional.absent(), Optional.absent());
+      Media  media  = new Media(uri, contentType, System.currentTimeMillis(), StickerSlide.WIDTH, StickerSlide.HEIGHT, size, 0, false, Optional.absent(), Optional.absent(), Optional.absent());
       Intent intent = MediaSendActivity.buildEditorIntent(this, Collections.singletonList(media), recipient.get(), composeText.getTextTrimmed(), sendButton.getSelectedTransport());
       startActivityForResult(intent, MEDIA_SENDER);
       return;
@@ -2944,7 +2945,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
     boolean         initiating     = threadId == -1;
     TransportOption transport      = sendButton.getSelectedTransport();
     SlideDeck       slideDeck      = new SlideDeck();
-    Slide           stickerSlide   = new StickerSlide(this, uri, size, stickerLocator);
+    Slide           stickerSlide   = new StickerSlide(this, uri, size, stickerLocator, contentType);
 
     slideDeck.addSlide(stickerSlide);
 
@@ -3143,7 +3144,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
                      .setPositiveButton(R.string.conversation_activity__send, (dialog, which) -> MessageSender.resend(this, messageRecord))
                      .show();
     } else if (messageRecord.isIdentityMismatchFailure()) {
-      SafetyNumberChangeDialog.create(this, messageRecord).show(getSupportFragmentManager(), SAFETY_NUMBER_DIALOG);
+      SafetyNumberChangeDialog.show(this, messageRecord);
     } else {
       startActivity(MessageDetailsActivity.getIntentForMessageDetails(this, messageRecord, messageRecord.getRecipient().getId(), messageRecord.getThreadId()));
     }

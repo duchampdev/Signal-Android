@@ -15,10 +15,12 @@ import org.thoughtcrime.securesms.attachments.Attachment;
 import org.thoughtcrime.securesms.crypto.UnidentifiedAccessUtil;
 import org.thoughtcrime.securesms.database.DatabaseFactory;
 import org.thoughtcrime.securesms.database.GroupDatabase;
+import org.thoughtcrime.securesms.database.GroupReceiptDatabase;
 import org.thoughtcrime.securesms.database.GroupReceiptDatabase.GroupReceiptInfo;
 import org.thoughtcrime.securesms.database.MessageDatabase;
 import org.thoughtcrime.securesms.database.MmsDatabase;
 import org.thoughtcrime.securesms.database.NoSuchMessageException;
+import org.thoughtcrime.securesms.database.RecipientDatabase;
 import org.thoughtcrime.securesms.database.documents.IdentityKeyMismatch;
 import org.thoughtcrime.securesms.database.documents.NetworkFailure;
 import org.thoughtcrime.securesms.dependencies.ApplicationDependencies;
@@ -38,6 +40,7 @@ import org.thoughtcrime.securesms.recipients.RecipientId;
 import org.thoughtcrime.securesms.recipients.RecipientUtil;
 import org.thoughtcrime.securesms.transport.RetryLaterException;
 import org.thoughtcrime.securesms.transport.UndeliverableMessageException;
+import org.thoughtcrime.securesms.util.FeatureFlags;
 import org.thoughtcrime.securesms.util.GroupUtil;
 import org.whispersystems.libsignal.util.Pair;
 import org.whispersystems.libsignal.util.guava.Optional;
@@ -160,7 +163,7 @@ public final class PushGroupSendJob extends PushSendJob {
     ApplicationDependencies.getJobManager().cancelAllInQueue(TypingSendJob.getQueue(threadId));
 
     if (database.isSent(messageId)) {
-      log(TAG, "Message " + messageId + " was already sent. Ignoring.");
+      log(TAG, String.valueOf(message.getSentTimeMillis()),  "Message " + messageId + " was already sent. Ignoring.");
       return;
     }
 
@@ -171,7 +174,7 @@ public final class PushGroupSendJob extends PushSendJob {
     }
 
     try {
-      log(TAG, "Sending message: " + messageId);
+      log(TAG, String.valueOf(message.getSentTimeMillis()), "Sending message: " + messageId);
 
       if (!groupRecipient.resolve().isProfileSharing() && !database.isGroupQuitMessage(messageId)) {
         RecipientUtil.shareProfileIfFirstSecureMessage(context, groupRecipient);
@@ -195,7 +198,13 @@ public final class PushGroupSendJob extends PushSendJob {
       List<Pair<RecipientId, Boolean>> successUnidentifiedStatus = Stream.of(successes).map(result -> new Pair<>(findId(result.getAddress(), idByE164, idByUuid), result.getSuccess().isUnidentified())).toList();
       Set<RecipientId>                 successIds                = Stream.of(successUnidentifiedStatus).map(Pair::first).collect(Collectors.toSet());
       List<NetworkFailure>             resolvedNetworkFailures   = Stream.of(existingNetworkFailures).filter(failure -> successIds.contains(failure.getRecipientId(context))).toList();
-      List<IdentityKeyMismatch>        resolvedIdentityFailures = Stream.of(existingIdentityMismatches).filter(failure -> successIds.contains(failure.getRecipientId(context))).toList();
+      List<IdentityKeyMismatch>        resolvedIdentityFailures  = Stream.of(existingIdentityMismatches).filter(failure -> successIds.contains(failure.getRecipientId(context))).toList();
+      List<Recipient>                  unregisteredRecipients    = Stream.of(results).filter(SendMessageResult::isUnregisteredFailure).map(result -> Recipient.externalPush(context, result.getAddress())).toList();
+
+      RecipientDatabase recipientDatabase = DatabaseFactory.getRecipientDatabase(context);
+      for (Recipient unregistered : unregisteredRecipients) {
+        recipientDatabase.markUnregistered(unregistered.getId());
+      }
 
       for (NetworkFailure resolvedFailure : resolvedNetworkFailures) {
         database.removeFailure(messageId, resolvedFailure);
@@ -245,7 +254,7 @@ public final class PushGroupSendJob extends PushSendJob {
         RetrieveProfileJob.enqueue(mismatchRecipientIds);
       }
     } catch (UntrustedIdentityException | UndeliverableMessageException e) {
-      warn(TAG, e);
+      warn(TAG, String.valueOf(message.getSentTimeMillis()), e);
       database.markAsSentFailed(messageId);
       notifyMediaMessageDeliveryFailed(context, messageId);
     }
@@ -291,7 +300,8 @@ public final class PushGroupSendJob extends PushSendJob {
     List<SignalServiceAddress>                 addresses          = RecipientUtil.toSignalServiceAddressesFromResolved(context, destinations);
     List<Attachment>                           attachments        = Stream.of(message.getAttachments()).filterNot(Attachment::isSticker).toList();
     List<SignalServiceAttachment>              attachmentPointers = getAttachmentPointersFor(attachments);
-    boolean                                    isRecipientUpdate  = destinations.size() != DatabaseFactory.getGroupReceiptDatabase(context).getGroupReceiptInfo(messageId).size();
+    boolean                                    isRecipientUpdate  = Stream.of(DatabaseFactory.getGroupReceiptDatabase(context).getGroupReceiptInfo(messageId))
+                                                                          .anyMatch(info -> info.getStatus() > GroupReceiptDatabase.STATUS_UNDELIVERED);
 
     List<Optional<UnidentifiedAccessPair>> unidentifiedAccess = Stream.of(destinations)
                                                                       .map(recipient -> UnidentifiedAccessUtil.getAccessFor(context, recipient))
@@ -366,7 +376,10 @@ public final class PushGroupSendJob extends PushSendJob {
     List<GroupReceiptInfo> destinations = DatabaseFactory.getGroupReceiptDatabase(context).getGroupReceiptInfo(messageId);
 
     if (!destinations.isEmpty()) {
-      return Stream.of(destinations).map(GroupReceiptInfo::getRecipientId).map(Recipient::resolved).toList();
+        return RecipientUtil.getEligibleForSending(Stream.of(destinations)
+                                                         .map(GroupReceiptInfo::getRecipientId)
+                                                         .map(Recipient::resolved)
+                                                         .toList());
     }
 
     List<Recipient> members = Stream.of(DatabaseFactory.getGroupDatabase(context)
@@ -377,8 +390,8 @@ public final class PushGroupSendJob extends PushSendJob {
     if (members.size() > 0) {
       Log.w(TAG, "No destinations found for group message " + groupId + " using current group membership");
     }
-    
-    return members;
+
+    return RecipientUtil.getEligibleForSending(members);
   }
 
   public static class Factory implements Job.Factory<PushGroupSendJob> {

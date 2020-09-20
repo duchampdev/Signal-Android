@@ -47,6 +47,7 @@ import org.thoughtcrime.securesms.preferences.widgets.UsernamePreference;
 import org.thoughtcrime.securesms.profiles.edit.EditProfileActivity;
 import org.thoughtcrime.securesms.recipients.Recipient;
 import org.thoughtcrime.securesms.service.KeyCachingService;
+import org.thoughtcrime.securesms.util.CommunicationActions;
 import org.thoughtcrime.securesms.util.DynamicLanguage;
 import org.thoughtcrime.securesms.util.DynamicTheme;
 import org.thoughtcrime.securesms.util.FeatureFlags;
@@ -77,6 +78,7 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActivity
   private static final String PREFERENCE_CATEGORY_DEVICES        = "preference_category_devices";
   private static final String PREFERENCE_CATEGORY_HELP           = "preference_category_help";
   private static final String PREFERENCE_CATEGORY_ADVANCED       = "preference_category_advanced";
+  private static final String PREFERENCE_CATEGORY_DONATE         = "preference_category_donate";
 
   private final DynamicTheme    dynamicTheme    = new DynamicTheme();
   private final DynamicLanguage dynamicLanguage = new DynamicLanguage();
@@ -142,6 +144,14 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActivity
     }
   }
 
+  public void pushFragment(@NonNull Fragment fragment) {
+    getSupportFragmentManager().beginTransaction()
+                               .setCustomAnimations(R.anim.slide_from_end, R.anim.slide_to_start, R.anim.slide_from_start, R.anim.slide_to_end)
+                               .replace(android.R.id.content, fragment)
+                               .addToBackStack(null)
+                               .commit();
+  }
+
   public static class ApplicationPreferenceFragment extends CorrectedPreferenceFragment {
 
     @Override
@@ -169,7 +179,9 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActivity
       this.findPreference(PREFERENCE_CATEGORY_HELP)
           .setOnPreferenceClickListener(new CategoryClickListener(PREFERENCE_CATEGORY_HELP));
       this.findPreference(PREFERENCE_CATEGORY_ADVANCED)
-        .setOnPreferenceClickListener(new CategoryClickListener(PREFERENCE_CATEGORY_ADVANCED));
+          .setOnPreferenceClickListener(new CategoryClickListener(PREFERENCE_CATEGORY_ADVANCED));
+      this.findPreference(PREFERENCE_CATEGORY_DONATE)
+          .setOnPreferenceClickListener(new CategoryClickListener(PREFERENCE_CATEGORY_DONATE));
 
       tintIcons();
     }
@@ -284,6 +296,9 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActivity
         case PREFERENCE_CATEGORY_HELP:
           fragment = new HelpFragment();
           break;
+        case PREFERENCE_CATEGORY_DONATE:
+          CommunicationActions.openBrowserLink(requireContext(), getString(R.string.donate_url));
+          break;
         default:
           throw new AssertionError();
         }
@@ -292,14 +307,7 @@ public class ApplicationPreferencesActivity extends PassphraseRequiredActivity
           Bundle args = new Bundle();
           fragment.setArguments(args);
 
-          FragmentManager     fragmentManager     = getActivity().getSupportFragmentManager();
-          FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-          fragmentTransaction.setCustomAnimations(R.anim.slide_from_end, R.anim.slide_to_start, R.anim.slide_from_start, R.anim.slide_to_end);
-
-          fragmentTransaction.replace(android.R.id.content, fragment);
-          fragmentTransaction.addToBackStack(null);
-          fragmentTransaction.commit();
+          ((ApplicationPreferencesActivity) requireActivity()).pushFragment(fragment);
         }
 
         return true;
