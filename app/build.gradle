@@ -80,8 +80,8 @@ protobuf {
     }
 }
 
-def canonicalVersionCode = 708
-def canonicalVersionName = "4.71.5"
+def canonicalVersionCode = 709
+def canonicalVersionName = "4.72.0"
 
 def postFixSize = 10
 def abiPostFix = ['universal'   : 0,
@@ -98,6 +98,15 @@ android {
 
     dexOptions {
         javaMaxHeapSize "4g"
+    }
+
+    signingConfigs {
+        staging {
+            storeFile file("${project.rootDir}/dev.keystore")
+            storePassword 'android'
+            keyAlias 'staging'
+            keyPassword 'android'
+        }
     }
 
     defaultConfig {
@@ -195,6 +204,8 @@ android {
         }
         staging {
             initWith debug
+            applicationIdSuffix ".staging"
+            signingConfig signingConfigs.staging
 
             buildConfigField "String", "SIGNAL_URL", "\"https://textsecure-service-staging.whispersystems.org\""
             buildConfigField "String", "STORAGE_URL", "\"https://storage-staging.signal.org\""
@@ -310,7 +321,7 @@ dependencies {
 
     implementation 'org.signal:argon2:13.1@aar'
 
-    implementation 'org.signal:ringrtc-android:2.5.1'
+    implementation 'org.signal:ringrtc-android:2.7.0'
 
     implementation "me.leolin:ShortcutBadger:1.1.16"
     implementation 'se.emilsjolander:stickylistheaders:2.7.0'
