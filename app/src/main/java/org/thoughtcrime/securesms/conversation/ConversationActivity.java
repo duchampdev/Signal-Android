@@ -838,10 +838,9 @@ public class ConversationActivity extends PassphraseRequiredActivity
         } else {
           menu.findItem(R.id.menu_distribution_conversation).setChecked(true);
         }
-        inflater.inflate(R.menu.conversation_active_group_options, menu);
-      } else if (isActiveV2Group || isActiveGroup) {
-        inflater.inflate(R.menu.conversation_active_group_options, menu);
       }
+
+      inflater.inflate(R.menu.conversation_active_group_options, menu);
     }
 
     inflater.inflate(R.menu.conversation, menu);
@@ -888,7 +887,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
     if (isActiveV2Group) {
       hideMenuItem(menu, R.id.menu_mute_notifications);
       hideMenuItem(menu, R.id.menu_conversation_settings);
-    } else if (isActiveGroup) {
+    } else if (isGroupConversation()) {
       hideMenuItem(menu, R.id.menu_conversation_settings);
     }
 
@@ -2250,6 +2249,10 @@ public class ConversationActivity extends PassphraseRequiredActivity
   private Drafts getDraftsForCurrentState() {
     Drafts drafts = new Drafts();
 
+    if (recipient.get().isGroup() && !recipient.get().isActiveGroup()) {
+      return drafts;
+    }
+
     if (!Util.isEmpty(composeText)) {
       drafts.add(new Draft(Draft.TEXT, composeText.getTextTrimmed().toString()));
       List<Mention> draftMentions = composeText.getMentions();
@@ -3079,7 +3082,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
     messageRequestBottomView.setBlockOnClickListener(v -> onMessageRequestBlockClicked(viewModel));
     messageRequestBottomView.setUnblockOnClickListener(v -> onMessageRequestUnblockClicked(viewModel));
 
-    viewModel.getRecipient().observe(this, this::presentMessageRequestBottomViewTo);
+    viewModel.getMessageData().observe(this, this::presentMessageRequestBottomViewTo);
     viewModel.getMessageRequestDisplayState().observe(this, this::presentMessageRequestDisplayState);
     viewModel.getFailures().observe(this, this::showGroupChangeErrorToast);
     viewModel.getMessageRequestStatus().observe(this, status -> {
@@ -3124,7 +3127,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
   {
     reactionOverlay.setOnToolbarItemClickedListener(toolbarListener);
     reactionOverlay.setOnHideListener(onHideListener);
-    reactionOverlay.show(this, maskTarget, messageRecord, inputAreaHeight());
+    reactionOverlay.show(this, maskTarget, recipient.get(), messageRecord, inputAreaHeight());
   }
 
   @Override
@@ -3492,10 +3495,10 @@ public class ConversationActivity extends PassphraseRequiredActivity
     }
   }
 
-  private void presentMessageRequestBottomViewTo(@Nullable Recipient recipient) {
-    if (recipient == null) return;
+  private void presentMessageRequestBottomViewTo(@Nullable MessageRequestViewModel.MessageData messageData) {
+    if (messageData == null) return;
 
-    messageRequestBottomView.setRecipient(recipient);
+    messageRequestBottomView.setMessageData(messageData);
   }
 
   private static class KeyboardImageDetails {
