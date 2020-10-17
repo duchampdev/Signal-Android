@@ -226,7 +226,7 @@ public class ConversationListFragment extends MainFragment implements ActionMode
 
     snapToTopDataObserver = new SnapToTopDataObserver(list);
 
-    new ItemTouchHelper(new ArchiveListenerCallback()).attachToRecyclerView(list);
+    //new ItemTouchHelper(new ArchiveListenerCallback()).attachToRecyclerView(list);
 
     fab.setOnClickListener(v -> startActivity(new Intent(getActivity(), NewConversationActivity.class)));
     cameraFab.setOnClickListener(v -> {
