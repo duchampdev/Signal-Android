@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Process;
 import android.os.RemoteException;
 import android.support.v4.media.MediaBrowserCompat;
+import android.support.v4.media.MediaDescriptionCompat;
 import android.support.v4.media.session.MediaControllerCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
@@ -89,7 +90,7 @@ public class VoiceNotePlaybackService extends MediaBrowserServiceCompat {
     VoiceNoteMediaSourceFactory mediaSourceFactory = new VoiceNoteMediaSourceFactory(this);
 
     voiceNotePlaybackPreparer = new VoiceNotePlaybackPreparer(this, player, queueDataAdapter, mediaSourceFactory);
-    voiceNoteProximityManager = new VoiceNoteProximityManager(this, player);
+    voiceNoteProximityManager = new VoiceNoteProximityManager(this, player, queueDataAdapter);
 
     mediaSession.setPlaybackState(stateBuilder.build());
 
@@ -162,7 +163,16 @@ public class VoiceNotePlaybackService extends MediaBrowserServiceCompat {
 
     @Override
     public void onPositionDiscontinuity(int reason) {
-      int     currentWindowIndex = player.getCurrentWindowIndex();
+      int currentWindowIndex = player.getCurrentWindowIndex();
+      if (currentWindowIndex == C.INDEX_UNSET) {
+        return;
+      }
+
+      if (reason == Player.DISCONTINUITY_REASON_PERIOD_TRANSITION) {
+        MediaDescriptionCompat mediaDescriptionCompat = queueDataAdapter.getMediaDescription(currentWindowIndex);
+        Log.d(TAG, "onPositionDiscontinuity: current window uri: " + mediaDescriptionCompat.getMediaUri());
+      }
+
       boolean isWithinThreshold  = currentWindowIndex < LOAD_MORE_THRESHOLD ||
                                    currentWindowIndex + LOAD_MORE_THRESHOLD >= queueDataAdapter.size();
 

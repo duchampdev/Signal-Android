@@ -839,13 +839,13 @@
   <string name="MessageRecord_left_group">Zapustili ste skupino.</string>
   <string name="MessageRecord_you_updated_group">Posodobili ste skupino.</string>
   <string name="MessageRecord_the_group_was_updated">Skupina je bila posodobljena</string>
-  <string name="MessageRecord_you_called">Klicali ste</string>
-  <string name="MessageRecord_called_you">Imeli ste klic</string>
-  <string name="MessageRecord_missed_call">Neodgovorjen klic</string>
+  <!-- Removed by excludeNonTranslatables <string name="MessageRecord_you_called">Klicali ste</string> -->
+  <!-- Removed by excludeNonTranslatables <string name="MessageRecord_called_you">Imeli ste klic</string> -->
+  <!-- Removed by excludeNonTranslatables <string name="MessageRecord_missed_call">Neodgovorjen klic</string> -->
   <string name="MessageRecord_s_updated_group">Oseba %s je posodobila skupino.</string>
-  <string name="MessageRecord_s_called_you">Oseba %s vas je klicala</string>
+  <!-- Removed by excludeNonTranslatables <string name="MessageRecord_s_called_you">Oseba %s vas je klicala</string> -->
   <string name="MessageRecord_called_s">Klicali ste: %s</string>
-  <string name="MessageRecord_missed_call_from">Neodgovorjen klic: %s</string>
+  <!-- Removed by excludeNonTranslatables <string name="MessageRecord_missed_call_from">Neodgovorjen klic: %s</string> -->
   <string name="MessageRecord_s_joined_signal">%s uporablja Signal!</string>
   <string name="MessageRecord_you_disabled_disappearing_messages">Izklopili ste izginjajoča sporočila</string>
   <string name="MessageRecord_s_disabled_disappearing_messages">Uporabnik/ca %1$s je izklopil/a izginjajoča sporočila.</string>
@@ -1518,8 +1518,8 @@ Prejeto sporočilo za izmenjavo ključev za napačno različico protokola.</stri
   <string name="ContactSelectionListFragment_error_retrieving_contacts_check_your_network_connection">Napaka pri preverjanju uporabnikov/ic. Preverite svoj dostop do omrežja.</string>
   <string name="ContactSelectionListFragment_username_not_found">Uporabniško ime ni bilo najdeno</string>
   <string name="ContactSelectionListFragment_s_is_not_a_signal_user">\"%1$s\" ni uporabnik/ca storitve Signal. Preverite uporabniško ime in poskusite znova.</string>
-  <string name="ContactSelectionListFragment_okay">Okej</string>
-  <string name="ContactSelectionListFragment_the_group_is_full">Skupina je polna</string>
+  <!-- Removed by excludeNonTranslatables <string name="ContactSelectionListFragment_okay">Okej</string> -->
+  <!-- Removed by excludeNonTranslatables <string name="ContactSelectionListFragment_the_group_is_full">Skupina je polna</string> -->
   <string name="ContactSelectionListFragment_you_do_not_need_to_add_yourself_to_the_group">Sebe ne rabite dodajati v skupino.</string>
   <!--blocked_contacts_fragment-->
   <string name="blocked_contacts_fragment__no_blocked_contacts">Ni blokiranih uporabnikov/ic</string>
@@ -2240,7 +2240,7 @@ Prejeto sporočilo za izmenjavo ključev za napačno različico protokola.</stri
   <string name="ResearchMegaphoneDialog_we_believe_in_privacy"><![CDATA[<p><b>Verjamemo v zasebno komunikacijo.</b></p><p>Signal vam ne sledi in ne zbira vaših podatkov. Za izboljšave aplikacije se zanašamo na vaše povratne informacije, <b>ki jih zelo cenimo.</b></p><p>Zato delamo raziskavo, da bi ugotovili, kako uporabljate aplikacijo Signal. Raziskava ne zahteva od vas nobenih podatkov, po katerih bi vas lahko prepoznali. Če pa bi radi z nami delili dodatne informacije, nam lahko tudi posredujete svoj kontakt.</p><p>Če imate nekaj minut časa in izdelano mnenje o nas, vam bomo z veseljem prisluhnili.</p>]]></string>
   <string name="ResearchMegaphoneDialog_take_the_survey">Izpolnite anketo</string>
   <string name="ResearchMegaphoneDialog_no_thanks">Ne, hvala!</string>
-  <string name="ResearchMegaphoneDialog_the_survey_is_hosted_by_surveygizmo_at_the_secure_domain">Anketa gostuje pri Surveygizmo na domain surveys.signalusers.org</string>
+  <!-- Removed by excludeNonTranslatables <string name="ResearchMegaphoneDialog_the_survey_is_hosted_by_surveygizmo_at_the_secure_domain">Anketa gostuje pri Surveygizmo na domain surveys.signalusers.org</string> -->
   <!--transport_selection_list_item-->
   <string name="transport_selection_list_item__transport_icon">Ikona transporta</string>
   <string name="ConversationListFragment_loading">Nalaganje …</string>

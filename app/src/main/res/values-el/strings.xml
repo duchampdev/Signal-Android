@@ -771,13 +771,13 @@
   <string name="MessageRecord_left_group">Αποχώρησες απ\' την ομάδα.</string>
   <string name="MessageRecord_you_updated_group">Ενημέρωσες την ομάδα</string>
   <string name="MessageRecord_the_group_was_updated">Η ομάδα ανανεώθηκε.</string>
-  <string name="MessageRecord_you_called">Τον/την κάλεσες</string>
-  <string name="MessageRecord_called_you">Η επαφή σε κάλεσε</string>
-  <string name="MessageRecord_missed_call">Αναπάντητη κλήση</string>
+  <!-- Removed by excludeNonTranslatables <string name="MessageRecord_you_called">Τον/την κάλεσες</string> -->
+  <!-- Removed by excludeNonTranslatables <string name="MessageRecord_called_you">Η επαφή σε κάλεσε</string> -->
+  <!-- Removed by excludeNonTranslatables <string name="MessageRecord_missed_call">Αναπάντητη κλήση</string> -->
   <string name="MessageRecord_s_updated_group">Ο/Η %s ενημέρωσε την ομάδα.</string>
-  <string name="MessageRecord_s_called_you">O/H %s σε κάλεσε</string>
+  <!-- Removed by excludeNonTranslatables <string name="MessageRecord_s_called_you">O/H %s σε κάλεσε</string> -->
   <string name="MessageRecord_called_s">Κάλεσες τον/την %s</string>
-  <string name="MessageRecord_missed_call_from">Αναπάντητη κλήση από τον/την %s</string>
+  <!-- Removed by excludeNonTranslatables <string name="MessageRecord_missed_call_from">Αναπάντητη κλήση από τον/την %s</string> -->
   <string name="MessageRecord_s_joined_signal">Ο/Η %s ήρθε στο Signal!</string>
   <string name="MessageRecord_you_disabled_disappearing_messages">Απενεργοποίησες τα μηνύματα που εξαφανίζονται.</string>
   <string name="MessageRecord_s_disabled_disappearing_messages">Ο/Η %1$s απενεργοποίησε τα μηνύματα που εξαφανίζονται.</string>
@@ -1428,8 +1428,8 @@
   <string name="ContactSelectionListFragment_error_retrieving_contacts_check_your_network_connection">Σφάλμα κατά τη λήψη επαφών, έλεγξε τη σύνδεσή σου στο δίκτυο</string>
   <string name="ContactSelectionListFragment_username_not_found">Το όνομα χρήστη δε βρέθηκε</string>
   <string name="ContactSelectionListFragment_s_is_not_a_signal_user">Ο/Η \"%1$s\" δεν είναι χρήστης του Signal. Παρακαλώ επιβεβαίωσε το όνομα χρήστη και ξαναδοκίμασε.</string>
-  <string name="ContactSelectionListFragment_okay">Εντάξει</string>
-  <string name="ContactSelectionListFragment_the_group_is_full">Η ομάδα είναι γεμάτη</string>
+  <!-- Removed by excludeNonTranslatables <string name="ContactSelectionListFragment_okay">Εντάξει</string> -->
+  <!-- Removed by excludeNonTranslatables <string name="ContactSelectionListFragment_the_group_is_full">Η ομάδα είναι γεμάτη</string> -->
   <string name="ContactSelectionListFragment_you_do_not_need_to_add_yourself_to_the_group">Δεν χρειάζεται να προσθέσεις τον εαυτό σου στην ομάδα</string>
   <!--blocked_contacts_fragment-->
   <string name="blocked_contacts_fragment__no_blocked_contacts">Καμία φραγμένη επαφή</string>
@@ -1741,7 +1741,7 @@
   <string name="preferences__use_signal_for_viewing_and_storing_all_incoming_multimedia_messages">Χρήση του Signal για όλα τα εισερχόμενα μηνύματα πολυμέσων</string>
   <string name="preferences__pref_enter_sends_title">Το Enter στέλνει</string>
   <string name="preferences__pressing_the_enter_key_will_send_text_messages">Τα μηνύματα θα στέλνονται με το πάτημα του Enter</string>
-  <string name="preferences__generate_link_previews">Δημιουργία προεπισκόπησης συνδέσμου</string>
+  <string name="preferences__generate_link_previews">Προεπισκόπηση συνδέσμων</string>
   <string name="preferences__retrieve_link_previews_from_websites_for_messages">Λάβε προεπισκόπεις συνδέσμων απ\' ευθείας από σελίδες για τα μηνύματα που στέλνεις.</string>
   <string name="preferences__choose_identity">Επέλεξε ταυτότητα</string>
   <string name="preferences__choose_your_contact_entry_from_the_contacts_list">Διάλεξε την επαφή σου από τη λίστα επαφών.</string>
@@ -1866,7 +1866,7 @@
   <string name="preferences_chats__show_invitation_prompts">Προβολή υπενθυμίσεων πρόσκλησης</string>
   <string name="preferences_chats__display_invitation_prompts_for_contacts_without_signal">Εμφάνιση υπενθυμίσεων πρόσκλησης για επαφές που δεν έχουν Signal</string>
   <string name="preferences_chats__message_text_size">Μέγεθος γραμματοσειράς μηνύματος</string>
-  <string name="preferences_events__contact_joined_signal">Η επαφή εγκατέστησε το Signal</string>
+  <string name="preferences_events__contact_joined_signal">Επαφή που εγκατέστησε το Signal</string>
   <string name="preferences_notifications__priority">Προτεραιότητα</string>
   <string name="preferences_communication__category_sealed_sender">Προστατευμένος αποστολέας</string>
   <string name="preferences_communication__sealed_sender_display_indicators">Προβολή δεικτών</string>
@@ -2119,7 +2119,7 @@
   <string name="ResearchMegaphoneDialog_we_believe_in_privacy"><![CDATA[<p><b>Πιστεύουμε στην ιδιωτικότητα.</b></p><p>Το Signal δεν σε παρακολουθεί ούτε συλλέγει τα δεδομένα σου. Για να βελτιώσουμε το Signal για όλους, βασιζόμαστε στα σχόλια των χρηστών <b>και θα εκτιμούσαμε πολύ να ακούσουμε τα δικά σου.</b></p><p>Κάνουμε μαι έρευνα που θα μας βοηθήσει να καταλάβουμε πως χρησιμοποιείς το Signal. Η έρευνά μας δεν συλλέγει δεδομένα που θα μπορούσαν να αποκαλύψουν την ταυτότητά σου. Αν ενδιαφέρεσαι να μας βοηθήσεις με περαιτέρω πληροφορίες και σχόλια, μπορείς να μας δώσεις στοιχεία επικοινωνίας.</p><p>Αν έχεις μερικά λεπτά διαθέσιμα, και έχεις κάτι να σχολιάσεις, με χαρά θα θέλαμε να το ακούσουμε.</p>]]></string>
   <string name="ResearchMegaphoneDialog_take_the_survey">Πάρε μέρος στην έρευνα</string>
   <string name="ResearchMegaphoneDialog_no_thanks">Όχι, ευχαριστώ</string>
-  <string name="ResearchMegaphoneDialog_the_survey_is_hosted_by_surveygizmo_at_the_secure_domain">Αυτή η έρευνα φιλοξενείται από το Surveygizmo στον ασφαλή σύνδεσμο surveys.signalusers.org</string>
+  <!-- Removed by excludeNonTranslatables <string name="ResearchMegaphoneDialog_the_survey_is_hosted_by_surveygizmo_at_the_secure_domain">Αυτή η έρευνα φιλοξενείται από το Surveygizmo στον ασφαλή σύνδεσμο surveys.signalusers.org</string> -->
   <!--transport_selection_list_item-->
   <string name="transport_selection_list_item__transport_icon">Μεταφορά εικονίδιου</string>
   <string name="ConversationListFragment_loading">Φόρτωση…</string>

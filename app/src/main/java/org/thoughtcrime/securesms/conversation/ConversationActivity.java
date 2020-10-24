@@ -860,7 +860,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
       inflater.inflate(R.menu.conversation_add_to_contacts, menu);
     }
 
-    if (recipient != null && recipient.get().isLocalNumber()) {
+    if (recipient != null && recipient.get().isSelf()) {
       if (isSecureText) {
         hideMenuItem(menu, R.id.menu_call_secure);
         hideMenuItem(menu, R.id.menu_video_secure);
@@ -1002,9 +1002,13 @@ public class ConversationActivity extends PassphraseRequiredActivity
   @Override
   public void onBackPressed() {
     Log.d(TAG, "onBackPressed()");
-    if (reactionOverlay.isShowing())  reactionOverlay.hide();
-    else if (container.isInputOpen()) container.hideCurrentInput(composeText);
-    else                              super.onBackPressed();
+    if (reactionOverlay.isShowing()) {
+      reactionOverlay.hide();
+    } else if (container.isInputOpen()) {
+      container.hideCurrentInput(composeText);
+    } else {
+      super.onBackPressed();
+    }
   }
 
   @Override
@@ -1057,6 +1061,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
     Permissions.with(this)
                .request(Manifest.permission.READ_EXTERNAL_STORAGE)
                .onAllGranted(() -> viewModel.onAttachmentKeyboardOpen())
+               .withPermanentDenialDialog(getString(R.string.AttachmentManager_signal_requires_the_external_storage_permission_in_order_to_attach_photos_videos_or_audio))
                .execute();
   }
 
@@ -1245,7 +1250,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
                                           @NonNull Recipient recipient)
   {
     IconCompat icon = IconCompat.createWithAdaptiveBitmap(bitmap);
-    String     name = recipient.isLocalNumber() ? context.getString(R.string.note_to_self)
+    String     name = recipient.isSelf() ? context.getString(R.string.note_to_self)
                                                   : recipient.getDisplayName(context);
 
     ShortcutInfoCompat shortcutInfoCompat = new ShortcutInfoCompat.Builder(context, recipient.getId().serialize() + '-' + System.currentTimeMillis())
@@ -2422,7 +2427,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
     if (!TextSecurePreferences.isPushRegistered(this)) return false;
     if (recipient.get().isGroup())                     return false;
 
-    return recipient.get().isLocalNumber();
+    return recipient.get().isSelf();
   }
 
   private boolean isGroupConversation() {

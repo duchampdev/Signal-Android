@@ -305,7 +305,7 @@
   <string name="ConversationFragment_deleting">Mažu</string>
   <string name="ConversationFragment_deleting_messages">Mažu zprávy…</string>
   <string name="ConversationFragment_delete_for_me">Smazat u mne</string>
-  <string name="ConversationFragment_delete_for_everyone">Pro každého smazat</string>
+  <string name="ConversationFragment_delete_for_everyone">Smazat u každého</string>
   <string name="ConversationFragment_this_message_will_be_deleted_for_everyone_in_the_conversation">Tato zpráva bude smazána pro všechny účastníky konverzace, pokud používají poslední verzi Signalu. Budou vidět, že jste smazali zprávu.</string>
   <string name="ConversationFragment_quoted_message_not_found">Původní zpráva nebyla nalezena</string>
   <string name="ConversationFragment_quoted_message_no_longer_available">Původní zpráva již není dostupná</string>
@@ -839,13 +839,13 @@
   <string name="MessageRecord_left_group">Opustili jste skupinu</string>
   <string name="MessageRecord_you_updated_group">Upravili jste skupinu.</string>
   <string name="MessageRecord_the_group_was_updated">Skupina byla aktualizována.</string>
-  <string name="MessageRecord_you_called">Vy jste volal</string>
-  <string name="MessageRecord_called_you">Volal vám kontakt</string>
-  <string name="MessageRecord_missed_call">Zmeškaný hovor</string>
+  <!-- Removed by excludeNonTranslatables <string name="MessageRecord_you_called">Vy jste volal</string> -->
+  <!-- Removed by excludeNonTranslatables <string name="MessageRecord_called_you">Volal vám kontakt</string> -->
+  <!-- Removed by excludeNonTranslatables <string name="MessageRecord_missed_call">Zmeškaný hovor</string> -->
   <string name="MessageRecord_s_updated_group">%s upravil(a) skupinu.</string>
-  <string name="MessageRecord_s_called_you">%s vám volal</string>
+  <!-- Removed by excludeNonTranslatables <string name="MessageRecord_s_called_you">%s vám volal</string> -->
   <string name="MessageRecord_called_s">Volán %s</string>
-  <string name="MessageRecord_missed_call_from">Zmeškaný hovor od %s</string>
+  <!-- Removed by excludeNonTranslatables <string name="MessageRecord_missed_call_from">Zmeškaný hovor od %s</string> -->
   <string name="MessageRecord_s_joined_signal">%s má Signal!</string>
   <string name="MessageRecord_you_disabled_disappearing_messages">Zakázali jste zmizení zpráv.</string>
   <string name="MessageRecord_s_disabled_disappearing_messages">%1$szakázal(a) zmizení zpráv.</string>
@@ -1526,8 +1526,8 @@ Obdržen požadavek na výměnu klíčů pro neplatnou verzi protokolu.
   <string name="ContactSelectionListFragment_error_retrieving_contacts_check_your_network_connection">Nepodařilo se načíst kontakty, zkontrolujte připojení k síti.</string>
   <string name="ContactSelectionListFragment_username_not_found">Uživatelské jméno nebylo nalezeno</string>
   <string name="ContactSelectionListFragment_s_is_not_a_signal_user">\"%1$s\" není uživatel Signalu. Prosím zkontrolujte uživatelské jméno a zkuste to znovu.</string>
-  <string name="ContactSelectionListFragment_okay">V pořádku</string>
-  <string name="ContactSelectionListFragment_the_group_is_full">Skupina je plná</string>
+  <!-- Removed by excludeNonTranslatables <string name="ContactSelectionListFragment_okay">V pořádku</string> -->
+  <!-- Removed by excludeNonTranslatables <string name="ContactSelectionListFragment_the_group_is_full">Skupina je plná</string> -->
   <string name="ContactSelectionListFragment_you_do_not_need_to_add_yourself_to_the_group">Nemusíte se přidávat do skupiny</string>
   <!--blocked_contacts_fragment-->
   <string name="blocked_contacts_fragment__no_blocked_contacts">Žádné blokované kontakty</string>
@@ -2248,7 +2248,7 @@ Obdržen požadavek na výměnu klíčů pro neplatnou verzi protokolu.
   <string name="ResearchMegaphoneDialog_we_believe_in_privacy"><![CDATA[<p><b>Věříme v soukromí.</b></p><p>Signal vás nesleduje ani nesbírá vaše data. Abychom Signal vylepšili pro všechny, spoléháme na zpětnou vazbu uživatelů, <b>a rádi bychom ji od vás získali.</b></p><p>Pořádáme anketu, abychom porozuměli, jak Signal používáte. Naše anketa neshromažďuje žádná data, která by vás identifikovala. Pokud byste měli zájem sdílet další zpětnou vazbu, budete mít možnost poskytnout kontaktní informace.</p><p>Jestli máte pár minut a zpětnou vazbu, kterou můžete nabídnout, rádi ji od vás získáme.</p>]]></string>
   <string name="ResearchMegaphoneDialog_take_the_survey">Zúčastnit se ankety</string>
   <string name="ResearchMegaphoneDialog_no_thanks">Ne díky</string>
-  <string name="ResearchMegaphoneDialog_the_survey_is_hosted_by_surveygizmo_at_the_secure_domain">Anketu pořádá Surveygizmo na zabezpečené doméně surveys.signalusers.org</string>
+  <!-- Removed by excludeNonTranslatables <string name="ResearchMegaphoneDialog_the_survey_is_hosted_by_surveygizmo_at_the_secure_domain">Anketu pořádá Surveygizmo na zabezpečené doméně surveys.signalusers.org</string> -->
   <!--transport_selection_list_item-->
   <string name="transport_selection_list_item__transport_icon">Ikona přenosu</string>
   <string name="ConversationListFragment_loading">Načítání…</string>
