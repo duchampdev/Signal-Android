@@ -80,8 +80,8 @@ protobuf {
     }
 }
 
-def canonicalVersionCode = 726
-def canonicalVersionName = "4.75.1"
+def canonicalVersionCode = 732
+def canonicalVersionName = "4.75.8"
 
 def postFixSize = 10
 def abiPostFix = ['universal'   : 0,
@@ -245,6 +245,13 @@ android {
             ext.websiteUpdateUrl = "https://updates.signal.org/android"
             buildConfigField "boolean", "PLAY_STORE_DISABLED", "true"
             buildConfigField "String", "NOPLAY_UPDATE_URL", "\"$ext.websiteUpdateUrl\""
+        }
+
+        internal {
+            dimension "none"
+            ext.websiteUpdateUrl = "null"
+            buildConfigField "boolean", "PLAY_STORE_DISABLED", "false"
+            buildConfigField "String", "NOPLAY_UPDATE_URL", "$ext.websiteUpdateUrl"
         }
     }
 
@@ -445,6 +452,12 @@ def signProductionRelease = { variant ->
 task signProductionPlayRelease {
     doLast {
         signProductionRelease(android.applicationVariants.find { (it.name == 'playRelease') })
+    }
+}
+
+task signProductionInternalRelease {
+    doLast {
+        signProductionRelease(android.applicationVariants.find { (it.name == 'internalRelease') })
     }
 }
 
