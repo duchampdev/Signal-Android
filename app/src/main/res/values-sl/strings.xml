@@ -85,8 +85,17 @@
   <string name="AttachmentUploadJob_compressing_video_start">Kompresija videa …</string>
   <!--AudioSlidePlayer-->
   <string name="AudioSlidePlayer_error_playing_audio">Napaka pri predvajanju zvoka!</string>
-  <!--BlockedContactsActivity-->
-  <string name="BlockedContactsActivity_blocked_contacts">Blokirani uporabniki/ce</string>
+  <!--BlockedUsersActivity-->
+  <string name="BlockedUsersActivity__blocked_users">Blokirani/e uporabniki/ce</string>
+  <string name="BlockedUsersActivity__add_blocked_user">Dodaj blokiranega uporabnika/co</string>
+  <string name="BlockedUsersActivity__blocked_users_will">Blokirani/e uporabniki/ce vas ne bodo mogli/e klicati, oziroma vam pošiljati sporočil.</string>
+  <string name="BlockedUsersActivity__no_blocked_users">Ni blokiranih uporabnikov/ic</string>
+  <string name="BlockedUsersActivity__block_user">Želite blokirati uporabnika/co?</string>
+  <string name="BlockedUserActivity__s_will_not_be_able_to">Uporabnik/ca \"%1$s\" vas ne bodo mogel/la klicati ali vam pošiljati sporočil.</string>
+  <string name="BlockedUsersActivity__block">Blokiraj</string>
+  <string name="BlockedUsersActivity__unblock_user">Želite odblokirati uporabnika/co?</string>
+  <string name="BlockedUsersActivity__do_you_want_to_unblock_s">Želite odbloirati uporabnika/co \"%1$s\"?</string>
+  <string name="BlockedUsersActivity__unblock">Odblokiraj</string>
   <!--BlockUnblockDialog-->
   <string name="BlockUnblockDialog_block_and_leave_s">Blokiram in zapustim skupino %1$s?</string>
   <string name="BlockUnblockDialog_block_s">Blokiram uporabnika/co %1$s?</string>
@@ -315,6 +324,10 @@
   <string name="ConversationFragment_outgoing_view_once_media_files_are_automatically_removed">Poslane medijske datoteke za enkraten ogled so avtomatično odstranjene s seznama </string>
   <string name="ConversationFragment_you_already_viewed_this_message">To sporočilo ste že videli</string>
   <string name="ConversationFragment__you_can_add_notes_for_yourself_in_this_conversation">V tem pogovoru lahko shranjujete lastne zabeležke.\nČe je vaš račun povezan s še kakšno napravo, se bodo zabeležke prenesle tudi tja.</string>
+  <string name="ConversationFragment__d_group_members_have_the_same_name">%1$d članov/ic skupine ima enako ime.</string>
+  <string name="ConversationFragment__tap_to_review">Tapnite za pregled</string>
+  <string name="ConversationFragment__review_requests_carefully">Pazljivo preglejte prošnje</string>
+  <string name="ConversationFragment__signal_found_another_contact_with_the_same_name">Signal je našel drug stik z enakim imenom.</string>
   <!--ConversationListActivity-->
   <string name="ConversationListActivity_there_is_no_browser_installed_on_your_device">Na svoji napravi nimate nameščenega spletnega brskalnika.</string>
   <!--ConversationListFragment-->
@@ -485,6 +498,67 @@
   <string name="GroupManagement_invite_single_user">Uporabnika/ce “%1$s” ne morete avtomatično dodati k skupini.\n\nPoslano mu/ji je bilo vabilo in dokler ga ne potrdi, ne bo videl/a sporočil skupine.</string>
   <string name="GroupManagement_learn_more">Več o funkciji zakriti pošiljatelj</string>
   <string name="GroupManagement_invite_multiple_users">Teh uporabnikov/ic ne morete avtomatično dodati v skupino.\n\nPoslano jim je bilo vabilo in dokler ga ne potrdijo, ne bodo videli/e sporočil skupine.</string>
+  <!--GroupsV1MigrationLearnMoreBottomSheetDialogFragment-->
+  <string name="GroupsV1MigrationLearnMore_what_are_new_groups">Kaj so Nove skupine?</string>
+  <string name="GroupsV1MigrationLearnMore_new_groups_have_features_like_mentions">Nove skupine omogočajo napredne funkcije kot so @omembe in skrbniki/ce skupin, ter v prihodnosti še veliko novih funkcij.</string>
+  <string name="GroupsV1MigrationLearnMore_all_message_history_and_media_has_been_kept">Zgodovina pogovorov in medijskih datotek je bila ohranjena in nadgrajena.</string>
+  <plurals name="GroupsV1MigrationLearnMore_these_members_will_need_to_accept_an_invite">
+    <item quantity="one">Ta član/ica bo moral/a potrditi vabilo za ponovno pridružitev skupini in do takrat ne bo mogel/a prejemati novih sporočil skupine:</item>
+    <item quantity="two">Ta/ti dva/e člana/ici bosta morala/i potrditi vabilo za ponovno pridružitev skupini in do takrat ne bosta mogla/i prejemati novih sporočil skupine:</item>
+    <item quantity="few">Ti/te člani/ce bodo morali/e potrditi vabilo za ponovno pridružitev skupini in do takrat ne bodo mogli/e prejemati novih sporočil skupine:</item>
+    <item quantity="other">Ti/te člani/ce bodo morali/e potrditi vabilo za ponovno pridružitev skupini in do takrat ne bodo mogli/e prejemati novih sporočil skupine:</item>
+  </plurals>
+  <!-- Removed by excludeNonTranslatables <plurals name="GroupsV1MigrationLearnMore_these_members_are_not_capable_of_joining_new_groups">
+    <item quantity="one">Ta član/ica se ne more pridružiti Novim skupinam, zato je bil/a odstranjen/a iz skupine:</item>
+    <item quantity="two">Ta/ti dva/e člana/ici se ne moreta pridružiti Novim skupinam, zato sta bila/i odstranjena/i iz skupine:</item>
+    <item quantity="few">Ti/te člani/ce se ne morejo pridružiti Novim skupinam, zato so bili/e odstranjeni/e iz skupine:</item>
+    <item quantity="other">Ti/te člani/ce se ne morejo pridružiti Novim skupinam, zato so bili/e odstranjeni/e iz skupine:</item>
+  </plurals> -->
+  <!--GroupsV1MigrationSuggestionsReminder-->
+  <plurals name="GroupsV1MigrationSuggestionsReminder_members_couldnt_be_added_to_the_new_group">
+    <item quantity="one">%1$d član/ica ni mogel/la biti ponovno dodan/a v Novo skupino. Ga/jo želite dodati zdaj?</item>
+    <item quantity="two">%1$d člana/ici nista mogla/i biti ponovno dodana/i v Novo skupino. Ju želite dodati zdaj?</item>
+    <item quantity="few">%1$d člani/ice niso mogli/e biti ponovno dodani/e v Novo skupino. Jih želite dodati zdaj?</item>
+    <item quantity="other">%1$d članov/ic ni moglo biti ponovno dodanih v Novo skupino. Jih želite dodati zdaj?</item>
+  </plurals>
+  <plurals name="GroupsV1MigrationSuggestionsReminder_add_members">
+    <item quantity="one">Dodaj člana/ico</item>
+    <item quantity="two">Dodaj člana/ici</item>
+    <item quantity="few">Dodaj člane/ice</item>
+    <item quantity="other">Dodaj člane/ice</item>
+  </plurals>
+  <string name="GroupsV1MigrationSuggestionsReminder_not_now">Ne zdaj</string>
+  <!--GroupsV1MigrationSuggestionsDialog-->
+  <plurals name="GroupsV1MigrationSuggestionsDialog_add_members_question">
+    <item quantity="one">Želite dodati člana/ico?</item>
+    <item quantity="two">Želite dodati člana/ici?</item>
+    <item quantity="few">Želite dodati člane/ice?</item>
+    <item quantity="other">Želite dodati člane/ice?</item>
+  </plurals>
+  <plurals name="GroupsV1MigrationSuggestionsDialog_these_members_couldnt_be_automatically_added">
+    <item quantity="one">Ta član/ica ni mogel/la biti avtomatično dodan/a, ko je bila skupina nadgrajena v Novo skupino:</item>
+    <item quantity="two">Ta/i člana/ici nista mogla/i biti avtomatično dodana/i, ko je bila skupina nadgrajena v Novo skupino:</item>
+    <item quantity="few">Ti/e člani/ce niso mogli/e biti avtomatično dodani/e, ko je bila skupina nadgrajena v Novo skupino:</item>
+    <item quantity="other">Ti/e člani/ce niso mogli/e biti avtomatično dodani/e, ko je bila skupina nadgrajena v Novo skupino:</item>
+  </plurals>
+  <plurals name="GroupsV1MigrationSuggestionsDialog_add_members">
+    <item quantity="one">Dodaj člana/ico</item>
+    <item quantity="two">Dodaj člana/ici</item>
+    <item quantity="few">Dodaj člane/ice</item>
+    <item quantity="other">Dodaj člane/ice</item>
+  </plurals>
+  <plurals name="GroupsV1MigrationSuggestionsDialog_failed_to_add_members_try_again_later">
+    <item quantity="one">Dodajanje člana/ice ni bilo uspešno. Poskusite znova kasneje.</item>
+    <item quantity="two">Dodajanje članov/ic ni bilo uspešno. Poskusite znova kasneje.</item>
+    <item quantity="few">Dodajanje članov/ic ni bilo uspešno. Poskusite znova kasneje.</item>
+    <item quantity="other">Dodajanje članov/ic ni bilo uspešno. Poskusite znova kasneje.</item>
+  </plurals>
+  <plurals name="GroupsV1MigrationSuggestionsDialog_cannot_add_members">
+    <item quantity="one">Dodajanje člana/ice ni mogoče.</item>
+    <item quantity="two">Dodajanje članov/ic ni mogoče.</item>
+    <item quantity="few">Dodajanje članov/ic ni mogoče.</item>
+    <item quantity="other">Dodajanje članov/ic ni mogoče.</item>
+  </plurals>
   <!--LeaveGroupDialog-->
   <string name="LeaveGroupDialog_leave_group">Želite zapustiti skupino?</string>
   <string name="LeaveGroupDialog_you_will_no_longer_be_able_to_send_or_receive_messages_in_this_group">Ne boste več mogli pošiljati in prejemati sporočil v tej skupini.</string>
@@ -578,8 +652,8 @@
   <string name="ManageGroupActivity_disappearing_messages">Izginjajoča sporočila</string>
   <string name="ManageGroupActivity_pending_group_invites">Čakajoča vabila v skupine</string>
   <string name="ManageGroupActivity_member_requests_and_invites">Vabila in prošnje za članstvo</string>
-  <string name="ManageGroupActivity_add_members">Dodaj člane/ice</string>
-  <string name="ManageGroupActivity_edit_group_info">Uredi podatke o skupini</string>
+  <string name="ManageGroupActivity_add_members">Dodajanje članov/ic</string>
+  <string name="ManageGroupActivity_edit_group_info">Urejanje podatkov o skupini</string>
   <string name="ManageGroupActivity_who_can_add_new_members">Kdo lahko dodaja nove člane?</string>
   <string name="ManageGroupActivity_who_can_edit_this_groups_info">Kdo lahko ureja informacije o skupini</string>
   <string name="ManageGroupActivity_group_link">Povezava do skupine</string>
@@ -876,7 +950,8 @@
   <string name="MessageRecord_you_updated_group">Posodobili ste skupino.</string>
   <string name="MessageRecord_the_group_was_updated">Skupina je bila posodobljena</string>
   <string name="MessageRecord_you_called_date">Klicali ste · %1$s</string>
-  <!-- Removed by excludeNonTranslatables <string name="MessageRecord_missed_call_date">Zgrešen klic · %1$s</string> -->
+  <string name="MessageRecord_missed_audio_call_date">Zamujen zvočni klic · %1$s</string>
+  <string name="MessageRecord_missed_video_call_date">Zamujen video klic · %1$s</string>
   <string name="MessageRecord_s_updated_group">Oseba %s je posodobila skupino.</string>
   <string name="MessageRecord_s_called_you_date">Uporabnik/ca %1$s vas je klical/a · %2$s</string>
   <string name="MessageRecord_called_s">Klicali ste: %s</string>
@@ -886,6 +961,13 @@
   <string name="MessageRecord_you_set_disappearing_message_time_to_s">Čas poteka sporočil ste nastavili na %1$s.</string>
   <string name="MessageRecord_s_set_disappearing_message_time_to_s">Uporabnik/ca %1$s je nastavil/a čas poteka sporočil na %2$s.</string>
   <string name="MessageRecord_disappearing_message_time_set_to_s">Čas poteka sporočila je nastavljen na %1$s.</string>
+  <string name="MessageRecord_this_group_was_updated_to_a_new_group">Skupina je bila nadgrajena v Novo skupino.</string>
+  <plurals name="MessageRecord_members_couldnt_be_added_to_the_new_group_and_have_been_invited">
+    <item quantity="one">%1$s član/ica ni mogel/la biti dodan/a v Novo skupino, zato je bil/a povabljen/a, da se pridruži.</item>
+    <item quantity="two">%1$s člana/ici nista mogla/i biti dodana/i v Novo skupino, zato sta bila/i povabljena/i, da se pridružita.</item>
+    <item quantity="few">%1$s člani/ce niso mogli/e biti dodani/e v Novo skupino, zato so bili/e povabljeni/e, da se pridružijo.</item>
+    <item quantity="other">%1$s članov/ic ni moglo biti dodanih v Novo skupino, zato so bili/e povabljeni/e, da se pridružijo.</item>
+  </plurals>
   <!--Profile change updates-->
   <string name="MessageRecord_changed_their_profile_name_to">Uporabnik/ca %1$s je preimenoval/a svoj profil v \"%2$s\".</string>
   <string name="MessageRecord_changed_their_profile_name_from_to">Uporabnik/ca%1$s je preimenoval/a svoj profil iz %2$s v %3$s.</string>
@@ -1176,9 +1258,23 @@
   <string name="WebRtcCallView__signal_voice_call">Zvočni klic Signal …</string>
   <string name="WebRtcCallView__signal_video_call">Video klic Signal …</string>
   <string name="WebRtcCallView__start_call">Začni klic</string>
-  <string name="WebRtcCallView__group_call">Skupinski klic</string>
+  <string name="WebRtcCallView__join_call">Pridruži se klicu</string>
+  <string name="WebRtcCallView__s_group_call">\"%1$s\" Skupinski klic</string>
   <string name="WebRtcCallView__view_participants_list">Prikaži sodelujoče</string>
   <string name="WebRtcCallView__your_video_is_off">Vaš video je izključen</string>
+  <string name="WebRtcCallView__connecting">Povezovanje …</string>
+  <string name="WebRtcCallView__reconnecting">Ponovno povezovanje …</string>
+  <string name="WebRtcCallView__joining">Pridruževanje …</string>
+  <string name="WebRtcCallView__disconnected">Povezava je prekinjena</string>
+  <string name="WebRtcCallView__no_one_else_is_here">Tu ni nikogar drugega</string>
+  <string name="WebRtcCallView__s_is_in_this_call">Uporabnik/ca %1$s je v tem klicu</string>
+  <string name="WebRtcCallView__s_and_s_are_in_this_call">Uporabnika/ci %1$s in %2$s sta v tem klicu</string>
+  <plurals name="WebRtcCallView__s_s_and_d_others_are_in_this_call">
+    <item quantity="one">Uporabnika/ci  %1$s, %2$s, in še %3$d drug/a so v tem klicu</item>
+    <item quantity="two">Uporabnika/ci  %1$s, %2$s, in še %3$d druga/i so v tem klicu</item>
+    <item quantity="few">Uporabnika/ci  %1$s, %2$s, in še %3$d drugi/e so v tem klicu</item>
+    <item quantity="other">Uporabnika/ci %1$s, %2$s, in še %3$d drugih so v tem klicu</item>
+  </plurals>
   <!--CallParticipantsListDialog-->
   <plurals name="CallParticipantsListDialog_in_this_call_d_people">
     <item quantity="one">Na tem klicu · %1$d človek</item>
@@ -1318,7 +1414,8 @@ Prejeto sporočilo za izmenjavo ključev za napačno različico protokola.</stri
   <string name="ThreadRecord_draft">Osnutek:</string>
   <string name="ThreadRecord_called">Klicali ste</string>
   <string name="ThreadRecord_called_you">Dohodni klic</string>
-  <!-- Removed by excludeNonTranslatables <string name="ThreadRecord_missed_call">Neodgovorjen klic</string> -->
+  <string name="ThreadRecord_missed_audio_call">Zgrešen zvočni klic</string>
+  <string name="ThreadRecord_missed_video_call">Zgrešen video klic</string>
   <string name="ThreadRecord_media_message">Večpredstavno sporočilo</string>
   <string name="ThreadRecord_sticker">Nalepka</string>
   <string name="ThreadRecord_view_once_photo">Slika za enkraten ogled</string>
@@ -1347,12 +1444,12 @@ Prejeto sporočilo za izmenjavo ključev za napačno različico protokola.</stri
   <string name="UpdateApkReadyListener_Signal_update">Nadgradnja aplikacije Signal</string>
   <string name="UpdateApkReadyListener_a_new_version_of_signal_is_available_tap_to_update">Na voljo je nova različica aplikacije Signal. Tapnite za nadgradnjo.</string>
   <!--UnknownSenderView-->
-  <string name="UnknownSenderView_block_s">Blokiram uporabnika/co %s?</string>
-  <string name="UnknownSenderView_blocked_contacts_will_no_longer_be_able_to_send_you_messages_or_call_you">Blokirani uporabniki/ce vam ne bodo več mogli pošiljati sporočil ali vas klicati.</string>
-  <string name="UnknownSenderView_block">Blokiraj</string>
-  <string name="UnknownSenderView_share_profile_with_s">Želite deliti profil z uporabnikom/co %s?</string>
-  <string name="UnknownSenderView_the_easiest_way_to_share_your_profile_information_is_to_add_the_sender_to_your_contacts">Svoj profil boste najlažje delili tako, da dodate pošiljatelja med stike na vaši napravi. Če tega ne želite, lahko delite profil tudi na ta način.</string>
-  <string name="UnknownSenderView_share_profile">Deli profil</string>
+  <!-- Removed by excludeNonTranslatables <string name="UnknownSenderView_block_s">Blokiram uporabnika/co %s?</string> -->
+  <!-- Removed by excludeNonTranslatables <string name="UnknownSenderView_blocked_contacts_will_no_longer_be_able_to_send_you_messages_or_call_you">Blokirani uporabniki/ce vam ne bodo več mogli pošiljati sporočil ali vas klicati.</string> -->
+  <!-- Removed by excludeNonTranslatables <string name="UnknownSenderView_block">Blokiraj</string> -->
+  <!-- Removed by excludeNonTranslatables <string name="UnknownSenderView_share_profile_with_s">Želite deliti profil z uporabnikom/co %s?</string> -->
+  <!-- Removed by excludeNonTranslatables <string name="UnknownSenderView_the_easiest_way_to_share_your_profile_information_is_to_add_the_sender_to_your_contacts">Svoj profil boste najlažje delili tako, da dodate pošiljatelja med stike na vaši napravi. Če tega ne želite, lahko delite profil tudi na ta način.</string> -->
+  <!-- Removed by excludeNonTranslatables <string name="UnknownSenderView_share_profile">Deli profil</string> -->
   <!--UntrustedSendDialog-->
   <string name="UntrustedSendDialog_send_message">Pošljem sporočilo?</string>
   <string name="UntrustedSendDialog_send">Pošlji</string>
@@ -1413,6 +1510,7 @@ Prejeto sporočilo za izmenjavo ključev za napačno različico protokola.</stri
   <string name="MediaPreviewActivity_media_delete_confirmation_message">Sporočilo bo nepovratno izbrisano.</string>
   <string name="MediaPreviewActivity_s_to_s">%1$s do %2$s</string>
   <string name="MediaPreviewActivity_media_no_longer_available">Medijsko sporočilo ni več na voljo.</string>
+  <string name="MediaPreviewActivity_cant_find_an_app_able_to_share_this_media">Ne najdem ustrezne aplikacije za delitev tega medija.</string>
   <!--MessageNotifier-->
   <string name="MessageNotifier_d_new_messages_in_d_conversations">Novih sporočil: %1$d, pogovorov: %2$d</string>
   <string name="MessageNotifier_most_recent_from_s">Zadnje sporočilo od: %1$s</string>
@@ -1611,6 +1709,7 @@ Prejeto sporočilo za izmenjavo ključev za napačno različico protokola.</stri
   <string name="conversation_item_received__contact_photo_description">Fotografija stika</string>
   <!--ConversationUpdateItem-->
   <string name="ConversationUpdateItem_loading">Nalagam</string>
+  <string name="ConversationUpdateItem_learn_more">Več o funkciji zakriti pošiljatelj</string>
   <!--audio_view-->
   <string name="audio_view__play_pause_accessibility_description">Predvajanje … pavza</string>
   <string name="audio_view__download_accessibility_description">Prenesi</string>
@@ -1750,7 +1849,7 @@ Prejeto sporočilo za izmenjavo ključev za napačno različico protokola.</stri
   </plurals>
   <string name="GroupUtil_group_name_is_now">Novo ime skupine je \'%1$s\'.</string>
   <!--profile_group_share_view-->
-  <string name="profile_group_share_view__make_your_profile_name_and_photo_visible_to_this_group">Želte, da sta ime vašega profila in predstavitvena fotografija vidni tej skupini?</string>
+  <!-- Removed by excludeNonTranslatables <string name="profile_group_share_view__make_your_profile_name_and_photo_visible_to_this_group">Želte, da sta ime vašega profila in predstavitvena fotografija vidni tej skupini?</string> -->
   <!--prompt_passphrase_activity-->
   <string name="prompt_passphrase_activity__unlock">Odkleni</string>
   <!--prompt_mms_activity-->
@@ -1978,7 +2077,7 @@ Prejeto sporočilo za izmenjavo ključev za napačno različico protokola.</stri
   <string name="preferences__typing_indicators">Kazalniki tipkanja</string>
   <string name="preferences__if_typing_indicators_are_disabled_you_wont_be_able_to_see_typing_indicators">Če nimate vklopljenih kazalnikov tipkanja zase, tudi ne morete videti kdaj vaš partner tipka svoje sporočilo.</string>
   <string name="preferences__request_keyboard_to_disable_personalized_learning">Zahteva tipkovnici za izklop personaliziranega učenja</string>
-  <string name="preferences_app_protection__blocked_contacts">Blokirani uporabniki/ce</string>
+  <string name="preferences_app_protection__blocked_users">Blokirani/e uporabniki/ce</string>
   <string name="preferences_chats__when_using_mobile_data">Ob uporabi mobilnega omrežja</string>
   <string name="preferences_chats__when_using_wifi">Ob uporabi omrežja Wi-Fi</string>
   <string name="preferences_chats__when_roaming">Med gostovanjem</string>
@@ -2041,6 +2140,7 @@ Prejeto sporočilo za izmenjavo ključev za napačno različico protokola.</stri
   <!--****************************************-->
   <!--contact_selection_list-->
   <string name="contact_selection_list__unknown_contact">Novo sporočilo za …</string>
+  <string name="contact_selection_list__unknown_contact_block">Blokiraj uporabnika/co</string>
   <string name="contact_selection_list__unknown_contact_add_to_group">Dodaj v skupino</string>
   <!--conversation_callable_insecure-->
   <string name="conversation_callable_insecure__menu_call">Kliči</string>
@@ -2140,6 +2240,7 @@ Prejeto sporočilo za izmenjavo ključev za napačno različico protokola.</stri
   <!--media_preview-->
   <string name="media_preview__save_title">Shrani</string>
   <string name="media_preview__forward_title">Posreduj</string>
+  <string name="media_preview__share_title">Deli</string>
   <string name="media_preview__all_media_title">Vsa večpredstavnostna sporočila</string>
   <!--media_preview_activity-->
   <string name="media_preview_activity__media_content_description">Ogled medija</string>
@@ -2465,5 +2566,39 @@ Prejeto sporočilo za izmenjavo ključev za napačno različico protokola.</stri
   <string name="VoiceNoteMediaDescriptionCompatFactory__s_to_s">%1$s do %2$s</string>
   <!--StorageUtil-->
   <string name="StorageUtil__s_s">%1$s/%2$s</string>
+  <string name="BlockedUsersActivity__s_has_been_blocked">Uporabnik/ca \"%1$s\" je bil/a blokiran/a.</string>
+  <string name="BlockedUsersActivity__failed_to_block_s">Blokada člana/ice \"%1$s\" ni uspela</string>
+  <string name="BlockedUsersActivity__s_has_been_unblocked">Uporabnik/ca \"%1$s\" je bil/a odblokirana.</string>
+  <!--ReviewCardDialogFragment-->
+  <string name="ReviewCardDialogFragment__review_members">Pregled članov/ic</string>
+  <string name="ReviewCardDialogFragment__review_request">Pregled prošenj</string>
+  <string name="ReviewCardDialogFragment__d_group_members_have_the_same_name">%1$d članov/ic skupine ima enako ime. Preglejte člane/ice spodaj in ustrezno ukrepajte.</string>
+  <string name="ReviewCardDialogFragment__if_youre_not_sure">Če niste prepričani, čigava je prošnja, preglejte stike spodaj in ustrezno ukrepajte.</string>
+  <string name="ReviewCardDialogFragment__no_other_groups_in_common">Ni drugih skupnih skupin.</string>
+  <string name="ReviewCardDialogFragment__no_groups_in_common">Ni skupnih skupin.</string>
+  <plurals name="ReviewCardDialogFragment__d_other_groups_in_common">
+    <item quantity="one">%d skupna skupina</item>
+    <item quantity="two">%d skupni skupini</item>
+    <item quantity="few">%d skupne skupine</item>
+    <item quantity="other">%d skupnih skupin</item>
+  </plurals>
+  <plurals name="ReviewCardDialogFragment__d_groups_in_common">
+    <item quantity="one">%d skupna skupina</item>
+    <item quantity="two">%d skupni skupini</item>
+    <item quantity="few">%d skupne skupine</item>
+    <item quantity="other">%d skupnih skupin</item>
+  </plurals>
+  <string name="ReviewCardDialogFragment__remove_s_from_group">Želite odstraniti uporabika/co %1$s iz skupine?</string>
+  <string name="ReviewCardDialogFragment__remove">Odstrani</string>
+  <string name="ReviewCardDialogFragment__failed_to_remove_group_member">Odstranitev člana/ice ni uspela.</string>
+  <!--ReviewCard-->
+  <string name="ReviewCard__member">Član</string>
+  <string name="ReviewCard__request">Prošnja</string>
+  <string name="ReviewCard__your_contact">Vaš stik</string>
+  <string name="ReviewCard__remove_from_group">Odstrani iz skupine</string>
+  <string name="ReviewCard__update_contact">Posodobite stik</string>
+  <string name="ReviewCard__block">Blokiraj</string>
+  <string name="ReviewCard__delete">Izbriši</string>
+  <string name="ReviewCard__recently_changed">Uporabnik/ca je pred kratkim spremenil/a ime profila iz %1$s v %2$s</string>
   <!--EOF-->
 </resources>

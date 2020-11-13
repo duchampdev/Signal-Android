@@ -80,7 +80,7 @@ public class IncomingCallActionProcessor extends DeviceAwareActionProcessor {
     RemotePeer      activePeer      = currentState.getCallInfoState().requireActivePeer();
     boolean         hideIp          = !activePeer.getRecipient().isSystemContact() || isAlwaysTurn;
     VideoState      videoState      = currentState.getVideoState();
-    CallParticipant callParticipant = Objects.requireNonNull(currentState.getCallInfoState().getRemoteParticipant(activePeer.getRecipient()));
+    CallParticipant callParticipant = Objects.requireNonNull(currentState.getCallInfoState().getRemoteCallParticipant(activePeer.getRecipient()));
 
     try {
       webRtcInteractor.getCallManager().proceed(activePeer.getCallId(),
@@ -108,7 +108,7 @@ public class IncomingCallActionProcessor extends DeviceAwareActionProcessor {
 
     Log.i(TAG, "handleAcceptCall(): call_id: " + activePeer.getCallId());
 
-    DatabaseFactory.getSmsDatabase(context).insertReceivedCall(activePeer.getId());
+    DatabaseFactory.getSmsDatabase(context).insertReceivedCall(activePeer.getId(), currentState.getCallSetupState().isRemoteVideoOffer());
 
     currentState = currentState.builder()
                                .changeCallSetupState()

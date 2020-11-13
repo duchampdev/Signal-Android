@@ -23,6 +23,7 @@ import org.whispersystems.signalservice.api.messages.calls.BusyMessage;
 import org.whispersystems.signalservice.api.messages.calls.HangupMessage;
 import org.whispersystems.signalservice.api.messages.calls.IceUpdateMessage;
 import org.whispersystems.signalservice.api.messages.calls.OfferMessage;
+import org.whispersystems.signalservice.api.messages.calls.OpaqueMessage;
 import org.whispersystems.signalservice.api.messages.calls.SignalServiceCallMessage;
 import org.whispersystems.signalservice.api.messages.multidevice.BlockedListMessage;
 import org.whispersystems.signalservice.api.messages.multidevice.ConfigurationMessage;
@@ -616,6 +617,9 @@ public final class SignalServiceContent {
     } else if (content.hasBusy()) {
       SignalServiceProtos.CallMessage.Busy busy = content.getBusy();
       return SignalServiceCallMessage.forBusy(new BusyMessage(busy.getId()), isMultiRing, destinationDeviceId);
+    } else if (content.hasOpaque()) {
+      SignalServiceProtos.CallMessage.Opaque opaque = content.getOpaque();
+      return SignalServiceCallMessage.forOpaque(new OpaqueMessage(opaque.getData().toByteArray()), isMultiRing, destinationDeviceId);
     }
 
     return SignalServiceCallMessage.empty();
@@ -660,8 +664,8 @@ public final class SignalServiceContent {
                                                                           attachment.hasThumbnail() ? createAttachmentPointer(attachment.getThumbnail()) : null));
     }
 
-    if (SignalServiceAddress.isValidAddress(content.getQuote().getAuthorUuid(), null)) {
-      SignalServiceAddress address = new SignalServiceAddress(UuidUtil.parseOrNull(content.getQuote().getAuthorUuid()), null);
+    if (SignalServiceAddress.isValidAddress(content.getQuote().getAuthorUuid(), content.getQuote().getAuthorE164())) {
+      SignalServiceAddress address = new SignalServiceAddress(UuidUtil.parseOrNull(content.getQuote().getAuthorUuid()), content.getQuote().getAuthorE164());
 
       return new SignalServiceDataMessage.Quote(content.getQuote().getId(),
                                                 address,
@@ -669,7 +673,7 @@ public final class SignalServiceContent {
                                                 attachments,
                                                 createMentions(content.getQuote().getBodyRangesList(), content.getQuote().getText(), isGroupV2));
     } else {
-      Log.w(TAG, "Quote was missing author's UUID! Returning null.");
+      Log.w(TAG, "Quote was missing an author! Returning null.");
       return null;
     }
   }
