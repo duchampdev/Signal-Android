@@ -61,7 +61,6 @@ import androidx.recyclerview.widget.RecyclerView.OnScrollListener;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
-import com.google.android.collect.Sets;
 
 import org.thoughtcrime.securesms.ApplicationContext;
 import org.thoughtcrime.securesms.LoggingFragment;
@@ -125,6 +124,7 @@ import org.thoughtcrime.securesms.util.CommunicationActions;
 import org.thoughtcrime.securesms.util.HtmlUtil;
 import org.thoughtcrime.securesms.util.RemoteDeleteUtil;
 import org.thoughtcrime.securesms.util.SaveAttachmentTask;
+import org.thoughtcrime.securesms.util.SetUtil;
 import org.thoughtcrime.securesms.util.SnapToTopDataObserver;
 import org.thoughtcrime.securesms.util.StickyHeaderDecoration;
 import org.thoughtcrime.securesms.util.StorageUtil;
@@ -480,7 +480,7 @@ public class ConversationFragment extends LoggingFragment {
 
     int startingPosition  = getStartPosition();
 
-    this.recipient         = Recipient.live(getActivity().getIntent().getParcelableExtra(ConversationActivity.RECIPIENT_EXTRA));
+    this.recipient         = Recipient.live(ConversationActivity.getRecipientId(requireActivity().getIntent()));
     this.threadId          = this.getActivity().getIntent().getLongExtra(ConversationActivity.THREAD_ID_EXTRA, -1);
     this.markReadHelper    = new MarkReadHelper(threadId, requireContext());
 
@@ -1498,8 +1498,8 @@ public class ConversationFragment extends LoggingFragment {
     public boolean onMenuItemClick(MenuItem item) {
       switch (item.getItemId()) {
         case R.id.action_info:        handleDisplayDetails(conversationMessage);                                            return true;
-        case R.id.action_delete:      handleDeleteMessages(Sets.newHashSet(conversationMessage));                           return true;
-        case R.id.action_copy:        handleCopyMessage(Sets.newHashSet(conversationMessage));                              return true;
+        case R.id.action_delete:      handleDeleteMessages(SetUtil.newHashSet(conversationMessage));                        return true;
+        case R.id.action_copy:        handleCopyMessage(SetUtil.newHashSet(conversationMessage));                           return true;
         case R.id.action_reply:       handleReplyMessage(conversationMessage);                                              return true;
         case R.id.action_multiselect: handleEnterMultiSelect(conversationMessage);                                          return true;
         case R.id.action_forward:     handleForwardMessage(conversationMessage);                                            return true;
@@ -1523,7 +1523,7 @@ public class ConversationFragment extends LoggingFragment {
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
         Window window = getActivity().getWindow();
         statusBarColor = window.getStatusBarColor();
-        window.setStatusBarColor(getResources().getColor(R.color.action_mode_status_bar));
+        WindowUtil.setStatusBarColor(window, getResources().getColor(R.color.action_mode_status_bar));
       }
 
       if (!ThemeUtil.isDarkTheme(getContext())) {
@@ -1547,7 +1547,7 @@ public class ConversationFragment extends LoggingFragment {
       list.getAdapter().notifyDataSetChanged();
 
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        getActivity().getWindow().setStatusBarColor(statusBarColor);
+        WindowUtil.setStatusBarColor(requireActivity().getWindow(), statusBarColor);
       }
 
       WindowUtil.clearLightStatusBar(getActivity().getWindow());
