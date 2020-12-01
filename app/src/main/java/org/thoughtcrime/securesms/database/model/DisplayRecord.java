@@ -45,10 +45,11 @@ public abstract class DisplayRecord {
   private final int        deliveryStatus;
   private final int        deliveryReceiptCount;
   private final int        readReceiptCount;
+  private final int        viewReceiptCount;
 
   DisplayRecord(String body, Recipient recipient, long dateSent,
                 long dateReceived, long threadId, int deliveryStatus, int deliveryReceiptCount,
-                long type, int readReceiptCount)
+                long type, int readReceiptCount, int viewReceiptCount)
   {
     this.threadId             = threadId;
     this.recipient            = recipient;
@@ -59,6 +60,7 @@ public abstract class DisplayRecord {
     this.deliveryReceiptCount = deliveryReceiptCount;
     this.readReceiptCount     = readReceiptCount;
     this.deliveryStatus       = deliveryStatus;
+    this.viewReceiptCount     = viewReceiptCount;
   }
 
   public @NonNull String getBody() {
@@ -164,6 +166,10 @@ public abstract class DisplayRecord {
     return SmsDatabase.Types.isMissedVideoCall(type);
   }
 
+  public final boolean isGroupCall() {
+    return SmsDatabase.Types.isGroupCall(type);
+  }
+
   public boolean isVerificationStatusChange() {
     return SmsDatabase.Types.isIdentityDefault(type) || SmsDatabase.Types.isIdentityVerified(type);
   }
@@ -182,6 +188,17 @@ public abstract class DisplayRecord {
 
   public int getReadReceiptCount() {
     return readReceiptCount;
+  }
+
+  /**
+   * For outgoing messages, this is incremented whenever a remote recipient has viewed our message
+   * and sends us a VIEWED receipt. For incoming messages, this is an indication of whether local
+   * user has viewed a piece of content.
+   *
+   * @return the number of times this has been viewed.
+   */
+  public int getViewedReceiptCount() {
+    return viewReceiptCount;
   }
 
   public boolean isDelivered() {

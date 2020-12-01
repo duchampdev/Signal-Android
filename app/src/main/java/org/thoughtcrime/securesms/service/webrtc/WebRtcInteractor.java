@@ -19,6 +19,7 @@ import org.thoughtcrime.securesms.webrtc.audio.SignalAudioManager;
 import org.thoughtcrime.securesms.webrtc.locks.LockManager;
 import org.whispersystems.signalservice.api.messages.calls.SignalServiceCallMessage;
 
+import java.util.Collection;
 import java.util.UUID;
 
 /**
@@ -89,6 +90,14 @@ public class WebRtcInteractor {
     webRtcCallService.sendOpaqueCallMessage(uuid, callMessage);
   }
 
+  void sendGroupCallMessage(@NonNull Recipient recipient, @Nullable String groupCallEraId) {
+    webRtcCallService.sendGroupCallMessage(recipient, groupCallEraId);
+  }
+
+  void updateGroupCallUpdateMessage(@NonNull RecipientId groupId, @Nullable String groupCallEraId, @NonNull Collection<UUID> joinedMembers) {
+    webRtcCallService.updateGroupCallUpdateMessage(groupId, groupCallEraId, joinedMembers);
+  }
+
   void setCallInProgressNotification(int type, @NonNull RemotePeer remotePeer) {
     webRtcCallService.setCallInProgressNotification(type, remotePeer.getRecipient());
   }
@@ -143,5 +152,9 @@ public class WebRtcInteractor {
 
   void startAudioCommunication(boolean preserveSpeakerphone) {
     audioManager.startCommunication(preserveSpeakerphone);
+  }
+
+  void peekGroupCall(@NonNull WebRtcData.GroupCallUpdateMetadata groupCallUpdateMetadata) {
+    webRtcCallService.peekGroupCall(groupCallUpdateMetadata);
   }
 }

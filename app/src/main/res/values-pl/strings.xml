@@ -440,8 +440,9 @@
   <string name="DocumentView_unnamed_file">Plik bez nazwy</string>
   <!--DonateMegaphone-->
   <string name="DonateMegaphone_donate_to_signal">Datek na Signal</string>
-  <string name="DonateMegaphone_donate">Darowizna</string>
-  <string name="DonateMegaphone_not_now">Nie teraz</string>
+  <string name="DonateMegaphone_Signal_is_powered_by_people_like_you_show_your_support_today">Signal funkcjonuje dzięki ludziom takim jak Ty. Wesprzyj nas już dziś!</string>
+  <string name="DonateMegaphone_donate">Podaruj</string>
+  <string name="DonateMegaphone_no_thanks">Nie, dzięki</string>
   <!--DozeReminder-->
   <string name="DozeReminder_optimize_for_missing_play_services">Optymalizacja dla brakujących Usług Play</string>
   <string name="DozeReminder_this_device_does_not_support_play_services_tap_to_disable_system_battery">Urządzenie nie wspiera Usług Play. Dotknij, aby wyłączyć systemową optymalizację baterii uniemożliwiającą odbieranie wiadomości w czasie braku aktywności.</string>
@@ -603,7 +604,7 @@
     <item quantity="other">%1$d członków</item>
   </plurals>
   <!--PendingMembersActivity-->
-  <string name="PendingMemberInvitesActivity_pending_group_invites">Oczekujące zaproszenia do grupy</string>
+  <!-- Removed by excludeNonTranslatables <string name="PendingMemberInvitesActivity_pending_group_invites">Oczekujące zaproszenia do grupy</string> -->
   <string name="PendingMembersActivity_requests">Prośby</string>
   <string name="PendingMembersActivity_invites">Zaproszenia</string>
   <string name="PendingMembersActivity_people_you_invited">Ludzie, których zaprosiłeś(aś)</string>
@@ -661,6 +662,12 @@
     <item quantity="many">%d członków nie ma wsparcia dla Nowych grup, więc zostanie utworzona Stara grupa.</item>
     <item quantity="other">%d członków nie ma wsparcia dla Nowych grup, więc zostanie utworzona Stara grupa.</item>
   </plurals>
+  <plurals name="AddGroupDetailsFragment__d_members_do_not_support_new_groups_so_this_group_cannot_be_created">
+    <item quantity="one">%d członek nie ma wsparcia dla Nowych grup, więc nie można utworzyć tej grupy.</item>
+    <item quantity="few">%d członków nie ma wsparcia dla Nowych grup, więc nie można utworzyć tej grupy.</item>
+    <item quantity="many">%d członków nie ma wsparcia dla Nowych grup, więc nie można utworzyć tej grypy.</item>
+    <item quantity="other">%d członków nie ma wsparcia dla Nowych grup, więc nie można utworzyć tej grupy.</item>
+  </plurals>
   <!--NonGv2MemberDialog-->
   <string name="NonGv2MemberDialog_single_users_are_non_gv2_capable">Zostanie utworzona Stara grupa, gdyż “%1$s” używa starej wersji Signal. Możesz utworzyć Nową wersję grupy z tym kontaktem, gdy zaktualizuje Signal, lub usunąć go przed utworzeniem grupy.</string>
   <plurals name="NonGv2MemberDialog_d_users_are_non_gv2_capable">
@@ -669,9 +676,16 @@
     <item quantity="many">Zostanie utworzona Stara grupa, gdyż %1$d członków używa starej wersji Signal. Możesz utworzyć Nową wersję grupy z tymi kontaktami, gdy zaktualizują Signal, lub usunąć je przed utworzeniem grupy.</item>
     <item quantity="other">Zostanie utworzona Stara grupa, gdyż %1$d członków używa starej wersji Signal. Możesz utworzyć Nową wersję grupy z tymi kontaktami, gdy zaktualizują Signal, lub usunąć je przed utworzeniem grupy.</item>
   </plurals>
+  <string name="NonGv2MemberDialog_single_users_are_non_gv2_capable_forced_migration">Ta grupa nie może zostać utworzona, gdyż \"%1$s\" używa starej wersji Signal. Musisz usunąć go przed utworzeniem grupy.</string>
+  <plurals name="NonGv2MemberDialog_d_users_are_non_gv2_capable_forced_migration">
+    <item quantity="one">Ta grupa nie może zostać utworzona, gdyż %1$d członek używa starej wersji Signal. Musisz go usunąć przed utworzeniem grupy.</item>
+    <item quantity="few">Ta grupa nie może zostać utworzona, gdyż %1$d członków używa starej wersji Signal. Musisz ich usunąć przed utworzeniem grupy.</item>
+    <item quantity="many">Ta grupa nie może zostać utworzona, gdyż %1$d członków używa starej wersji Signal. Musisz ich usunąć przed utworzeniem grupy.</item>
+    <item quantity="other">Ta grupa nie może zostać utworzona, gdyż %1$d członków używa starej wersji Signal. Musisz ich usunąć przed utworzeniem grupy.</item>
+  </plurals>
   <!--ManageGroupActivity-->
   <string name="ManageGroupActivity_disappearing_messages">Znikające wiadomości</string>
-  <string name="ManageGroupActivity_pending_group_invites">Oczekujące zaproszenia do grupy</string>
+  <!-- Removed by excludeNonTranslatables <string name="ManageGroupActivity_pending_group_invites">Oczekujące zaproszenia do grupy</string> -->
   <string name="ManageGroupActivity_member_requests_and_invites">Prośby o przyjęcie i zaproszenia</string>
   <string name="ManageGroupActivity_add_members">Dodaj członków</string>
   <string name="ManageGroupActivity_edit_group_info">Edytuj informacje o grupie</string>
@@ -816,7 +830,7 @@
   <!--GroupJoinUpdateRequiredBottomSheetDialogFragment-->
   <string name="GroupJoinUpdateRequiredBottomSheetDialogFragment_group_links_coming_soon">Linki do grup już wkrótce</string>
   <string name="GroupJoinUpdateRequiredBottomSheetDialogFragment_update_signal_to_use_group_links">Uaktualnij Signal, aby korzystać z linków do grup</string>
-  <string name="GroupJoinUpdateRequiredBottomSheetDialogFragment_coming_soon">Dołączanie do grupy przez link, nie jest jeszcze obsługiwane w Signal. Ta funkcja znajdzie się w kolejnej aktualizacji.</string>
+  <!-- Removed by excludeNonTranslatables <string name="GroupJoinUpdateRequiredBottomSheetDialogFragment_coming_soon">Dołączanie do grupy przez link, nie jest jeszcze obsługiwane w Signal. Ta funkcja znajdzie się w kolejnej aktualizacji.</string> -->
   <string name="GroupJoinUpdateRequiredBottomSheetDialogFragment_update_message">Używana przez Ciebie wersja Signal nie obsługuje linków do grup. Zaktualizuj do najnowszej wersji, aby dołączyć do tej grupy przez link.</string>
   <string name="GroupJoinUpdateRequiredBottomSheetDialogFragment_update_signal">Zaktualizuj Signal</string>
   <string name="GroupJoinUpdateRequiredBottomSheetDialogFragment_update_linked_device_message">Jedno lub więcej z Twoich połączonych urządzeń używa wersji Signal, która nie obsługuje linków do grup. Zaktualizuj aplikację Signal  na swoim połączonym urządzeniu(ach) do najnowszej wersji, aby dołączyć do tej grupy.</string>
@@ -1128,6 +1142,20 @@
   <string name="MessageRecord_you_marked_your_safety_number_with_s_verified_from_another_device">Oznaczyłeś(aś) numer bezpieczeństwa dla %s jako zweryfikowany na innym urządzeniu</string>
   <string name="MessageRecord_you_marked_your_safety_number_with_s_unverified">Oznaczyłeś(aś) numer bezpieczeństwa dla %s jako niezweryfikowany</string>
   <string name="MessageRecord_you_marked_your_safety_number_with_s_unverified_from_another_device">Oznaczyłeś(aś) numer bezpieczeństwa dla %s jako niezweryfikowany na innym urządzeniu</string>
+  <!--Group Calling update messages-->
+  <string name="MessageRecord_s_started_a_group_call_s">%1$s rozpoczął(ęła) połączenie grupowe · %2$s</string>
+  <string name="MessageRecord_s_is_in_the_group_call_s">%1$s uczestniczy w rozmowie · %2$s</string>
+  <!-- Removed by excludeNonTranslatables <string name="MessageRecord_you_are_in_the_group_call_s">Uczestniczysz w rozmowie · %2$s</string> -->
+  <!-- Removed by excludeNonTranslatables <string name="MessageRecord_s_and_s_are_in_the_group_call_s">%1$s i %2$s uczestniczą w rozmowie · %3$s</string> -->
+  <string name="MessageRecord_s_s_and_s_are_in_the_group_call_s">%1$s, %2$s i %3$s uczestniczą w rozmowie · %4$s</string>
+  <string name="MessageRecord_group_call_s">Połączenie grupowe · %1$s</string>
+  <string name="MessageRecord_you">Ty</string>
+  <plurals name="MessageRecord_s_s_and_d_others_are_in_the_group_call_s">
+    <item quantity="one">%1$s, %2$s i %3$d inny uczestniczy w rozmowie · %4$s</item>
+    <item quantity="few">%1$s, %2$s i %3$d innych uczestniczy w rozmowie · %4$s</item>
+    <item quantity="many">%1$s, %2$s i %3$d innych uczestniczy w rozmowie · %4$s</item>
+    <item quantity="other">%1$s, %2$s i %3$d innych uczestniczy w rozmowie · %4$s</item>
+  </plurals>
   <!--MessageRequestBottomView-->
   <string name="MessageRequestBottomView_accept">Akceptuj</string>
   <string name="MessageRequestBottomView_continue">Kontynuuj</string>
@@ -1730,6 +1758,8 @@ Otrzymano wiadomość wymiany klucz dla niepoprawnej wersji protokołu.</string>
   <!--ConversationUpdateItem-->
   <string name="ConversationUpdateItem_loading">Ładowanie</string>
   <string name="ConversationUpdateItem_learn_more">Dowiedz się więcej</string>
+  <string name="ConversationUpdateItem_join_call">Dołącz do rozmowy</string>
+  <string name="ConversationUpdateItem_return_to_call">Wróć do rozmowy</string>
   <!--audio_view-->
   <string name="audio_view__play_pause_accessibility_description">Odtwarzanie … Pauza</string>
   <string name="audio_view__download_accessibility_description">Pobierz</string>
@@ -2153,6 +2183,9 @@ Otrzymano wiadomość wymiany klucz dla niepoprawnej wersji protokołu.</string>
   <string name="preferences_setup_a_username">Ustaw nazwę użytkownika</string>
   <string name="configurable_single_select__customize_option">Dostosuj opcję</string>
   <!--Internal only preferences-->
+  <!-- Removed by excludeNonTranslatables <string name="preferences__internal_conversations_and_shortcuts">Konwersacje i skróty</string> -->
+  <!-- Removed by excludeNonTranslatables <string name="preferences__internal_delete_all_dynamic_shortcuts">Usuń wszystkie dynamiczne skróty</string> -->
+  <!-- Removed by excludeNonTranslatables <string name="preferences__internal_click_to_delete_all_dynamic_shortcuts">Stuknij, aby usunąć wszystkie dynamiczne skróty</string> -->
   <!--****************************************-->
   <!--menus-->
   <!--****************************************-->
