@@ -242,6 +242,7 @@
   <string name="ConversationActivity__to_call_s_signal_needs_access_to_your_microphone">Để gọi %1$s, Signal cần quyền truy cập micro của bạn</string>
   <string name="ConversationActivity__to_call_s_signal_needs_access_to_your_microphone_and_camera">Để gọi %1$s, Signal cần quyền truy cập micro và máy ảnh của bạn.</string>
   <string name="ConversationActivity__more_options_now_in_group_settings">Nhiều thiết đặt hơn trong \"Cài đặt nhóm\"</string>
+  <string name="ConversationActivity_join">Tham gia</string>
   <!--ConversationAdapter-->
   <plurals name="ConversationAdapter_n_unread_messages">
     <item quantity="other">%d tin nhắn chưa đọc</item>
@@ -451,7 +452,7 @@
     <item quantity="other">%1$d thành viên</item>
   </plurals>
   <!--PendingMembersActivity-->
-  <!-- Removed by excludeNonTranslatables <string name="PendingMemberInvitesActivity_pending_group_invites">Lời mời vào nhóm đang chờ</string> -->
+  <string name="PendingMembersActivity_pending_group_invites">Lời mời vào nhóm đang chờ</string>
   <string name="PendingMembersActivity_requests">Yêu cầu</string>
   <string name="PendingMembersActivity_invites">Lời mời</string>
   <string name="PendingMembersActivity_people_you_invited">Người dùng bạn đã mời</string>
@@ -504,7 +505,6 @@
   </plurals>
   <!--ManageGroupActivity-->
   <string name="ManageGroupActivity_disappearing_messages">Tin nhắn tạm thời</string>
-  <!-- Removed by excludeNonTranslatables <string name="ManageGroupActivity_pending_group_invites">Lời mời vào nhóm đang chờ</string> -->
   <string name="ManageGroupActivity_member_requests_and_invites">Yêu cầu tham gia &amp; Lời mời</string>
   <string name="ManageGroupActivity_add_members">Thêm thành viên</string>
   <string name="ManageGroupActivity_edit_group_info">Sửa thông tin nhóm</string>
@@ -620,8 +620,6 @@
   <!--GroupJoinUpdateRequiredBottomSheetDialogFragment-->
   <string name="GroupJoinUpdateRequiredBottomSheetDialogFragment_group_links_coming_soon">Đường dẫn nhóm sẽ có trong tương lai</string>
   <string name="GroupJoinUpdateRequiredBottomSheetDialogFragment_update_signal_to_use_group_links">Cập nhật Signal để dùng liên kết nhóm</string>
-  <!-- Removed by excludeNonTranslatables <string name="GroupJoinUpdateRequiredBottomSheetDialogFragment_coming_soon">Tham gia nhóm bằng đường dẫn nhóm hiện chưa được Signal hỗ trợ. Tính năng này sẽ được hoàn thiện trong bản cập nhật tới.</string> -->
-  <string name="GroupJoinUpdateRequiredBottomSheetDialogFragment_update_message">Phiên bản Signal bạn đang dùng không hỗ trợ liên kết nhóm. Vui lòng cập nhật để có thể tham gia nhóm qua liên kết.</string>
   <string name="GroupJoinUpdateRequiredBottomSheetDialogFragment_update_signal">Cập nhật Signal</string>
   <string name="GroupJoinUpdateRequiredBottomSheetDialogFragment_group_link_is_not_valid">Đường dẫn nhóm không hợp lệ</string>
   <!--GV2 Request confirmation dialog-->
@@ -1008,6 +1006,8 @@
   <string name="WebRtcCallView__reconnecting">Đang kết nối lại…</string>
   <string name="WebRtcCallView__disconnected">Đã ngắt kết nối</string>
   <!--CallParticipantsListDialog-->
+  <!--CallParticipantView-->
+  <string name="CallParticipantView__more_info">Thông tin khác</string>
   <!--RegistrationActivity-->
   <string name="RegistrationActivity_select_your_country">Chọn quốc gia bạn</string>
   <string name="RegistrationActivity_you_must_specify_your_country_code">Bạn phải cho biết
@@ -1251,8 +1251,6 @@ Nhận thông tin trao đổi mã khóa về phiên bản giao thức không h�
   <string name="MessageNotifier_reacted_s_to_your_image">Đã bày tỏ cảm xúc %1$s cho hình ảnh của bạn.</string>
   <string name="MessageNotifier_reacted_s_to_your_file">Đã bày tỏ cảm xúc %1$s cho tệp tin của bạn.</string>
   <string name="MessageNotifier_reacted_s_to_your_audio">Đã bày tỏ cảm xúc %1$s cho tệp âm thanh của bạn.</string>
-  <string name="MessageNotifier_reacted_s_to_your_view_once_photo">Đã bày tỏ cảm xúc %1$s cho ảnh xem một lần của bạn.</string>
-  <string name="MessageNotifier_reacted_s_to_your_view_once_video">Đã bày tỏ cảm xúc %1$s cho video xem một lần của bạn.</string>
   <string name="MessageNotifier_reacted_s_to_your_sticker">Đã bày tỏ cảm xúc %1$s cho nhãn dán của bạn.</string>
   <string name="MessageNotifier_this_message_was_deleted">Tin nhắn này đã bị xóa.</string>
   <string name="TurnOffContactJoinedNotificationsActivity__turn_off_contact_joined_signal">Tắt thông báo khi liên hệ bắt đầu sử dụng Signal? Bạn có thể bật lại ở Signal &gt; Cài đặt &gt; Thông báo.</string>
@@ -2198,5 +2196,9 @@ Nhận thông tin trao đổi mã khóa về phiên bản giao thức không h�
   <string name="ReviewCard__remove_from_group">Loại bỏ khỏi nhóm</string>
   <string name="ReviewCard__block">Chặn</string>
   <string name="ReviewCard__delete">Xóa</string>
+  <!--CallParticipantsListUpdatePopupWindow-->
+  <!--DeleteAccountFragment-->
+  <string name="DeleteAccountFragment__are_you_sure">Bạn có chắc muốn xoá tài khoản?</string>
+  <!--DeleteAccountCountryPickerFragment-->
   <!--EOF-->
 </resources>

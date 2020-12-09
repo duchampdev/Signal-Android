@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 
 import com.annimon.stream.Stream;
 
+import org.signal.core.util.concurrent.SignalExecutors;
+import org.signal.core.util.logging.Log;
 import org.thoughtcrime.securesms.database.DatabaseFactory;
 import org.thoughtcrime.securesms.database.model.ThreadRecord;
 import org.thoughtcrime.securesms.dependencies.ApplicationDependencies;
@@ -16,13 +18,11 @@ import org.thoughtcrime.securesms.jobmanager.Job;
 import org.thoughtcrime.securesms.jobmanager.JobManager;
 import org.thoughtcrime.securesms.jobmanager.impl.NetworkConstraint;
 import org.thoughtcrime.securesms.keyvalue.SignalStore;
-import org.thoughtcrime.securesms.logging.Log;
 import org.thoughtcrime.securesms.recipients.Recipient;
 import org.thoughtcrime.securesms.recipients.RecipientId;
 import org.thoughtcrime.securesms.transport.RetryLaterException;
 import org.thoughtcrime.securesms.util.FeatureFlags;
 import org.thoughtcrime.securesms.util.TextSecurePreferences;
-import org.thoughtcrime.securesms.util.concurrent.SignalExecutors;
 import org.whispersystems.signalservice.api.groupsv2.NoCredentialForRedemptionTimeException;
 import org.whispersystems.signalservice.api.push.exceptions.PushNetworkException;
 
@@ -38,12 +38,10 @@ public class GroupV1MigrationJob extends BaseJob {
 
   public static final String KEY = "GroupV1MigrationJob";
 
-  public static final long MANUAL_TIMEOUT = TimeUnit.SECONDS.toMillis(20);
-
   private static final String KEY_RECIPIENT_ID = "recipient_id";
 
-  private static final int  ROUTINE_LIMIT    = 50;
-  private static final long REFRESH_INTERVAL = TimeUnit.HOURS.toMillis(3);
+  private static final int  ROUTINE_LIMIT    = 20;
+  private static final long REFRESH_INTERVAL = TimeUnit.HOURS.toMillis(1);
 
   private final RecipientId recipientId;
 

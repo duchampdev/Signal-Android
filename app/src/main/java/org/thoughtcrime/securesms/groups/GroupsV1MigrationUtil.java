@@ -7,13 +7,13 @@ import androidx.annotation.Nullable;
 
 import com.annimon.stream.Stream;
 
+import org.signal.core.util.logging.Log;
 import org.signal.storageservice.protos.groups.local.DecryptedGroup;
 import org.signal.zkgroup.groups.GroupMasterKey;
 import org.thoughtcrime.securesms.database.DatabaseFactory;
 import org.thoughtcrime.securesms.database.GroupDatabase;
 import org.thoughtcrime.securesms.database.RecipientDatabase;
 import org.thoughtcrime.securesms.keyvalue.SignalStore;
-import org.thoughtcrime.securesms.logging.Log;
 import org.thoughtcrime.securesms.mms.MmsException;
 import org.thoughtcrime.securesms.mms.OutgoingMediaMessage;
 import org.thoughtcrime.securesms.recipients.Recipient;
@@ -22,11 +22,9 @@ import org.thoughtcrime.securesms.recipients.RecipientUtil;
 import org.thoughtcrime.securesms.transport.RetryLaterException;
 import org.thoughtcrime.securesms.util.FeatureFlags;
 import org.thoughtcrime.securesms.util.GroupUtil;
-import org.whispersystems.signalservice.api.groupsv2.DecryptedGroupUtil;
 
 import java.io.Closeable;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.thoughtcrime.securesms.groups.v2.processing.GroupsV2StateProcessor.LATEST;
@@ -148,7 +146,7 @@ public final class GroupsV1MigrationUtil {
 
   public static void performLocalMigration(@NonNull Context context, @NonNull GroupId.V1 gv1Id) throws IOException
   {
-    Log.i(TAG, "Beginning local migration!", new Throwable());
+    Log.i(TAG, "Beginning local migration! V1 ID: " + gv1Id, new Throwable());
     try (Closeable ignored = GroupsV2ProcessingLock.acquireGroupProcessingLock()) {
       if (DatabaseFactory.getGroupDatabase(context).groupExists(gv1Id.deriveV2MigrationGroupId())) {
         Log.w(TAG, "Group was already migrated! Could have been waiting for the lock.", new Throwable());
@@ -159,7 +157,7 @@ public final class GroupsV1MigrationUtil {
       long      threadId  = DatabaseFactory.getThreadDatabase(context).getThreadIdFor(recipient);
 
       performLocalMigration(context, gv1Id, threadId, recipient);
-      Log.i(TAG, "Migration complete!", new Throwable());
+      Log.i(TAG, "Migration complete! (" + gv1Id + ", " + threadId + ", " + recipient.getId() + ")", new Throwable());
     } catch (GroupChangeBusyException e) {
       throw new IOException(e);
     }
@@ -171,6 +169,8 @@ public final class GroupsV1MigrationUtil {
                                                                 @NonNull Recipient groupRecipient)
       throws IOException, GroupChangeBusyException
   {
+    Log.i(TAG, "performLocalMigration(" + gv1Id + ", " + threadId + ", " + groupRecipient.getId());
+
     try (Closeable ignored = GroupsV2ProcessingLock.acquireGroupProcessingLock()){
       DecryptedGroup decryptedGroup;
       try {
