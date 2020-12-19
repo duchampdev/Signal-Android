@@ -4,11 +4,9 @@ import android.content.Context;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewStub;
 import android.view.animation.Animation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -120,7 +118,7 @@ public class WebRtcCallView extends FrameLayout {
   public WebRtcCallView(@NonNull Context context, @Nullable AttributeSet attrs) {
     super(context, attrs);
 
-    LayoutInflater.from(context).inflate(R.layout.webrtc_call_view, this, true);
+    inflate(context, R.layout.webrtc_call_view, this);
   }
 
   @SuppressWarnings("CodeBlock2Expr")
@@ -264,8 +262,10 @@ public class WebRtcCallView extends FrameLayout {
       pages.add(WebRtcCallParticipantsPage.forSingleParticipant(state.getFocusedParticipant(), state.isInPipMode()));
     }
 
-    if (state.getGroupCallState().isConnected()) {
+    if ((state.getGroupCallState().isNotIdle() && state.getRemoteDevicesCount() > 0) || state.getGroupCallState().isConnected()) {
       recipientName.setText(state.getRemoteParticipantsDescription(getContext()));
+    } else if (state.getGroupCallState().isNotIdle()) {
+      recipientName.setText(getContext().getString(R.string.WebRtcCallView__s_group_call, Recipient.resolved(recipientId).getDisplayName(getContext())));
     }
 
     if (state.getGroupCallState().isNotIdle() && participantCount != null) {
@@ -356,7 +356,6 @@ public class WebRtcCallView extends FrameLayout {
     recipientId = recipient.getId();
 
     if (recipient.isGroup()) {
-      recipientName.setText(getContext().getString(R.string.WebRtcCallView__s_group_call, recipient.getDisplayName(getContext())));
       if (toolbar.getMenu().findItem(R.id.menu_group_call_participants_list) == null) {
         toolbar.inflateMenu(R.menu.group_call);
 
