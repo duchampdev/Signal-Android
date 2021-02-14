@@ -10,6 +10,7 @@ import android.graphics.Rect;
 import android.graphics.YuvImage;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
@@ -47,6 +48,11 @@ public class BitmapUtil {
   private static final int MIN_COMPRESSION_QUALITY_DECREASE = 5;
   private static final int MAX_IMAGE_HALF_SCALES            = 3;
 
+  /**
+   * @deprecated You probably want to use {@link ImageCompressionUtil} instead, which has a clearer
+   *             contract and handles mimetypes properly.
+   */
+  @Deprecated
   @WorkerThread
   public static <T> ScaleResult createScaledBytes(@NonNull Context context, @NonNull T model, @NonNull MediaConstraints constraints)
       throws BitmapDecodingException
@@ -57,6 +63,10 @@ public class BitmapUtil {
                              constraints.getImageMaxSize(context));
   }
 
+  /**
+   * @deprecated You probably want to use {@link ImageCompressionUtil} instead, which has a clearer
+   *             contract and handles mimetypes properly.
+   */
   @WorkerThread
   public static <T> ScaleResult createScaledBytes(@NonNull Context context,
                                                   @NonNull T model,
@@ -68,6 +78,10 @@ public class BitmapUtil {
     return createScaledBytes(context, model, maxImageWidth, maxImageHeight, maxImageSize, CompressFormat.JPEG);
   }
 
+  /**
+   * @deprecated You probably want to use {@link ImageCompressionUtil} instead, which has a clearer
+   *             contract and handles mimetypes properly.
+   */
   @WorkerThread
   public static <T> ScaleResult createScaledBytes(Context context,
                                                   T model,
@@ -264,6 +278,17 @@ public class BitmapUtil {
     if (bitmap == null) return null;
     ByteArrayOutputStream stream = new ByteArrayOutputStream();
     bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+    return stream.toByteArray();
+  }
+
+  public static @Nullable byte[] toWebPByteArray(@Nullable Bitmap bitmap) {
+    if (bitmap == null) return null;
+    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+    if (Build.VERSION.SDK_INT >= 30) {
+      bitmap.compress(CompressFormat.WEBP_LOSSLESS, 100, stream);
+    } else {
+      bitmap.compress(CompressFormat.WEBP, 100, stream);
+    }
     return stream.toByteArray();
   }
 

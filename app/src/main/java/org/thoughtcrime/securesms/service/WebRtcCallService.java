@@ -28,13 +28,13 @@ import org.signal.ringrtc.CallManager;
 import org.signal.ringrtc.CallManager.CallEvent;
 import org.signal.ringrtc.GroupCall;
 import org.signal.ringrtc.HttpHeader;
-import org.signal.ringrtc.IceCandidate;
 import org.signal.ringrtc.Remote;
 import org.signal.storageservice.protos.groups.GroupExternalCredential;
 import org.signal.zkgroup.VerificationFailedException;
 import org.thoughtcrime.securesms.ApplicationContext;
 import org.thoughtcrime.securesms.BuildConfig;
 import org.thoughtcrime.securesms.WebRtcCallActivity;
+import org.thoughtcrime.securesms.components.sensors.DeviceOrientationMonitor;
 import org.thoughtcrime.securesms.crypto.IdentityKeyParcelable;
 import org.thoughtcrime.securesms.crypto.UnidentifiedAccessUtil;
 import org.thoughtcrime.securesms.database.DatabaseFactory;
@@ -43,7 +43,6 @@ import org.thoughtcrime.securesms.events.GroupCallPeekEvent;
 import org.thoughtcrime.securesms.events.WebRtcViewModel;
 import org.thoughtcrime.securesms.groups.GroupId;
 import org.thoughtcrime.securesms.groups.GroupManager;
-import org.thoughtcrime.securesms.jobmanager.impl.NetworkConstraint;
 import org.thoughtcrime.securesms.jobs.GroupCallUpdateSendJob;
 import org.thoughtcrime.securesms.recipients.Recipient;
 import org.thoughtcrime.securesms.recipients.RecipientId;
@@ -142,6 +141,7 @@ public class WebRtcCallService extends Service implements CallManager.Observer,
   public static final String EXTRA_GROUP_CALL_UPDATE_GROUP    = "group_call_update_group";
   public static final String EXTRA_GROUP_CALL_ERA_ID          = "era_id";
   public static final String EXTRA_RECIPIENT_IDS              = "recipient_ids";
+  public static final String EXTRA_ORIENTATION_DEGREES        = "orientation_degrees";
 
   public static final String ACTION_PRE_JOIN_CALL                       = "CALL_PRE_JOIN";
   public static final String ACTION_CANCEL_PRE_JOIN_CALL                = "CANCEL_PRE_JOIN_CALL";
@@ -152,6 +152,7 @@ public class WebRtcCallService extends Service implements CallManager.Observer,
   public static final String ACTION_FLIP_CAMERA                         = "FLIP_CAMERA";
   public static final String ACTION_BLUETOOTH_CHANGE                    = "BLUETOOTH_CHANGE";
   public static final String ACTION_NETWORK_CHANGE                      = "NETWORK_CHANGE";
+  public static final String ACTION_BANDWIDTH_MODE_UPDATE               = "BANDWIDTH_MODE_UPDATE";
   public static final String ACTION_WIRED_HEADSET_CHANGE                = "WIRED_HEADSET_CHANGE";
   public static final String ACTION_SCREEN_OFF                          = "SCREEN_OFF";
   public static final String ACTION_IS_IN_CALL_QUERY                    = "IS_IN_CALL";
@@ -198,6 +199,7 @@ public class WebRtcCallService extends Service implements CallManager.Observer,
   public static final String ACTION_HTTP_FAILURE                        = "HTTP_FAILURE";
   public static final String ACTION_SEND_OPAQUE_MESSAGE                 = "SEND_OPAQUE_MESSAGE";
   public static final String ACTION_RECEIVE_OPAQUE_MESSAGE              = "RECEIVE_OPAQUE_MESSAGE";
+  public static final String ACTION_ORIENTATION_CHANGED                 = "ORIENTATION_CHANGED";
 
   public static final String ACTION_GROUP_LOCAL_DEVICE_STATE_CHANGED  = "GROUP_LOCAL_DEVICE_CHANGE";
   public static final String ACTION_GROUP_REMOTE_DEVICE_STATE_CHANGED = "GROUP_REMOTE_DEVICE_CHANGE";
@@ -444,7 +446,7 @@ public class WebRtcCallService extends Service implements CallManager.Observer,
   }
 
   public void setCallInProgressNotification(int type, @NonNull Recipient recipient) {
-    startForeground(CallNotificationBuilder.getNotificationId(getApplicationContext(), type),
+    startForeground(CallNotificationBuilder.getNotificationId(type),
                     CallNotificationBuilder.getCallInProgressNotification(this, type, recipient));
   }
 
@@ -478,7 +480,7 @@ public class WebRtcCallService extends Service implements CallManager.Observer,
   }
 
   public void startCallCardActivityIfPossible() {
-    if (Build.VERSION.SDK_INT >= 29 && !ApplicationContext.getInstance(getApplicationContext()).isAppVisible()) {
+    if (Build.VERSION.SDK_INT >= 29 && !ApplicationDependencies.getAppForegroundObserver().isForegrounded()) {
       return;
     }
 
@@ -536,6 +538,9 @@ public class WebRtcCallService extends Service implements CallManager.Observer,
       serviceIntent.setAction(ACTION_NETWORK_CHANGE);
       serviceIntent.putExtra(EXTRA_AVAILABLE, activeNetworkInfo != null && activeNetworkInfo.isConnected());
       context.startService(serviceIntent);
+
+      serviceIntent.setAction(ACTION_BANDWIDTH_MODE_UPDATE);
+      context.startService(serviceIntent);
     }
   }
 
@@ -568,6 +573,13 @@ public class WebRtcCallService extends Service implements CallManager.Observer,
     Intent intent = new Intent(context, WebRtcCallService.class);
     intent.setAction(ACTION_IS_IN_CALL_QUERY);
     intent.putExtra(EXTRA_RESULT_RECEIVER, resultReceiver);
+
+    context.startService(intent);
+  }
+
+  public static void notifyBandwidthModeUpdated(@NonNull Context context) {
+    Intent intent = new Intent(context, WebRtcCallService.class);
+    intent.setAction(ACTION_BANDWIDTH_MODE_UPDATE);
 
     context.startService(intent);
   }
@@ -919,7 +931,7 @@ public class WebRtcCallService extends Service implements CallManager.Observer,
   }
 
   @Override
-  public void onSendOffer(@NonNull CallId callId, @Nullable Remote remote, @NonNull Integer remoteDevice, @NonNull Boolean broadcast, @Nullable byte[] opaque, @Nullable String sdp, @NonNull CallManager.CallMediaType callMediaType) {
+  public void onSendOffer(@NonNull CallId callId, @Nullable Remote remote, @NonNull Integer remoteDevice, @NonNull Boolean broadcast, @NonNull byte[] opaque, @NonNull CallManager.CallMediaType callMediaType) {
     Log.i(TAG, "onSendOffer: id: " + callId.format(remoteDevice) + " type: " + callMediaType.name());
 
     if (remote instanceof RemotePeer) {
@@ -933,7 +945,6 @@ public class WebRtcCallService extends Service implements CallManager.Observer,
             .putExtra(EXTRA_REMOTE_DEVICE, remoteDevice)
             .putExtra(EXTRA_BROADCAST,     broadcast)
             .putExtra(EXTRA_OFFER_OPAQUE,  opaque)
-            .putExtra(EXTRA_OFFER_SDP,     sdp)
             .putExtra(EXTRA_OFFER_TYPE,    offerType);
 
       startService(intent);
@@ -943,7 +954,7 @@ public class WebRtcCallService extends Service implements CallManager.Observer,
   }
 
   @Override
-  public void onSendAnswer(@NonNull CallId callId, @Nullable Remote remote, @NonNull Integer remoteDevice, @NonNull Boolean broadcast, @Nullable byte[] opaque, @Nullable String sdp) {
+  public void onSendAnswer(@NonNull CallId callId, @Nullable Remote remote, @NonNull Integer remoteDevice, @NonNull Boolean broadcast, @NonNull byte[] opaque) {
     Log.i(TAG, "onSendAnswer: id: " + callId.format(remoteDevice));
 
     if (remote instanceof RemotePeer) {
@@ -955,8 +966,7 @@ public class WebRtcCallService extends Service implements CallManager.Observer,
             .putExtra(EXTRA_REMOTE_PEER,   remotePeer)
             .putExtra(EXTRA_REMOTE_DEVICE, remoteDevice)
             .putExtra(EXTRA_BROADCAST,     broadcast)
-            .putExtra(EXTRA_ANSWER_OPAQUE, opaque)
-            .putExtra(EXTRA_ANSWER_SDP,    sdp);
+            .putExtra(EXTRA_ANSWER_OPAQUE, opaque);
 
       startService(intent);
     } else {
@@ -965,7 +975,7 @@ public class WebRtcCallService extends Service implements CallManager.Observer,
   }
 
   @Override
-  public void onSendIceCandidates(@NonNull CallId callId, @Nullable Remote remote, @NonNull Integer remoteDevice, @NonNull Boolean broadcast, @NonNull List<IceCandidate> iceCandidates) {
+  public void onSendIceCandidates(@NonNull CallId callId, @Nullable Remote remote, @NonNull Integer remoteDevice, @NonNull Boolean broadcast, @NonNull List<byte[]> iceCandidates) {
     Log.i(TAG, "onSendIceCandidates: id: " + callId.format(remoteDevice));
 
     if (remote instanceof RemotePeer) {
@@ -973,7 +983,7 @@ public class WebRtcCallService extends Service implements CallManager.Observer,
       Intent     intent     = new Intent(this, WebRtcCallService.class);
 
       ArrayList<IceCandidateParcel> iceCandidateParcels = new ArrayList<>(iceCandidates.size());
-      for (IceCandidate iceCandidate : iceCandidates) {
+      for (byte[] iceCandidate : iceCandidates) {
         iceCandidateParcels.add(new IceCandidateParcel(iceCandidate));
       }
 

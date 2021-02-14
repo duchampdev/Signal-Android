@@ -8,6 +8,7 @@ import com.annimon.stream.Stream;
 
 import org.signal.core.util.logging.Log;
 import org.signal.ringrtc.CallException;
+import org.signal.ringrtc.CallManager;
 import org.signal.ringrtc.GroupCall;
 import org.signal.ringrtc.PeekInfo;
 import org.thoughtcrime.securesms.BuildConfig;
@@ -20,6 +21,7 @@ import org.thoughtcrime.securesms.recipients.Recipient;
 import org.thoughtcrime.securesms.ringrtc.RemotePeer;
 import org.thoughtcrime.securesms.service.webrtc.state.WebRtcServiceState;
 import org.thoughtcrime.securesms.service.webrtc.state.WebRtcServiceStateBuilder;
+import org.thoughtcrime.securesms.util.NetworkUtil;
 import org.thoughtcrime.securesms.util.ServiceUtil;
 import org.whispersystems.signalservice.api.messages.calls.OfferMessage;
 
@@ -51,6 +53,7 @@ public class GroupPreJoinActionProcessor extends GroupActionProcessor {
     try {
       groupCall.setOutgoingAudioMuted(true);
       groupCall.setOutgoingVideoMuted(true);
+      groupCall.setBandwidthMode(NetworkUtil.getCallingBandwidthMode(context));
 
       Log.i(TAG, "Connecting to group call: " + currentState.getCallInfoState().getCallRecipient().getId());
       groupCall.connect();
@@ -120,7 +123,7 @@ public class GroupPreJoinActionProcessor extends GroupActionProcessor {
                                                                          .clearParticipantMap();
 
     for (Recipient recipient : callParticipants) {
-      builder.putParticipant(recipient, CallParticipant.createRemote(new CallParticipantId(recipient), recipient, null, new BroadcastVideoSink(null), true, true, 0, false, 0));
+      builder.putParticipant(recipient, CallParticipant.createRemote(new CallParticipantId(recipient), recipient, null, new BroadcastVideoSink(null), true, true, 0, false, 0, CallParticipant.DeviceOrdinal.PRIMARY));
     }
 
     return builder.build();
@@ -149,7 +152,7 @@ public class GroupPreJoinActionProcessor extends GroupActionProcessor {
       groupCall.setOutgoingVideoSource(currentState.getVideoState().requireLocalSink(), currentState.getVideoState().requireCamera());
       groupCall.setOutgoingVideoMuted(!currentState.getLocalDeviceState().getCameraState().isEnabled());
       groupCall.setOutgoingAudioMuted(!currentState.getLocalDeviceState().isMicrophoneEnabled());
-      groupCall.setBandwidthMode(GroupCall.BandwidthMode.NORMAL);
+      groupCall.setBandwidthMode(NetworkUtil.getCallingBandwidthMode(context));
 
       groupCall.join();
     } catch (CallException e) {

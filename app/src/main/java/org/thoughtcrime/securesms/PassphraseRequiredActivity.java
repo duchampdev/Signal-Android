@@ -78,7 +78,7 @@ public abstract class PassphraseRequiredActivity extends BaseActivity implements
     super.onResume();
 
     if (networkAccess.isCensored(this)) {
-      ApplicationDependencies.getJobManager().add(new PushNotificationReceiveJob(this));
+      ApplicationDependencies.getJobManager().add(new PushNotificationReceiveJob());
     }
   }
 
@@ -91,8 +91,8 @@ public abstract class PassphraseRequiredActivity extends BaseActivity implements
   @Override
   public void onMasterSecretCleared() {
     Log.d(TAG, "onMasterSecretCleared()");
-    if (ApplicationContext.getInstance(this).isAppVisible()) routeApplicationState(true);
-    else                                                     finish();
+    if (ApplicationDependencies.getAppForegroundObserver().isForegrounded()) routeApplicationState(true);
+    else                                                                     finish();
   }
 
   protected <T extends Fragment> T initFragment(@IdRes int target,
@@ -194,7 +194,7 @@ public abstract class PassphraseRequiredActivity extends BaseActivity implements
   }
 
   private Intent getPushRegistrationIntent() {
-    return RegistrationNavigationActivity.newIntentForNewRegistration(this);
+    return RegistrationNavigationActivity.newIntentForNewRegistration(this, getIntent());
   }
 
   private Intent getEnterSignalPinIntent() {
@@ -232,8 +232,10 @@ public abstract class PassphraseRequiredActivity extends BaseActivity implements
     this.clearKeyReceiver = new BroadcastReceiver() {
       @Override
       public void onReceive(Context context, Intent intent) {
-        Log.i(TAG, "onReceive() for clear key event");
-        onMasterSecretCleared();
+        Log.i(TAG, "onReceive() for clear key event. PasswordDisabled: " + TextSecurePreferences.isPasswordDisabled(context) + ", ScreenLock: " + TextSecurePreferences.isScreenLockEnabled(context));
+        if (TextSecurePreferences.isScreenLockEnabled(context) || !TextSecurePreferences.isPasswordDisabled(context)) {
+          onMasterSecretCleared();
+        }
       }
     };
 
