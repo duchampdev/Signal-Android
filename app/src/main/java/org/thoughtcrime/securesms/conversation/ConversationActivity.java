@@ -141,6 +141,7 @@ import org.thoughtcrime.securesms.conversation.ui.error.SafetyNumberChangeDialog
 import org.thoughtcrime.securesms.conversation.ui.groupcall.GroupCallViewModel;
 import org.thoughtcrime.securesms.conversation.ui.mentions.MentionsPickerViewModel;
 import org.thoughtcrime.securesms.conversationlist.model.MessageResult;
+import org.thoughtcrime.securesms.crypto.DatabaseSessionLock;
 import org.thoughtcrime.securesms.crypto.SecurityEvent;
 import org.thoughtcrime.securesms.database.DatabaseFactory;
 import org.thoughtcrime.securesms.database.DraftDatabase;
@@ -279,6 +280,7 @@ import org.thoughtcrime.securesms.wallpaper.ChatWallpaperDimLevelUtil;
 import org.whispersystems.libsignal.InvalidMessageException;
 import org.whispersystems.libsignal.util.Pair;
 import org.whispersystems.libsignal.util.guava.Optional;
+import org.whispersystems.signalservice.api.SignalSessionLock;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -295,7 +297,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.thoughtcrime.securesms.TransportOption.Type;
 import static org.thoughtcrime.securesms.database.GroupDatabase.GroupRecord;
-import static org.whispersystems.libsignal.SessionCipher.SESSION_LOCK;
 
 /**
  * Activity for displaying a message thread, as well as
@@ -676,6 +677,13 @@ public class ConversationActivity extends PassphraseRequiredActivity
       break;
     case MEDIA_SENDER:
       MediaSendActivityResult result = data.getParcelableExtra(MediaSendActivity.EXTRA_RESULT);
+
+      if (!Objects.equals(result.getRecipientId(), recipient.getId())) {
+        Log.w(TAG, "Result's recipientId did not match ours! Result: " + result.getRecipientId() + ", Activity: " + recipient.getId());
+        Toast.makeText(this, R.string.ConversationActivity_error_sending_media, Toast.LENGTH_SHORT).show();
+        return;
+      }
+
       sendButton.setTransport(result.getTransport());
 
       if (result.isPushPreUpload()) {
@@ -704,7 +712,8 @@ public class ConversationActivity extends PassphraseRequiredActivity
 
       final Context context = ConversationActivity.this.getApplicationContext();
 
-      sendMediaMessage(result.getTransport().isSms(),
+      sendMediaMessage(result.getRecipientId(),
+                       result.getTransport().isSms(),
                        result.getBody(),
                        slideDeck,
                        quote,
@@ -2034,7 +2043,8 @@ public class ConversationActivity extends PassphraseRequiredActivity
     supportActionBar.setDisplayShowTitleEnabled(false);
 
     if (isInBubble()) {
-      supportActionBar.setHomeAsUpIndicator(ContextCompat.getDrawable(this, R.drawable.ic_notification));
+      supportActionBar.setHomeAsUpIndicator(DrawableUtil.tint(ContextUtil.requireDrawable(this, R.drawable.ic_notification),
+                                                              ContextCompat.getColor(this, R.color.signal_accent_primary)));
       toolbar.setNavigationOnClickListener(unused -> startActivity(MainActivity.clearTop(this)));
     }
   }
@@ -2423,7 +2433,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
     long       expiresIn      = recipient.get().getExpireMessages() * 1000L;
     boolean    initiating     = threadId == -1;
 
-    sendMediaMessage(isSmsForced(), "", attachmentManager.buildSlideDeck(), null, contacts, Collections.emptyList(), Collections.emptyList(), expiresIn, false, subscriptionId, initiating, false);
+    sendMediaMessage(recipient.getId(), isSmsForced(), "", attachmentManager.buildSlideDeck(), null, contacts, Collections.emptyList(), Collections.emptyList(), expiresIn, false, subscriptionId, initiating, false);
   }
 
   private void selectContactInfo(ContactData contactData) {
@@ -2749,7 +2759,8 @@ public class ConversationActivity extends PassphraseRequiredActivity
       throws InvalidMessageException
   {
     Log.i(TAG, "Sending media message...");
-    sendMediaMessage(forceSms,
+    sendMediaMessage(recipient.getId(),
+                     forceSms,
                      getMessage(),
                      attachmentManager.buildSlideDeck(),
                      inputPanel.getQuote().orNull(),
@@ -2763,7 +2774,8 @@ public class ConversationActivity extends PassphraseRequiredActivity
                      true);
   }
 
-  private ListenableFuture<Void> sendMediaMessage(final boolean forceSms,
+  private ListenableFuture<Void> sendMediaMessage(@NonNull RecipientId recipientId,
+                                                  final boolean forceSms,
                                                   @NonNull String body,
                                                   SlideDeck slideDeck,
                                                   QuoteModel quote,
@@ -2792,7 +2804,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
       }
     }
 
-    OutgoingMediaMessage outgoingMessageCandidate = new OutgoingMediaMessage(recipient.get(), slideDeck, body, System.currentTimeMillis(), subscriptionId, expiresIn, viewOnce, distributionType, quote, contacts, previews, mentions);
+    OutgoingMediaMessage outgoingMessageCandidate = new OutgoingMediaMessage(Recipient.resolved(recipientId), slideDeck, body, System.currentTimeMillis(), subscriptionId, expiresIn, viewOnce, distributionType, quote, contacts, previews, mentions);
 
     final SettableFuture<Void> future  = new SettableFuture<>();
     final Context              context = getApplicationContext();
@@ -2983,7 +2995,8 @@ public class ConversationActivity extends PassphraseRequiredActivity
         SlideDeck  slideDeck      = new SlideDeck();
         slideDeck.addSlide(audioSlide);
 
-        ListenableFuture<Void> sendResult = sendMediaMessage(forceSms,
+        ListenableFuture<Void> sendResult = sendMediaMessage(recipient.getId(),
+                                                             forceSms,
                                                              "",
                                                              slideDeck,
                                                              inputPanel.getQuote().orNull(),
@@ -3126,7 +3139,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
 
     slideDeck.addSlide(stickerSlide);
 
-    sendMediaMessage(transport.isSms(), "", slideDeck, null, Collections.emptyList(), Collections.emptyList(), Collections.emptyList(), expiresIn, false, subscriptionId, initiating, clearCompose);
+    sendMediaMessage(recipient.getId(), transport.isSms(), "", slideDeck, null, Collections.emptyList(), Collections.emptyList(), Collections.emptyList(), expiresIn, false, subscriptionId, initiating, clearCompose);
   }
 
   private void silentlySetComposeText(String text) {
@@ -3244,7 +3257,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
 
     @Override
     public void onTextChanged(String text) {
-      if (enabled && threadId > 0 && isSecureText && !isSmsForced() && !recipient.get().isBlocked()) {
+      if (enabled && threadId > 0 && isSecureText && !isSmsForced() && !recipient.get().isBlocked() && !recipient.get().isSelf()) {
         TypingStatusSender typingStatusSender = ApplicationDependencies.getTypingStatusSender();
 
         if (text.length() == 0) {
@@ -3598,7 +3611,8 @@ public class ConversationActivity extends PassphraseRequiredActivity
       throw new AssertionError("Only images are supported!");
     }
 
-    sendMediaMessage(isSmsForced(),
+    sendMediaMessage(recipient.getId(),
+                     isSmsForced(),
                      "",
                      slideDeck,
                      null,
@@ -3620,7 +3634,7 @@ public class ConversationActivity extends PassphraseRequiredActivity
       new AsyncTask<Void, Void, Void>() {
         @Override
         protected Void doInBackground(Void... params) {
-          synchronized (SESSION_LOCK) {
+          try (SignalSessionLock.Lock unused = DatabaseSessionLock.INSTANCE.acquire()) {
             for (IdentityRecord identityRecord : unverifiedIdentities) {
               identityDatabase.setVerified(identityRecord.getRecipientId(),
                                            identityRecord.getIdentityKey(),
